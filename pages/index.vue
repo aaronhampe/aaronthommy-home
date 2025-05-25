@@ -76,7 +76,7 @@
           size="M" 
           :title="$t('home.video.title')" 
           :text="$t('home.video.text')"
-          link="https://youtube.com"
+          link="https://www.youtube.com/@aaronthommy"
           :linkText="$t('home.video.button')"
           bgColor="bg-red-50 dark:bg-red-900/20"
           class="md:col-span-1 lg:col-span-1"
