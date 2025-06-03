@@ -312,8 +312,8 @@ const errors = ref({})
 const isSubmitting = ref(false)
 const showSuccess = ref(false)
 const showError = ref(false)
-const successMessage = ref($t('pages.contact.success'))
-const errorMessage = ref($t('pages.contact.error'))
+const successMessage = ref(t('pages.contact.success'))
+const errorMessage = ref(t('pages.contact.error'))
 
 // Formularvalidierung
 const validateForm = () => {
@@ -321,29 +321,29 @@ const validateForm = () => {
   let valid = true
 
   if (!contactForm.value.name.trim()) {
-    errors.value.name = $t('pages.contact.name')
+    errors.value.name = t('pages.contact.name')
     valid = false
   }
   if (!contactForm.value.email.trim()) {
-    errors.value.email = $t('pages.contact.email')
+    errors.value.email = t('pages.contact.email')
     valid = false
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.value.email)) {
-    errors.value.email = $t('pages.contact.email')
+    errors.value.email = t('pages.contact.email')
     valid = false
   }
   if (!contactForm.value.subject.trim()) {
-    errors.value.subject = $t('pages.contact.subject')
+    errors.value.subject = t('pages.contact.subject')
     valid = false
   }
   if (!contactForm.value.message.trim()) {
-    errors.value.message = $t('pages.contact.message')
+    errors.value.message = t('pages.contact.message')
     valid = false
   } else if (contactForm.value.message.trim().length < 10) {
-    errors.value.message = $t('pages.contact.message')
+    errors.value.message = t('pages.contact.message')
     valid = false
   }
   if (!contactForm.value.privacy) {
-    errors.value.privacy = $t('pages.contact.privacyLabel')
+    errors.value.privacy = t('pages.contact.privacyLabel')
     valid = false
   }
 
@@ -377,16 +377,16 @@ const sendMessage = async (e) => {
 
     if (response.ok) {
       showSuccess.value = true;
-      successMessage.value = $t('pages.contact.success');
+      successMessage.value = t('pages.contact.success');
       contactForm.value = { name: '', email: '', subject: '', message: '', privacy: false };
     } else {
       showError.value = true;
-      errorMessage.value = data.error || $t('pages.contact.error');
+      errorMessage.value = data.error || t('pages.contact.error');
     }
   } catch (err) {
     console.error('Fehler beim Senden des Formulars:', err);
     showError.value = true;
-    errorMessage.value = $t('pages.contact.error');
+    errorMessage.value = t('pages.contact.error');
   } finally {
     isSubmitting.value = false;
     if (showSuccess.value) setTimeout(() => (showSuccess.value = false), 5000);
