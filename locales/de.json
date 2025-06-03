@@ -64,5 +64,40 @@
   "language": {
     "de": "Deutsch",
     "en": "Englisch"
+  },
+  "pages": {
+    "comingsoon": {
+      "title": "Coming Soon",
+      "description": "Diese Seite befindet sich noch in Entwicklung. Schau bald wieder vorbei für neue Inhalte.",
+      "back": "Zurück zur Startseite",
+      "socialTitle": "Folge mir auf Social Media",
+      "socialText": "Für tägliche Clips und Performances",
+      "ctaButton": "Jetzt Patron werden"
+    },
+    "offers": {
+      "title": "Angebote"
+    },
+    "community": {
+      "title": "Community"
+    },
+    "contact": {
+      "title": "Schreib mir eine Nachricht",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "privacyLabel": "Ich habe die Datenschutzerklärung gelesen und stimme zu, dass meine Angaben zur Kontaktaufnahme verwendet werden.",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet...",
+      "success": "Vielen Dank für deine Nachricht! Ich werde mich schnellstmöglich bei dir melden.",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuche es später noch einmal.",
+      "info": "Kontaktinformationen",
+      "emailTitle": "E-Mail",
+      "locationTitle": "Standort",
+      "responseTitle": "Antwortzeit",
+      "followTitle": "Folge mir auf Social Media",
+      "ctaTitle": "Lass uns in Verbindung bleiben!",
+      "ctaText": "Folge mir auf Social Media für tägliche musikalische Inspirationen, neue Tutorials und Updates zu kommenden Projekten."
+    }
   }
 }

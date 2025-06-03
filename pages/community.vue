@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="mb-12">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          Community
+          {{ $t('pages.community.title') }}
         </h1>
         <div class="h-1 w-20 bg-blue-500 dark:bg-blue-400 rounded"></div>
       </div>
@@ -440,9 +440,11 @@
 
 <script setup>
 import { onMounted } from "vue";
+import { useI18n } from 'vue-i18n';
 import { useThemeStore } from "~/stores/themeStore";
 
 const themeStore = useThemeStore();
+const { t } = useI18n();
 
 onMounted(() => {
   // Theme-Einstellungen initialisieren
