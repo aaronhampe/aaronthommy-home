@@ -8,12 +8,12 @@
       
       <!-- Coming Soon Text -->
       <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">
-        Coming Soon
+        {{ $t('pages.comingsoon.title') }}
       </h2>
       
       <!-- Beschreibungstext -->
       <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
-        Diese Seite befindet sich noch in Entwicklung. Schau bald wieder vorbei für neue Inhalte.
+        {{ $t('pages.comingsoon.description') }}
       </p>
 
       <!-- Patreon Highlight Box mit verbessertem Design -->
@@ -76,7 +76,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" fill="white"/>
             </svg>
-            Jetzt Patron werden
+            {{ $t('pages.comingsoon.ctaButton') }}
           </a>
           <p class="text-sm text-gray-600 dark:text-gray-400 mt-3">
             Ab 3€ pro Monat • Jederzeit kündbar
@@ -93,14 +93,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Zurück zur Startseite
+          {{ $t('pages.comingsoon.back') }}
         </NuxtLink>
         
         <!-- Social Media Links mit verbessertem Design -->
         <div class="mt-12">
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Folge mir auf Social Media</h3>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('pages.comingsoon.socialTitle') }}</h3>
           <p class="text-gray-600 dark:text-gray-300 mb-6">
-            Für tägliche Clips und Performances
+            {{ $t('pages.comingsoon.socialText') }}
           </p>
           <div class="flex justify-center space-x-4">
             <a href="https://www.tiktok.com/@aaronthommy" target="_blank" class="group">
@@ -133,10 +133,12 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useThemeStore } from '~/stores/themeStore';
 
 // Theme Store für Dark Mode
 const themeStore = useThemeStore();
+const { t } = useI18n();
 
 onMounted(() => {
   // Dark Mode Einstellungen initialisieren
