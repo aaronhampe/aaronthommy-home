@@ -49,8 +49,8 @@ export const useThemeStore = defineStore('theme', {
           this.setDarkMode(savedTheme === 'dark');
         } else {
           // System-Präferenz prüfen
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          this.setDarkMode(prefersDark);
+          //const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          this.setDarkMode(true);
           
           // Auf Änderungen der System-Präferenz hören
           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
