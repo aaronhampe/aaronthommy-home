@@ -64,5 +64,40 @@
     "language": {
       "de": "German",
       "en": "English"
+    },
+    "pages": {
+      "comingsoon": {
+        "title": "Coming Soon",
+        "description": "This page is still under development. Check back soon for new content.",
+        "back": "Back to home",
+        "socialTitle": "Follow me on Social Media",
+        "socialText": "For daily clips and performances",
+        "ctaButton": "Become a Patron now"
+      },
+      "offers": {
+        "title": "Offers"
+      },
+      "community": {
+        "title": "Community"
+      },
+      "contact": {
+        "title": "Send me a message",
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "privacyLabel": "I have read the privacy policy and agree that my information may be used to contact me.",
+        "send": "Send message",
+        "sending": "Sending...",
+        "success": "Thank you for your message! I will get back to you as soon as possible.",
+        "error": "An error occurred. Please try again later.",
+        "info": "Contact information",
+        "emailTitle": "Email",
+        "locationTitle": "Location",
+        "responseTitle": "Response time",
+        "followTitle": "Follow me on Social Media",
+        "ctaTitle": "Let's stay in touch!",
+        "ctaText": "Follow me on social media for daily musical inspiration, new tutorials and updates on upcoming projects."
+      }
     }
   }

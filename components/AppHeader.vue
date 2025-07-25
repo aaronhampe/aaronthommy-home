@@ -132,7 +132,7 @@ const scrolled = ref(false);
 // Navigation Items mit i18n-Keys
 const navItems = [
   { key: "home", path: "/" },
-  { key: "tabs", path: "/tabs" },
+  { key: "tabs", path: "/comingsoon" },
   { key: "offers", path: "/offers" },
   { key: "social", path: "/social" }
 ];

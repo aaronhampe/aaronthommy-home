@@ -13,13 +13,13 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Kontaktformular - Linke Spalte -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 md:p-8">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Schreib mir eine Nachricht</h2>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{{ $t('pages.contact.title') }}</h2>
 
           <form @submit.prevent="sendMessage" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- Name -->
               <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('pages.contact.name') }}</label>
                 <input
                   type="text"
                   id="name"
@@ -33,7 +33,7 @@
 
               <!-- Email -->
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('pages.contact.email') }}</label>
                 <input
                   type="email"
                   id="email"
@@ -48,7 +48,7 @@
 
             <!-- Betreff -->
             <div>
-              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Betreff</label>
+              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('pages.contact.subject') }}</label>
               <input
                 type="text"
                 id="subject"
@@ -62,7 +62,7 @@
 
             <!-- Nachricht -->
             <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nachricht</label>
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ $t('pages.contact.message') }}</label>
               <textarea
                 id="message"
                 v-model="contactForm.message"
@@ -88,8 +88,7 @@
               </div>
               <div class="ml-3 text-sm">
                 <label for="privacy" class="text-gray-600 dark:text-gray-400">
-                  Ich habe die <NuxtLink to="/datenschutz" class="text-blue-500 dark:text-blue-400 hover:underline">Datenschutzerklärung</NuxtLink>
-                  gelesen und stimme zu, dass meine Angaben zur Kontaktaufnahme verwendet werden.
+                  {{ $t('pages.contact.privacyLabel') }}
                 </label>
                 <p v-if="errors.privacy" class="text-red-500 text-sm mt-1">{{ errors.privacy }}</p>
               </div>
@@ -108,7 +107,7 @@
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                 </span>
-                {{ isSubmitting ? 'Wird gesendet...' : 'Nachricht senden' }}
+                {{ isSubmitting ? $t('pages.contact.sending') : $t('pages.contact.send') }}
               </button>
             </div>
           </form>
@@ -176,7 +175,7 @@
                   </svg>
                 </div>
                 <div class="ml-4">
-                  <h3 class="text-base font-medium text-gray-900 dark:text-white">E-Mail</h3>
+                  <h3 class="text-base font-medium text-gray-900 dark:text-white">{{ $t('pages.contact.emailTitle') }}</h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-300">info@aaronthommy.com</p>
                 </div>
               </div>
@@ -189,7 +188,7 @@
                   </svg>
                 </div>
                 <div class="ml-4">
-                  <h3 class="text-base font-medium text-gray-900 dark:text-white">Standort</h3>
+                  <h3 class="text-base font-medium text-gray-900 dark:text-white">{{ $t('pages.contact.locationTitle') }}</h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-300">Hannover, Deutschland</p>
                 </div>
               </div>
@@ -201,14 +200,14 @@
                   </svg>
                 </div>
                 <div class="ml-4">
-                  <h3 class="text-base font-medium text-gray-900 dark:text-white">Antwortzeit</h3>
+                  <h3 class="text-base font-medium text-gray-900 dark:text-white">{{ $t('pages.contact.responseTitle') }}</h3>
                   <p class="mt-1 text-gray-600 dark:text-gray-300">In der Regel innerhalb von 24-48 Stunden</p>
                 </div>
               </div>
               
               <!-- Social Media Links -->
               <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
-                <h3 class="text-base font-medium text-gray-900 dark:text-white mb-4">Folge mir auf Social Media</h3>
+                <h3 class="text-base font-medium text-gray-900 dark:text-white mb-4">{{ $t('pages.contact.followTitle') }}</h3>
                 <div class="flex space-x-4">
                   <a href="https://www.tiktok.com/@aaronthommy" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -262,9 +261,9 @@
       
       <!-- Call to Action -->
       <div class="mt-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-8 text-center">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Lass uns in Verbindung bleiben!</h2>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('pages.contact.ctaTitle') }}</h2>
         <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6">
-          Folge mir auf Social Media für tägliche musikalische Inspirationen, neue Tutorials und Updates zu kommenden Projekten.
+          {{ $t('pages.contact.ctaText') }}
         </p>
         <div class="flex flex-wrap justify-center gap-4">
           <a href="https://www.tiktok.com/@aaronthommy" target="_blank" class="inline-flex items-center px-5 py-3 rounded-lg bg-black text-white hover:bg-gray-900 transition-colors">
@@ -293,9 +292,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useThemeStore } from '~/stores/themeStore'
 
 const themeStore = useThemeStore()
+const { t } = useI18n()
 
 // Kontaktformular Daten
 const contactForm = ref({
@@ -311,8 +312,8 @@ const errors = ref({})
 const isSubmitting = ref(false)
 const showSuccess = ref(false)
 const showError = ref(false)
-const successMessage = ref('Vielen Dank für deine Nachricht! Ich werde mich schnellstmöglich bei dir melden.')
-const errorMessage = ref('Ein Fehler ist aufgetreten. Bitte versuche es später noch einmal.')
+const successMessage = ref(t('pages.contact.success'))
+const errorMessage = ref(t('pages.contact.error'))
 
 // Formularvalidierung
 const validateForm = () => {
@@ -320,29 +321,29 @@ const validateForm = () => {
   let valid = true
 
   if (!contactForm.value.name.trim()) {
-    errors.value.name = 'Bitte gib deinen Namen ein'
+    errors.value.name = t('pages.contact.name')
     valid = false
   }
   if (!contactForm.value.email.trim()) {
-    errors.value.email = 'Bitte gib deine E-Mail-Adresse ein'
+    errors.value.email = t('pages.contact.email')
     valid = false
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.value.email)) {
-    errors.value.email = 'Bitte gib eine gültige E-Mail-Adresse ein'
+    errors.value.email = t('pages.contact.email')
     valid = false
   }
   if (!contactForm.value.subject.trim()) {
-    errors.value.subject = 'Bitte gib einen Betreff ein'
+    errors.value.subject = t('pages.contact.subject')
     valid = false
   }
   if (!contactForm.value.message.trim()) {
-    errors.value.message = 'Bitte gib eine Nachricht ein'
+    errors.value.message = t('pages.contact.message')
     valid = false
   } else if (contactForm.value.message.trim().length < 10) {
-    errors.value.message = 'Die Nachricht sollte mindestens 10 Zeichen lang sein'
+    errors.value.message = t('pages.contact.message')
     valid = false
   }
   if (!contactForm.value.privacy) {
-    errors.value.privacy = 'Bitte akzeptiere die Datenschutzbestimmungen'
+    errors.value.privacy = t('pages.contact.privacyLabel')
     valid = false
   }
 
@@ -376,16 +377,16 @@ const sendMessage = async (e) => {
 
     if (response.ok) {
       showSuccess.value = true;
-      successMessage.value = "Vielen Dank für deine Nachricht! Ich werde mich schnellstmöglich bei dir melden.";
+      successMessage.value = t('pages.contact.success');
       contactForm.value = { name: '', email: '', subject: '', message: '', privacy: false };
     } else {
       showError.value = true;
-      errorMessage.value = data.error || "Ein Fehler ist aufgetreten. Bitte versuche es später noch einmal.";
+      errorMessage.value = data.error || t('pages.contact.error');
     }
   } catch (err) {
     console.error('Fehler beim Senden des Formulars:', err);
     showError.value = true;
-    errorMessage.value = "Ein Netzwerkfehler ist aufgetreten. Bitte überprüfe deine Internetverbindung.";
+    errorMessage.value = t('pages.contact.error');
   } finally {
     isSubmitting.value = false;
     if (showSuccess.value) setTimeout(() => (showSuccess.value = false), 5000);
