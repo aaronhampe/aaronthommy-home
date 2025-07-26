@@ -31,13 +31,13 @@
 
       <!-- Floating Record - Enhanced with better positioning and animation -->
       <div class="absolute top-20 right-16 hidden lg:block animate-float-record">
-        <div class="relative group">
+        <div class="relative">
           <img src="/img/aaronthommy-home-icon-600x600.png" alt="Vinyl Record"
-            class="w-64 h-64 opacity-60 dark:opacity-40 transition-all duration-700 group-hover:opacity-80 group-hover:scale-110 filter drop-shadow-2xl"
+            class="w-64 h-64 opacity-60 dark:opacity-40 transition-all duration-700 filter drop-shadow-2xl"
             style="animation: spin 25s linear infinite;" />
           <!-- Glowing effect behind record -->
           <div
-            class="absolute inset-0 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl -z-10 group-hover:scale-125 transition-transform duration-700">
+            class="absolute inset-0 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl -z-10 transition-transform duration-700">
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
             </h1>
           </div>
           <h1
-            class="relative text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white animate-slide-up">
+            class="relative text-4xl md:text-5xl lg:text-9xl font-black tracking-tighter text-gray-900 dark:text-white animate-slide-up">
             aaron<span
               class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x">thommy</span>
           </h1>
@@ -116,6 +116,10 @@
               class="px-4 py-2 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-full text-sm text-gray-600 dark:text-gray-300 border border-white/20 dark:border-gray-700/50">
               🎥 Tone Tutorials
             </span>
+            <span
+              class="px-4 py-2 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-full text-sm text-gray-600 dark:text-gray-300 border border-white/20 dark:border-gray-700/50">
+              🎥 Logic Pro X 
+            </span>
           </div>
 
         </div>
@@ -133,7 +137,7 @@
     <section class="relative py-32 overflow-hidden">
       <!-- Dynamic Gradient Background -->
       <div
-        class="absolute inset-0 bg-gradient-to-br from-orange-50 via-red-50 via-pink-50 to-purple-50 dark:from-orange-900/20 dark:via-red-900/20 dark:via-pink-900/20 dark:to-purple-900/20">
+        class="absolute inset-0 bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 dark:from-orange-900/20 dark:via-red-900/20 dark:to-purple-900/20">
         <!-- Animated Background Elements -->
         <div class="absolute inset-0">
           <!-- Large Orbs with Enhanced Animation -->
@@ -930,7 +934,7 @@ html {
 }
 
 .animate-gradient-x {
-  background-size: 400% 400%;
+  background-size:100% 100%;
   animation: gradient-x 3s ease infinite;
 }
 
@@ -1150,7 +1154,7 @@ html {
 }
 
 .animate-gradient-x {
-  background-size: 200% 200%;
+  background-size: 100% 100%;
   animation: gradient-x 5s ease infinite;
 }
 
