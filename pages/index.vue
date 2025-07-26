@@ -1,15 +1,10 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-
-
-
-    <!------------------------------------
-    
-    Hero Section
-     
-    ----------------------------------->
-
-
+    <!------------------------------------------------------- 
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                      Hero Section
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    --------------------------------------------------------->
 
     <section
       class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/20">
@@ -64,7 +59,7 @@
             </h1>
           </div>
           <h1
-            class="relative text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-gray-900 dark:text-white animate-slide-up">
+            class="relative text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-gray-900 dark:text-white animate-slide-up">
             aaron<span
               class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x">thommy</span>
           </h1>
@@ -75,7 +70,7 @@
 
         <!-- Enhanced Subtitle with Typing Effect -->
         <div class="mb-12 animate-slide-up-delayed">
-          <p class="text-2xl md:text-3xl lg:text-4xl text-gray-600 dark:text-gray-300 mb-4 font-light">
+          <p class="text-1xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-4 font-light">
             <span
               class="bg-gradient-to-r from-gray-600 to-gray-800 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
               Guitarist & Pianist
@@ -86,64 +81,20 @@
           </p>
         </div>
 
-        <!-- Enhanced Instrument Icons with Glassmorphism -->
-        <div class="flex justify-center space-x-12 mb-16 animate-fade-in-up">
-          <div class="group cursor-pointer">
-            <div class="relative">
-              <div
-                class="w-20 h-20 bg-white/20 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl flex items-center justify-center mb-3 border border-white/30 dark:border-gray-700/50 shadow-2xl group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500">
-                <svg class="w-10 h-10 text-blue-500 group-hover:text-blue-400 transition-colors duration-300"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 1L3 7v4c0 .55.45 1 1 1h2v11h4V12h4v11h4V12h2c.55 0 1-.45 1-1V7l-9-6z" />
-                </svg>
-                <!-- Glow effect -->
-                <div
-                  class="absolute inset-0 rounded-2xl bg-blue-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
-                </div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-blue-500 transition-colors duration-300">Guitar</span>
-            </div>
-          </div>
-
-          <div class="group cursor-pointer">
-            <div class="relative">
-              <div
-                class="w-20 h-20 bg-white/20 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl flex items-center justify-center mb-3 border border-white/30 dark:border-gray-700/50 shadow-2xl group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-500">
-                <svg class="w-10 h-10 text-purple-500 group-hover:text-purple-400 transition-colors duration-300"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM4 16V8h16v8H4z" />
-                  <path d="M6 14h2v-4H6v4zm3 0h2v-4H9v4zm3 0h2v-4h-2v4zm3 0h2v-4h-2v4zm3 0h2v-4h-2v4z" />
-                </svg>
-                <!-- Glow effect -->
-                <div
-                  class="absolute inset-0 rounded-2xl bg-purple-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
-                </div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-purple-500 transition-colors duration-300">Piano</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Enhanced CTA Section -->
         <div class="space-y-8 animate-fade-in-up-delayed">
-          <!-- Main CTA Button with Advanced Styling -->
+          <!-- Main CTA Button with Subtle Styling -->
           <div class="relative group">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500">
-            </div>
             <a href="https://patreon.com/AaronThommyMusicCircle" target="_blank"
-              class="relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg font-bold rounded-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 shadow-2xl border border-white/20">
-              <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl"></div>
+              class="relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 shadow-xl hover:shadow-2xl border border-white/20">
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-4" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" />
               </svg>
               <span class="relative">Join My Music Circle</span>
-              <div
-                class="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-1000">
-              </div>
             </a>
           </div>
 
@@ -161,74 +112,22 @@
               class="px-4 py-2 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-full text-sm text-gray-600 dark:text-gray-300 border border-white/20 dark:border-gray-700/50">
               🎥 Live Sessions
             </span>
+            <span
+              class="px-4 py-2 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-full text-sm text-gray-600 dark:text-gray-300 border border-white/20 dark:border-gray-700/50">
+              🎥 Tone Tutorials
+            </span>
           </div>
 
-          <!-- Enhanced Social Media Links -->
-          <div class="flex justify-center space-x-6 pt-8">
-            <a href="https://www.tiktok.com/@aaronthommy" target="_blank" class="group relative">
-              <div
-                class="w-14 h-14 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 dark:border-gray-700/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-black/20">
-                <svg
-                  class="w-7 h-7 text-gray-600 dark:text-gray-300 group-hover:text-white transition-colors duration-300"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z" />
-                </svg>
-              </div>
-              <div
-                class="absolute inset-0 rounded-2xl bg-gray-800/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
-              </div>
-            </a>
-
-            <a href="https://www.instagram.com/aaronthommy_" target="_blank" class="group relative">
-              <div
-                class="w-14 h-14 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 dark:border-gray-700/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-purple-500/20 group-hover:to-pink-500/20">
-                <svg
-                  class="w-7 h-7 text-gray-600 dark:text-gray-300 group-hover:text-pink-400 transition-colors duration-300"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                </svg>
-              </div>
-              <div
-                class="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/20 to-pink-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
-              </div>
-            </a>
-
-            <a href="https://www.youtube.com/@aaronthommy" target="_blank" class="group relative">
-              <div
-                class="w-14 h-14 bg-white/10 dark:bg-gray-800/30 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 dark:border-gray-700/50 transition-all duration-300 group-hover:scale-110 group-hover:bg-red-500/20">
-                <svg
-                  class="w-7 h-7 text-gray-600 dark:text-gray-300 group-hover:text-red-400 transition-colors duration-300"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                </svg>
-              </div>
-              <div
-                class="absolute inset-0 rounded-2xl bg-red-400/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
-              </div>
-            </a>
-          </div>
         </div>
 
-        <!-- Enhanced Scroll Indicator -->
-        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
-          <div class="flex flex-col items-center space-y-2">
-            <div class="w-6 h-10 border-2 border-gray-400/50 dark:border-gray-500/50 rounded-full flex justify-center">
-              <div class="w-1 h-3 bg-gray-400 dark:bg-gray-500 rounded-full mt-2 animate-scroll-indicator"></div>
-            </div>
-            <span class="text-xs text-gray-400 dark:text-gray-500 font-medium">Scroll</span>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- 
-    
-    Main Patreon CTA Section
-    
-    -->
+    <!------------------------------------------------------- 
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                Main Patreon CTA Section
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    --------------------------------------------------------->
 
     <!-- Enhanced Patreon CTA Section -->
     <section class="relative py-32 overflow-hidden">
@@ -319,27 +218,7 @@
               </p>
             </div>
 
-            <!-- Animated Stats -->
-            <div class="flex justify-center space-x-8 mb-12 animate-slide-up-stagger">
-              <div class="text-center group">
-                <div
-                  class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-1 group-hover:scale-110 transition-transform duration-300">
-                  150+</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Musicians</div>
-              </div>
-              <div class="text-center group">
-                <div
-                  class="text-3xl font-bold text-red-600 dark:text-red-400 mb-1 group-hover:scale-110 transition-transform duration-300">
-                  50+</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Exclusive Tabs</div>
-              </div>
-              <div class="text-center group">
-                <div
-                  class="text-3xl font-bold text-pink-600 dark:text-pink-400 mb-1 group-hover:scale-110 transition-transform duration-300">
-                  12</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Live Sessions</div>
-              </div>
-            </div>
+
           </div>
 
           <!-- Enhanced Membership Tiers with Advanced Design -->
@@ -403,159 +282,7 @@
               </div>
             </div>
 
-            <!-- Pro Tier - Featured -->
-            <div class="group relative transform lg:scale-105">
-              <!-- Popular Badge -->
-              <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
-                <div
-                  class="bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg animate-pulse-glow">
-                  Most Popular
-                </div>
-              </div>
 
-              <!-- Enhanced Glow Effect -->
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-orange-400/30 to-red-400/30 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500">
-              </div>
-
-              <div class="relative">
-                <div
-                  class="absolute inset-0 bg-gradient-to-br from-orange-100/80 to-red-100/80 dark:from-orange-900/60 dark:to-red-900/60 rounded-2xl backdrop-blur-lg border-2 border-orange-400/50 dark:border-orange-600/50 shadow-2xl">
-                </div>
-                <div class="relative p-8 rounded-2xl group-hover:-translate-y-3 transition-all duration-500">
-                  <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Music Creator</h3>
-                    <div
-                      class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <span
-                      class="text-4xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">€18</span>
-                    <span class="text-lg text-gray-500 dark:text-gray-400">/month</span>
-                  </div>
-
-                  <ul class="space-y-4 mb-8">
-                    <li class="flex items-start">
-                      <div
-                        class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span class="text-gray-700 dark:text-gray-300">Everything from Music Lover</span>
-                    </li>
-                    <li class="flex items-start">
-                      <div
-                        class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span class="text-gray-700 dark:text-gray-300">Behind-the-Scenes Content</span>
-                    </li>
-                    <li class="flex items-start">
-                      <div
-                        class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span class="text-gray-700 dark:text-gray-300">Early Access to New Videos</span>
-                    </li>
-                    <li class="flex items-start">
-                      <div
-                        class="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span class="text-gray-700 dark:text-gray-300">Monthly Q&A Sessions</span>
-                    </li>
-                  </ul>
-
-                  <button
-                    class="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg relative overflow-hidden group">
-                    <div
-                      class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    </div>
-                    <span class="relative">Choose This Plan</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Master Tier -->
-            <div class="group relative">
-              <div
-                class="absolute inset-0 bg-gradient-to-b from-gray-900/80 to-black/80 dark:from-gray-800/80 dark:to-gray-900/80 rounded-2xl backdrop-blur-lg border border-gray-700/50 shadow-xl group-hover:shadow-2xl transition-all duration-500">
-              </div>
-              <div class="relative p-8 rounded-2xl group-hover:-translate-y-2 transition-all duration-500">
-                <div class="flex items-center justify-between mb-6">
-                  <h3 class="text-2xl font-bold text-white">Music Master</h3>
-                  <div
-                    class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M5 16L3 14l5.5-5.5L12 12l4-4 1.5 1.5L13 14l-2.5-2.5L5 16z" />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="mb-6">
-                  <span class="text-4xl font-black text-white">€90</span>
-                  <span class="text-lg text-gray-400">/month</span>
-                </div>
-
-                <ul class="space-y-4 mb-8">
-                  <li class="flex items-start">
-                    <div
-                      class="flex-shrink-0 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span class="text-gray-300">Everything from Music Creator</span>
-                  </li>
-                  <li class="flex items-start">
-                    <div
-                      class="flex-shrink-0 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span class="text-gray-300">Monthly 1-on-1 Live Sessions</span>
-                  </li>
-                  <li class="flex items-start">
-                    <div
-                      class="flex-shrink-0 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span class="text-gray-300">Personal Feedback on Your Playing</span>
-                  </li>
-                  <li class="flex items-start">
-                    <div
-                      class="flex-shrink-0 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center mt-0.5 mr-3">
-                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <span class="text-gray-300">Custom Tab Requests</span>
-                  </li>
-                </ul>
-
-                <button
-                  class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105">
-                  Elite Access
-                </button>
-              </div>
-            </div>
           </div>
 
           <!-- Enhanced Main CTA -->
@@ -594,15 +321,7 @@
 
             <!-- Enhanced Trust Indicators -->
             <div class="mt-8 flex flex-col items-center space-y-4">
-              <div class="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
-                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clip-rule="evenodd" />
-                </svg>
-                <span class="text-lg">Join <span class="font-semibold">150+ musicians</span> already in the
-                  community</span>
-              </div>
+
 
               <div class="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                 <div class="flex items-center space-x-1">
@@ -1034,49 +753,19 @@ html {
 
 /* Custom Animations */
 @keyframes float-slow {
-
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-
-  33% {
-    transform: translate(30px, -30px) rotate(120deg);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) rotate(240deg);
-  }
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(15px, -15px); }
 }
 
 @keyframes float-delayed {
-
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-
-  33% {
-    transform: translate(-40px, -20px) rotate(-120deg);
-  }
-
-  66% {
-    transform: translate(25px, 25px) rotate(-240deg);
-  }
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, -10px); }
 }
 
 @keyframes float-record {
-
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
-
 @keyframes float-record-mobile {
 
   0%,
@@ -1221,15 +910,15 @@ html {
 
 /* Apply Animations */
 .animate-float-slow {
-  animation: float-slow 20s ease-in-out infinite;
+  animation: float-slow 8s ease-in-out infinite;
 }
 
 .animate-float-delayed {
-  animation: float-delayed 25s ease-in-out infinite;
+  animation: float-delayed 10s ease-in-out infinite;
 }
 
 .animate-float-record {
-  animation: float-record 6s ease-in-out infinite;
+  animation: float-record 4s ease-in-out infinite;
 }
 
 .animate-float-record-mobile {
@@ -1297,7 +986,6 @@ html {
   - This section contains styles for the video cards and social proof section.
   - It includes responsive grid layouts, hover effects, and animations for the video cards.
 */
-
 /* Enhanced Custom Animations */
 @keyframes float-orb-1 {
 
@@ -1380,16 +1068,10 @@ html {
 }
 
 @keyframes gradient-x {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
+
 
 @keyframes expand-delayed {
   0% {
@@ -1468,8 +1150,8 @@ html {
 }
 
 .animate-gradient-x {
-  background-size: 400% 400%;
-  animation: gradient-x 3s ease infinite;
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
 }
 
 .animate-expand-delayed {
@@ -1535,4 +1217,5 @@ html {
 
 .group:hover {
   will-change: transform;
-}</style>
+}
+</style>
