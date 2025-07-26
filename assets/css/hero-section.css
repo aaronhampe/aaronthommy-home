@@ -1,0 +1,304 @@
+/* Custom Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Hover Effekte */
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+.group:hover .group-hover\:-translate-y-2 {
+  transform: translateY(-0.5rem);
+}
+
+/* Floating Animations für Feature Pills */
+@keyframes float-pill {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-3px); 
+  }
+}
+
+/* Verschiedene Delays für natürliche Bewegung */
+.animate-float-pill-1 {
+  animation: float-pill 3s ease-in-out infinite;
+}
+
+.animate-float-pill-2 {
+  animation: float-pill 3s ease-in-out infinite 0.5s;
+}
+
+.animate-float-pill-3 {
+  animation: float-pill 3s ease-in-out infinite 1s;
+}
+
+.animate-float-pill-4 {
+  animation: float-pill 3s ease-in-out infinite 1.5s;
+}
+
+.animate-float-pill-5 {
+  animation: float-pill 3s ease-in-out infinite 2s;
+}
+
+/* Enhanced Glassmorphism */
+.backdrop-blur-xl {
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+  .animate-spin-slow {
+    display: none;
+  }
+}
+
+/* Custom Animations */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(15px, -15px);
+  }
+}
+
+@keyframes float-delayed {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, -10px);
+  }
+}
+
+@keyframes float-record {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes float-record-mobile {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up-delayed {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  60% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up-delayed {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  70% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    width: 8rem;
+    opacity: 1;
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes scroll-indicator {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply Animations */
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 10s ease-in-out infinite;
+}
+
+.animate-float-record {
+  animation: float-record 4s ease-in-out infinite;
+}
+
+.animate-float-record-mobile {
+  animation: float-record-mobile 5s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-gradient-x {
+  background-size: 100% 100%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out;
+}
+
+.animate-slide-up-delayed {
+  animation: slide-up-delayed 1.5s ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 2s ease-out;
+}
+
+.animate-fade-in-up-delayed {
+  animation: fade-in-up-delayed 2.5s ease-out;
+}
+
+.animate-expand {
+  animation: expand 1.2s ease-out 0.5s both;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-scroll-indicator {
+  animation: scroll-indicator 2s ease-in-out infinite;
+}
+
+/* Enhanced Glassmorphism Effects */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .animate-float-record {
+    display: none;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px) brightness(1.1);
+  }
+}
