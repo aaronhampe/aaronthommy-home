@@ -15,16 +15,18 @@
             <!-- Anbieter -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Angaben gemäß § 5 TMG</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              Aaron Thomas Hampe<br>
-              Lampestraße 03<br>
-              30449 Hannover<br>
+              AARON THOMAS HAMPE<br>
+              c/o MDC<br>
+              Management#2005<br>
+              Welserstraße 3<br>
+              87463 Dietmannsried<br>
               Deutschland
             </p>
   
             <!-- Kontakt -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Kontakt</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              Telefon: +49 1514 2418699 <br>
+              Telefon: +49 1514 295774884<br>
               E-Mail: info@aaronthommy.com <br>
               Website: www.aaronthommy.com
             </p>
@@ -33,13 +35,13 @@
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Umsatzsteuer-ID</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
-              [Umsatzsteuer-ID]
+              DE454283895
             </p>
   
             <!-- Verantwortlich für den Inhalt -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Verantwortlich für den Inhalt</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              Aaron Thomas Hampe<br>
+              AARON THOMAS HAMPE<br>
               
             </p>
   

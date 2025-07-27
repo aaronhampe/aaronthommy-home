@@ -47,12 +47,7 @@
                 {{ $t('header.home') }}
               </NuxtLink>
             </li>
-            <li>
-              <NuxtLink to="/tabs"
-                class="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-                {{ $t('header.tabs') }}
-              </NuxtLink>
-            </li>
+           
             <li>
               <NuxtLink to="/comingsoon"
                 class="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
@@ -60,7 +55,7 @@
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/comingsoon"
+              <NuxtLink to="/community"
                 class="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
                 {{ $t('header.offers') }}
               </NuxtLink>

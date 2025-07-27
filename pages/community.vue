@@ -1,446 +1,491 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-16">
-    <div class="container mx-auto px-4">
-      <!-- Header -->
-      <div class="mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-          {{ $t('pages.community.title') }}
-        </h1>
-        <div class="h-1 w-20 bg-blue-500 dark:bg-blue-400 rounded"></div>
-      </div>
+  <!------------------------------------------------------- 
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                Main Patreon CTA Section
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    --------------------------------------------------------->
 
-      <!-- Patreon Hero Section -->
-      <div class="relative bg-gradient-to-br from-orange-50 via-red-50 to-pink-50 dark:from-orange-900/20 dark:via-red-900/20 dark:to-pink-900/20 rounded-3xl p-8 md:p-12 mb-12 overflow-hidden shadow-xl">
-        <!-- Decorative Elements -->
-        <div class="absolute inset-0 opacity-10 dark:opacity-5">
-          <div class="absolute -top-32 -right-32 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>
-          <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-red-400 rounded-full blur-3xl"></div>
+  <!-- Enhanced Patreon CTA Section -->
+  <section class="relative py-32 overflow-hidden" id="patreon-cta">
+    <!-- Dynamic Gradient Background -->
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 dark:from-orange-900/20 dark:via-red-900/20 dark:to-purple-900/20"
+    >
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0">
+        <!-- Large Orbs with Enhanced Animation -->
+        <div
+          class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-orange-400/30 to-red-400/30 rounded-full blur-3xl animate-float-orb-1"
+        ></div>
+        <div
+          class="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/25 to-pink-400/25 rounded-full blur-3xl animate-float-orb-2"
+        ></div>
+        <div
+          class="absolute top-1/2 right-1/4 w-80 h-80 bg-gradient-to-br from-pink-400/20 to-purple-400/20 rounded-full blur-3xl animate-float-orb-3"
+        ></div>
+
+        <!-- Grid Pattern Overlay -->
+        <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
+          <div
+            class="absolute inset-0"
+            style="
+              background-image: radial-gradient(
+                circle at 2px 2px,
+                rgba(245, 101, 101, 0.4) 1px,
+                transparent 0
+              );
+              background-size: 50px 50px;
+            "
+          ></div>
         </div>
 
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-white dark:bg-gray-800 rounded-2xl shadow-lg mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" fill="#F96854"/>
-              </svg>
-            </div>
-            
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              AaronThommy <span class="text-orange-600 dark:text-orange-400">Music Circle</span>
-            </h2>
-            
-            <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Werde Teil meiner exklusiven Patreon-Community und erhalte Zugang zu einzigartigen Inhalten, 
-              persönlichem Feedback und einer engagierten Musikergemeinschaft.
-            </p>
-
-            <a 
-              href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" 
-              target="_blank" 
-              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" fill="white"/>
-              </svg>
-              Werde jetzt Patron
-            </a>
-          </div>
-
-          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Was dich erwartet:</h3>
-            <ul class="space-y-3">
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-300">Exklusive Guitar Tabs & Piano Sheets</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-300">Monatliche Live-Sessions & Q&As</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-300">Behind-the-Scenes Content & Tutorials</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-300">Persönliches Feedback zu deinem Spiel</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-300">Zugang zum exklusiven Discord Server</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Membership Tiers -->
-      <div class="mb-16">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Wähle deine Mitgliedschaft
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <!-- Basic Tier -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Music Lover</h3>
-            <p class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-4">3€<span class="text-base font-normal text-gray-600 dark:text-gray-400">/Monat</span></p>
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Zugang zu allen Tabs
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Community Discord
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Patron-Only Posts
-              </li>
-            </ul>
-            <a 
-              href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" 
-              target="_blank" 
-              class="block w-full text-center py-3 px-4 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-lg transition-colors"
-            >
-              Jetzt starten
-            </a>
-          </div>
-
-          <!-- Pro Tier -->
-          <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl shadow-xl p-6 hover:shadow-2xl transition-shadow border-2 border-orange-400 dark:border-orange-600">
-            <div class="bg-orange-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full inline-block mb-3">Beliebteste Option</div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Music Creator</h3>
-            <p class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-4">18€<span class="text-base font-normal text-gray-600 dark:text-gray-400">/Monat</span></p>
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Alles aus Music Lover
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Zugang zu allen Kursen
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Behind-the-Scenes Content
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Früher Zugang zu neuen Videos
-              </li>
-            </ul>
-            <a 
-              href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" 
-              target="_blank" 
-              class="block w-full text-center py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors"
-            >
-              Jetzt starten
-            </a>
-          </div>
-
-          <!-- VIP Tier -->
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Music Master</h3>
-            <p class="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-4">90€<span class="text-base font-normal text-gray-600 dark:text-gray-400">/Monat</span></p>
-            <ul class="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Alles aus Music Creator
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Monatliche Live-Sessions
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Persönliche Betreuung
-              </li>
-              <li class="flex items-center">
-                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Custom Tabs auf Anfrage
-              </li>
-            </ul>
-            <a 
-              href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" 
-              target="_blank" 
-              class="block w-full text-center py-3 px-4 bg-gray-900 hover:bg-black dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-medium rounded-lg transition-colors"
-            >
-              Jetzt starten
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- What Members Say  <div class="mb-16">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Was Community-Mitglieder sagen
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
-                <span class="text-orange-600 dark:text-orange-400 font-bold">MG</span>
-              </div>
-              <div class="ml-3">
-                <h4 class="font-semibold text-gray-900 dark:text-white">Max G.</h4>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Music Creator</p>
-              </div>
-            </div>
-            <p class="text-gray-700 dark:text-gray-300 italic">
-              "Die Tabs sind super akkurat und die Live-Sessions haben mir enorm geholfen, 
-              meinen Spielstil zu verbessern. Die Community ist toll!"
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
-                <span class="text-orange-600 dark:text-orange-400 font-bold">SK</span>
-              </div>
-              <div class="ml-3">
-                <h4 class="font-semibold text-gray-900 dark:text-white">Sarah K.</h4>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Music Master</p>
-              </div>
-            </div>
-            <p class="text-gray-700 dark:text-gray-300 italic">
-              "Das persönliche Feedback von Aaron ist unbezahlbar. Ich habe in wenigen 
-              Monaten mehr gelernt als in Jahren zuvor."
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
-                <span class="text-orange-600 dark:text-orange-400 font-bold">TM</span>
-              </div>
-              <div class="ml-3">
-                <h4 class="font-semibold text-gray-900 dark:text-white">Tom M.</h4>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Music Lover</p>
-              </div>
-            </div>
-            <p class="text-gray-700 dark:text-gray-300 italic">
-              "Endlich eine Quelle für qualitativ hochwertige Tabs! Der Discord ist 
-              super aktiv und man bekommt immer Hilfe."
-            </p>
-          </div>
-        </div>
-      </div>-->
-     
-
-      <!-- Social Media Section -->
-      <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg mb-12">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Folge mir auch auf Social Media
-        </h2>
-        <p class="text-gray-600 dark:text-gray-300 mb-8">
-          Für tägliche Clips, Performances und Updates - kostenlos und für alle zugänglich!
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <a
-            href="https://www.tiktok.com/@aaronthommy"
-            target="_blank"
-            class="group flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-md transition-all hover:-translate-y-1"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-12 w-12 mb-4 text-gray-700 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z"
-              />
-            </svg>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              TikTok
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center mt-2">
-              Tägliche kurze Clips
-            </p>
-          </a>
-
-          <a
-            href="https://www.instagram.com/aaronthommy_"
-            target="_blank"
-            class="group flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-md transition-all hover:-translate-y-1"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-12 w-12 mb-4 text-gray-700 dark:text-gray-300 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-              />
-            </svg>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              Instagram
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center mt-2">
-              Reels & Behind-the-Scenes
-            </p>
-          </a>
-
-          <a
-            href="https://www.youtube.com/@aaronthommy"
-            target="_blank"
-            class="group flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:shadow-md transition-all hover:-translate-y-1"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-12 w-12 mb-4 text-gray-700 dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-              />
-            </svg>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-              YouTube
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center mt-2">
-              Tutorials & Performances
-            </p>
-          </a>
-        </div>
-      </div>
-
-      <!-- FAQ Section -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Häufige Fragen zur Patreon Community
-        </h2>
-
-        <div class="space-y-6">
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Was ist der AaronThommy Music Circle?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Der Music Circle ist meine exklusive Patreon-Community, in der ich meine Leidenschaft für Musik 
-              mit gleichgesinnten Musikern und Fans teile. Hier findest du nicht nur Tabs und Tutorials, 
-              sondern auch eine unterstützende Gemeinschaft.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Kann ich jederzeit kündigen?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Ja, du kannst deine Mitgliedschaft jederzeit über Patreon kündigen. Es gibt keine Mindestlaufzeit 
-              und du behältst bis zum Ende des bezahlten Monats Zugriff auf alle Inhalte.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Wie erhalte ich Zugang zum Discord Server?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Sobald du Patron wirst, erhältst du automatisch über Patreon einen Einladungslink zum exklusiven 
-              Discord Server. Dort kannst du dich mit anderen Mitgliedern austauschen und an Live-Sessions teilnehmen.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              In welchen Formaten sind die Tabs verfügbar?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Die Tabs sind als PDF und Guitar Pro Dateien verfügbar. Piano Sheets gibt es als PDF mit 
-              Notenschrift. Alle Dateien sind professionell aufbereitet und leicht zu lesen.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Wie funktionieren die Live-Sessions?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Die monatlichen Live-Sessions finden über Discord statt. Als Music Creator oder Music Master 
-              erhältst du Zugang zu exklusiven Sessions, in denen ich Fragen beantworte, Techniken zeige 
-              und auf Wünsche der Community eingehe.
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Was beinhaltet das persönliche Feedback?
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300">
-              Als Music Master erhältst du einmal im Monat die Möglichkeit, mir ein Video von deinem Spiel 
-              zu schicken. Ich gebe dir dann detailliertes, persönliches Feedback per Video zurück, 
-              mit konkreten Tipps zur Verbesserung.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA Section -->
-      <div class="mt-12 text-center">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Bereit, Teil des Music Circle zu werden?
-        </h2>
-        <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          Schließe dich einer wachsenden Community von Musikbegeisterten an und bringe dein Spiel auf das nächste Level.
-        </p>
-        <a 
-          href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" 
-          target="_blank" 
-          class="inline-flex items-center px-10 py-5 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white text-lg font-semibold rounded-xl transition-all transform hover:scale-105 shadow-xl"
+        <!-- Floating Music Notes -->
+        <div
+          class="absolute top-1/4 left-1/4 opacity-20 dark:opacity-10 animate-float-note-1"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" fill="white"/>
+          <svg
+            class="w-8 h-8 text-orange-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+            />
           </svg>
-          Jetzt Patron werden
-        </a>
+        </div>
+        <div
+          class="absolute top-3/4 right-1/3 opacity-15 dark:opacity-8 animate-float-note-2"
+        >
+          <svg
+            class="w-6 h-6 text-red-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+            />
+          </svg>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-6xl mx-auto">
+        <!-- Enhanced Header Section -->
+        <div class="text-center mb-20">
+          <!-- Animated Patreon Logo -->
+          <div class="relative group mb-8">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 rounded-3xl blur-2xl group-hover:scale-110 transition-transform duration-700"
+            ></div>
+            <div
+              class="relative inline-flex items-center justify-center w-24 h-24 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 dark:border-gray-700/50 group-hover:scale-105 transition-all duration-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-14 w-14 group-hover:scale-110 transition-transform duration-300"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"
+                  fill="url(#patreon-gradient)"
+                />
+                <defs>
+                  <linearGradient
+                    id="patreon-gradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" style="stop-color: #f96854" />
+                    <stop offset="100%" style="stop-color: #ff5722" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Enhanced Title with Staggered Animation -->
+          <div class="mb-8 animate-fade-in-sequence">
+            <h2
+              class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-4 tracking-tight"
+            >
+              Join the
+              <span class="relative inline-block">
+                <span
+                  class="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent animate-gradient-x"
+                  >Music Circle</span
+                >
+                <div
+                  class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-expand-delayed"
+                ></div>
+              </span>
+            </h2>
+
+            <!-- Enhanced Subtitle -->
+            <p
+              class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            >
+              Become part of my
+              <span class="font-semibold text-orange-600 dark:text-orange-400"
+                >exclusive Patreon community</span
+              >
+              and unlock a world of musical content, personalized feedback, and
+              direct access to my creative process.
+            </p>
+          </div>
+        </div>
+
+        <!-- Enhanced Main CTA -->
+        <div class="text-center mb-16">
+          <div class="relative group inline-block">
+            <!-- Enhanced Glow Effect -->
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-500"
+            ></div>
+
+            <a
+              href="https://patreon.com/AaronThommyMusicCircle"
+              target="_blank"
+              class="relative inline-flex items-center px-8 py-4 md:px-16 md:py-6 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg md:text-2xl font-bold md:font-black rounded-2xl md:rounded-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-xl hover:shadow-2xl border border-white/20 overflow-hidden group"
+            >
+              <!-- Shimmer Effect -->
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-800"
+              ></div>
+
+              <!-- Patreon Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 md:h-8 md:w-8 mr-3 md:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"
+                />
+              </svg>
+
+              <span class="relative whitespace-nowrap"
+                >Become a Patron Today</span
+              >
+
+              <!-- Arrow Icon -->
+              <svg
+                class="w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Enhanced Single Membership Tier -->
+        <div class="flex justify-center mb-16">
+          <div class="group relative max-w-md w-full">
+            <!-- Enhanced Glow Background -->
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-orange-400/20 to-red-400/20 rounded-3xl blur-xl group-hover:scale-110 group-hover:blur-2xl transition-all duration-700"
+            ></div>
+
+            <!-- Main Card -->
+            <div
+              class="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl border border-white/60 dark:border-gray-700/60 shadow-2xl group-hover:shadow-3xl group-hover:-translate-y-3 transition-all duration-500 overflow-hidden"
+            >
+              <!-- Popular Badge -->
+
+              <div class="p-10">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                  <div class="flex items-center justify-center mb-4">
+                    <div
+                      class="w-16 h-16 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                    >
+                      <svg
+                        class="w-8 h-8 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <h3
+                    class="text-3xl font-bold text-gray-900 dark:text-white mb-2"
+                  >
+                    Music Circle
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400">
+                    Join my exclusive community
+                  </p>
+                </div>
+
+                <!-- Pricing -->
+                <div class="text-center mb-8">
+                  <div class="flex items-baseline justify-center">
+                    <span
+                      class="text-6xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"
+                    >
+                      €3
+                    </span>
+                    <span class="text-xl text-gray-500 dark:text-gray-400 ml-2">
+                      /month
+                    </span>
+                  </div>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    Cancel anytime • Instant access
+                  </p>
+                </div>
+
+                <!-- Enhanced Features List -->
+                <ul class="space-y-5 mb-10">
+                  <li class="flex items-start group/item">
+                    <div
+                      class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mt-0.5 mr-4 group-hover/item:scale-110 transition-transform duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="3"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="text-gray-900 dark:text-white font-semibold">
+                        🎸 All Guitar Tabs & Piano Sheets
+                      </span>
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        Access to my complete library of professionally
+                        transcribed tabs
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="flex items-start group/item">
+                    <div
+                      class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mt-0.5 mr-4 group-hover/item:scale-110 transition-transform duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="3"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="text-gray-900 dark:text-white font-semibold">
+                        💬 Exclusive Discord Community
+                      </span>
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        Connect with fellow musicians and get direct access to
+                        me
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="flex items-start group/item">
+                    <div
+                      class="flex-shrink-0 w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mt-0.5 mr-4 group-hover/item:scale-110 transition-transform duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="3"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="text-gray-900 dark:text-white font-semibold">
+                        🎥 Behind-the-Scenes Content
+                      </span>
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        Exclusive posts about my creative process and gear
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhanced Main CTA -->
+        <div class="text-center">
+          <div class="relative group inline-block">
+            <!-- Enhanced Glow Effect -->
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-500"
+            ></div>
+
+            <a
+              href="https://patreon.com/AaronThommyMusicCircle"
+              target="_blank"
+              class="relative inline-flex items-center px-8 py-4 md:px-16 md:py-6 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white text-lg md:text-2xl font-bold md:font-black rounded-2xl md:rounded-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-xl hover:shadow-2xl border border-white/20 overflow-hidden group"
+            >
+              <!-- Shimmer Effect -->
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-800"
+              ></div>
+
+              <!-- Patreon Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 md:h-8 md:w-8 mr-3 md:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"
+                />
+              </svg>
+
+              <span class="relative whitespace-nowrap"
+                >Become a Patron Today</span
+              >
+
+              <!-- Arrow Icon -->
+              <svg
+                class="w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Enhanced Trust Indicators -->
+          <div class="mt-6 md:mt-8">
+            <div
+              class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <!-- Secure Payment -->
+              <div
+                class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+              >
+                <div
+                  class="flex-shrink-0 w-5 h-5 bg-green-500/10 rounded-full flex items-center justify-center"
+                >
+                  <svg
+                    class="w-3 h-3 text-green-600 dark:text-green-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <span class="font-medium">Secure Payment</span>
+              </div>
+
+              <!-- Cancel Anytime -->
+              <div
+                class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+              >
+                <div
+                  class="flex-shrink-0 w-5 h-5 bg-blue-500/10 rounded-full flex items-center justify-center"
+                >
+                  <svg
+                    class="w-3 h-3 text-blue-600 dark:text-blue-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-10.293a1 1 0 00-1.414-1.414L9 9.586 7.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    />
+                  </svg>
+                </div>
+                <span class="font-medium">Cancel Anytime</span>
+              </div>
+
+              <!-- Instant Access -->
+              <div
+                class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+              >
+                <div
+                  class="flex-shrink-0 w-5 h-5 bg-orange-500/10 rounded-full flex items-center justify-center"
+                >
+                  <svg
+                    class="w-3 h-3 text-orange-600 dark:text-orange-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <span class="font-medium">Instant Access</span>
+              </div>
+            </div>
+
+            <!-- Additional Trust Info -->
+            <div class="mt-4 text-center">
+              <p
+                class="text-xs text-gray-400 dark:text-gray-500 max-w-md mx-auto"
+              >
+                Join
+                <span class="font-semibold text-orange-500">500+</span>
+                musicians already in the community •
+                <span class="font-semibold">No long-term commitment</span>
+                required
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import { useThemeStore } from "~/stores/themeStore";
 
 const themeStore = useThemeStore();
