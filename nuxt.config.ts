@@ -14,38 +14,49 @@ export default defineNuxtConfig({
     "~/assets/css/hero-section.css",
     "~/assets/css/patreon-section.css",
   ],
+  /* ---------- Cookie Banner ---------- */
   cookieControl: {
+    /* Pflicht!  -> verhindert den 500-Fehler */
+    locales: ["de", "en"],
+
+    /* Texte überschreiben  */
+    localeTexts: {
+      de: {
+        barTitle: "🍪 Cookies gefällig?",
+        barDescription:
+          "Ein paar sind technisch nötig – andere helfen mir, Musik besser zu machen.",
+        acceptAll: "Alle akzeptieren",
+        acceptNecessary: "Nur notwendige",
+        decline: "Ablehnen",
+        showDetails: "Auswahl anpassen",
+        save: "Speichern",
+      },
+    },
+
     barPosition: "bottom-full",
     isAcceptNecessaryButtonEnabled: true,
     isModalForced: true,
+
+    /* Farben / Glass-Look (Kurzfassung) */
     colors: {
-    /* Modal */
-    modalButtonBg:           'rgba(255,255,255,.10)',   // Sekundär
-    modalButtonTextColor:    '#F1F5F9',
-    modalButtonHoverBg:      'rgba(255,255,255,.20)',
-    modalButtonBorder:       'rgba(255,255,255,.25)',
+      barBackground: "rgba(15,23,42,.60)",
+      barTextColor: "#F1F5F9",
+      modalBackground: "rgba(15,23,42,.70)",
+      modalTextColor: "#F8FAFC",
+      modalButtonBackground: "rgba(255,255,255,.10)",
+      modalButtonHoverBackground: "rgba(255,255,255,.20)",
+      modalButtonColor: "#F8FAFC",
+      modalButtonSecondaryBackground: "linear-gradient(90deg,#6366F1,#8B5CF6)",
+      modalButtonSecondaryColor: "#FFFFFF",
+    },
 
-    modalButtonSecondaryBg:  'linear-gradient(90deg,#6366F1,#8B5CF6)', // Primär
-    modalButtonSecondaryText: '#FFFFFF',
-    modalButtonSecondaryHoverBg: 'linear-gradient(90deg,#818CF8,#A78BFA)',
-  },
-  localeStrings: {
-    de: {
-      acceptAll:        'Alle akzeptieren',
-      acceptNecessary:  'Nur notwendige',
-      decline:          'Ablehnen'
-    }
-  },
-
+    /* Deine Cookie-Kategorien (neue API-Felder) */
     cookies: {
       necessary: [
         {
           id: "session",
-          name: { de: "Sitzung", en: "Session" },
-          description: {
-            de: "Merkt Sprache & Log-in",
-            en: "Stores language and log-in",
-          },
+          name: { de: "Sitzung" },
+          description: { de: "Speichert Sprache & Log-in" },
           targetCookieIds: ["_session"],
         },
       ],
@@ -54,8 +65,7 @@ export default defineNuxtConfig({
           id: "analytics",
           name: { de: "Plausible Analytics" },
           description: { de: "Anonyme Seitenstatistik" },
-          // kein targetCookieIds nötig – Plausible arbeitet cookielos
-          isPreselected: false, // wichtig!
+          isPreselected: false, // nie vorauswählen!
         },
         {
           id: "youtube",
@@ -78,9 +88,7 @@ export default defineNuxtConfig({
     server: {
       hmr: {
         clientPort: 24678,
-        host: "0.0.0.0",
       },
-      host: "0.0.0.0",
     },
   },
   nitro: {
