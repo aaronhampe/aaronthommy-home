@@ -14,15 +14,18 @@ export default defineNuxtConfig({
     "~/assets/css/hero-section.css",
     "~/assets/css/patreon-section.css",
   ],
+
   /* ---------- Cookie Banner ---------- */
   cookieControl: {
-    /* Pflicht!  -> verhindert den 500-Fehler */
     locales: ["de", "en"],
 
     /* Texte überschreiben  */
     localeTexts: {
       de: {
         acceptAll: "Alle akzeptieren",
+        declineAll: "Nichts da",
+        manageCookies: "Einstellungen",
+        accept: "Akzeptieren",
         decline: "Ablehnen",
         save: "Speichern",
       },
@@ -34,16 +37,17 @@ export default defineNuxtConfig({
 
     /* Farben / Glass-Look (Kurzfassung) */
     colors: {
-      barBackground: "rgba(15,23,42,.60)",
-      barTextColor: "#F1F5F9",
-      modalBackground: "rgba(15,23,42,.70)",
-      modalTextColor: "#F8FAFC",
-      modalButtonBackground: "rgba(255,255,255,.10)",
-      modalButtonHoverBackground: "rgba(255,255,255,.20)",
-      modalButtonColor: "#F8FAFC",
-      modalButtonSecondaryBackground: "linear-gradient(90deg,#6366F1,#8B5CF6)",
-      modalButtonSecondaryColor: "#FFFFFF",
+      barBackground: "rgba(99,102,241,.85)", // indigo-500/85
+      barTextColor: "#FDF4FF", // fuchsia-50
+      barButtonBackground: "rgba(255,255,255,.15)",
+      barButtonHoverBackground: "rgba(255,255,255,.30)",
+      barButtonColor: "#FDF4FF",
+      modalBackground: "rgba(15,23,42,.75)", // slate-900/75
+      modalTextColor: "#E2E8F0", // slate-300
+      modalButtonSecondaryBackground: "linear-gradient(90deg,#EC4899,#6366F1)", // pink→indigo
+      modalButtonSecondaryColor: "#fff",
     },
+    
 
     /* Deine Cookie-Kategorien (neue API-Felder) */
     cookies: {
@@ -72,6 +76,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   vite: {
     optimizeDeps: {
       include: ["vue", "vue-router", "pinia", "swiper", "vue-i18n"],
