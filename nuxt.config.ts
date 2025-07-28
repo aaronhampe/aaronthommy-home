@@ -22,13 +22,8 @@ export default defineNuxtConfig({
     /* Texte überschreiben  */
     localeTexts: {
       de: {
-        barTitle: "🍪 Cookies gefällig?",
-        barDescription:
-          "Ein paar sind technisch nötig – andere helfen mir, Musik besser zu machen.",
         acceptAll: "Alle akzeptieren",
-        acceptNecessary: "Nur notwendige",
         decline: "Ablehnen",
-        showDetails: "Auswahl anpassen",
         save: "Speichern",
       },
     },
