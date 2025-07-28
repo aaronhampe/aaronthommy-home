@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen relative overflow-hidden">
+  <div class="min-h-screen relative overflow-hidden pt-40">
     <!-- Enhanced Background with Animated Elements -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20">
       <!-- Animated Background Orbs -->

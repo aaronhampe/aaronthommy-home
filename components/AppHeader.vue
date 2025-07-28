@@ -44,7 +44,7 @@
 
         <!-- Hamburger-Button für Mobile -->
         <button
-          class="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 focus:outline-none md:hidden relative w-6 h-6"
+          class="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 focus:outline-none lg:hidden relative w-6 h-6"
           aria-label="Menu"
           @click="toggleMobileMenu"
         >
@@ -77,7 +77,7 @@
     >
       <div
         v-if="isMobileMenuOpen"
-        class="md:hidden bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800"
+        class="bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800"
       >
         <nav class="container mx-auto py-6 px-6">
           <ul class="space-y-6">
@@ -153,8 +153,6 @@
       </div>
     </transition>
   </header>
-
- 
 </template>
 
 <script setup>
@@ -177,6 +175,7 @@ const navItems = [
   { key: "community", path: "/community" },
   //{ key: "offers", path: "/offers" },
   { key: "social", path: "/social" },
+  { key: "kontakt", path: "/kontakt" },
 ];
 
 // Überprüft, ob der aktuelle Pfad aktiv ist

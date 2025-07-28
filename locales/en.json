@@ -1,7 +1,8 @@
 {
     "header": {
       "home": "Home",
-      "community": "Comunity",
+      "community": "Community",
+      "kontakt": "Contact",
       "offers": "Offers",
       "social": "Social Media"
     },

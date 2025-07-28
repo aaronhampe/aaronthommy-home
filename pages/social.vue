@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 overflow-hidden">
+    <section class="mb-[-2em] relative py-20 md:py-32 overflow-hidden">
       <!-- Dynamic Background -->
       <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20">
         <!-- Animated Background Elements -->
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="container mx-auto px-6 relative z-10">
+      <div class="container mx-auto px-6 relative z-10 mt-20">
         <div class="text-center max-w-4xl mx-auto">
           <!-- Title -->
           <h1 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
@@ -56,8 +56,28 @@
       </div>
     </section>
 
+     <!-- Clean Glass Morphism Separator - Ohne dunkle Ränder -->
+    <div class="relative h-16 overflow-hidden">
+      <!-- Saubere Glaslinie ohne Blur-Artefakte -->
+      <div
+        class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/40 to-transparent dark:via-gray-500/40"
+      ></div>
+
+      <!-- Glaskugeln ohne Blur-Artefakte -->
+      <div
+        class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-blue-400/60 dark:bg-blue-500/60 rounded-full animate-float-delayed"
+      ></div>
+      <div
+        class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
+      ></div>
+    </div>
+
+
     <!-- Social Platforms Section -->
-    <section class="py-20 relative">
+    <section class="mt-[-2em] py-20 relative">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">

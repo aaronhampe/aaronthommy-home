@@ -112,7 +112,7 @@
             <h2
               class="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-4 tracking-tight"
             >
-              Join the
+              aaronthommy's
               <span class="relative inline-block">
                 <span
                   class="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent animate-gradient-x"
@@ -128,12 +128,11 @@
             <p
               class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
             >
-              Become part of my
+              As a member of my
               <span class="font-semibold text-orange-600 dark:text-orange-400"
                 >exclusive Patreon community</span
               >
-              and unlock a world of musical content, personalized feedback, and
-              direct access to my creative process.
+              you can grow your skills, connect with fellow musicians, and unlock a world of musical content, personalized feedback, and direct access to my creative process.
             </p>
           </div>
         </div>
