@@ -238,7 +238,7 @@
                     <span
                       class="text-6xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"
                     >
-                      €3
+                      €5
                     </span>
                     <span class="text-xl text-gray-500 dark:text-gray-400 ml-2">
                       /month
