@@ -2,18 +2,37 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
+
+  site: {
+    url: 'https://aaronthommy.com',   
+    trailingSlash: false             
+  },
+
   modules: [
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
     "@dargmuesli/nuxt-cookie-control",
+    "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
   ],
-
   plugins: ["~/plugins/i18n.js"],
   css: [
     "~/assets/css/main.css",
     "~/assets/css/hero-section.css",
     "~/assets/css/patreon-section.css",
   ],
+
+   sitemap: {
+    autoLastmod: true,  
+    credits: false,
+    exclude: ['/old-index' ,'/tabs']     
+  },
+
+  robots: {
+    allow: '/',                      
+    disallow: ['/admin','/old-index' ],        
+    sitemap: '/sitemap.xml'              
+  },
 
   /* ---------- Cookie Banner ---------- */
   cookieControl: {
@@ -91,6 +110,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   nitro: {
     esbuild: {
       options: {

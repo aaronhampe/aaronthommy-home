@@ -25,6 +25,8 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@nuxtjs/robots": "^5.4.0",
+    "@nuxtjs/sitemap": "^7.4.3",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@types/node": "^22.15.18",
     "@types/nodemailer": "^6.4.17",
