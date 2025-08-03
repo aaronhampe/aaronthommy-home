@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { useLanguageStore } from "~/stores/languageStore";
 import { useThemeStore } from "~/stores/themeStore";
 
+
 useHead({
   title: "aaronthommy - guitarist, pianist & composer",
   meta: [
@@ -24,12 +25,14 @@ onMounted(() => {
 
   // Theme-Einstellungen initialisieren
   themeStore.initTheme();
+
+  document.documentElement.classList.add('dark')
 });
 </script>
 
 <template>
   <div
-    class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300"
+    class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300"
   >
     <NuxtLayout>
       <AppHeader />

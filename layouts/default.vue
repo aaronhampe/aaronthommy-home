@@ -15,7 +15,7 @@ defineOgImageComponent('AaronThommyBanner', {
 
 <template>
   <!-- Beispielhülle – ersetze durch deine eigenen Komponenten -->
-  <div class="min-h-screen flex flex-col text-gray-900 bg-white">
+  <div class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
     <main class="flex-1">
       <slot />
     </main>

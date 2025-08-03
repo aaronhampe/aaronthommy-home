@@ -9,7 +9,9 @@
   <section class="relative py-32 overflow-hidden" id="patreon-cta">
     <!-- Dynamic Gradient Background -->
     <div
-      class="absolute inset-0 bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 dark:from-orange-900/20 dark:via-red-900/20 dark:to-purple-900/20"
+      class="absolute inset-0 bg-gradient-to-br
+            from-orange-50 via-pink-50 to-purple-50
+            dark:!from-orange-900/20 dark:!via-red-900/20 dark:!to-purple-900/20"
     >
       <!-- Animated Background Elements -->
       <div class="absolute inset-0">

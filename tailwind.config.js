@@ -2,6 +2,16 @@
 module.exports = {
   // Dark Mode aktivieren mit class-Strategie
   darkMode: 'class',
+
+  darkMode: 'class',
+  variantOrder: [
+    // …alles Voreingestellte…
+    'first',
+    /* responsive sm-2xl usw. */,
+    'DEFAULT',           // utilities ohne Präfix
+    'dark',              // DARK **danach** → überschreibt sicher
+    /* hover, focus, motion-safe …*/
+  ],
   
   content: [
     "./components/**/*.{js,vue,ts}", 
