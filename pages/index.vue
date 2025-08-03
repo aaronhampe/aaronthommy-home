@@ -43,9 +43,10 @@
         class="absolute top-40 right-16 hidden lg:block animate-float-record"
       >
         <div class="relative">
-          <img
+          <NuxtImg
             src="/img/aaronthommy-home-icon-600x600.png"
-            alt="Vinyl Record"
+            alt="Vinyl Record aaronthommy"
+            sizes="xs:100vw md:50vw lg:800px"
             class="w-64 h-64 opacity-60 dark:opacity-40 transition-all duration-700 filter drop-shadow-2xl"
             style="animation: spin 25s linear infinite"
           />
@@ -60,9 +61,10 @@
       <div
         class="absolute top-20 right-6 block lg:hidden animate-float-record-mobile"
       >
-        <img
+        <NuxtImg
           src="/img/aaronthommy-home-icon-600x600.png"
-          alt="Vinyl Record"
+          alt="Vinyl Record aaronthommy"
+          sizes="xs:100vw md:50vw lg:800px"
           class="w-32 h-32 opacity-40 dark:opacity-30 filter drop-shadow-xl"
           style="animation: spin 20s linear infinite"
         />

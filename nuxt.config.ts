@@ -15,7 +15,9 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "nuxt-og-image",
+    '@nuxt/image',
   ],
+
   plugins: ["~/plugins/i18n.js"],
   css: [
     "~/assets/css/main.css",
@@ -40,6 +42,21 @@ export default defineNuxtConfig({
       component: "AaronThommyBanner",
       props: { title: "Aaron Thommy" },
     },
+  },
+
+  
+  image: {
+    provider: 'ipx',
+    format: ['webp', 'avif', 'jpg'],      // Browser bekommt das Beste, das er kann
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      '2xl': 1536
+    },
+    quality: 70
   },
 
   /* ---------- Cookie Banner ---------- */
