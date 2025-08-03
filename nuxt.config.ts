@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "nuxt-og-image",
     '@nuxt/image',
+    "nuxt-security",
   ],
 
   plugins: ["~/plugins/i18n.js"],
@@ -57,6 +58,21 @@ export default defineNuxtConfig({
       '2xl': 1536
     },
     quality: 70
+  },
+
+  security: {
+    // 1) HTTP-Header (alle Defaults geben schon A+ im Mozilla-Observatory)
+    headers: {
+      strictTransportSecurity: {          // HSTS
+        maxAge: 63072000,                // 2 Jahre
+        includeSubdomains: true,
+        preload: true
+      },
+      xFrameOptions: 'SAMEORIGIN',
+      referrerPolicy: 'no-referrer-when-downgrade',
+
+      
+    }
   },
 
   /* ---------- Cookie Banner ---------- */

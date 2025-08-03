@@ -32,6 +32,7 @@
     "@types/nodemailer": "^6.4.17",
     "autoprefixer": "^10.4.20",
     "nuxt": "^4.0.2",
+    "nuxt-security": "^2.3.0",
     "pinia": "^3.0.3",
     "postcss": "^8.5.2"
   },

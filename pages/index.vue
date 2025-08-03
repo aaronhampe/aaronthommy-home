@@ -1,4 +1,3 @@
-
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!------------------------------------------------------- 
@@ -46,6 +45,7 @@
           <NuxtImg
             src="/img/aaronthommy-home-icon-600x600.png"
             alt="Vinyl Record aaronthommy"
+            preload
             sizes="xs:100vw md:50vw lg:800px"
             class="w-64 h-64 opacity-60 dark:opacity-40 transition-all duration-700 filter drop-shadow-2xl"
             style="animation: spin 25s linear infinite"
@@ -64,6 +64,7 @@
         <NuxtImg
           src="/img/aaronthommy-home-icon-600x600.png"
           alt="Vinyl Record aaronthommy"
+          preload
           sizes="xs:100vw md:50vw lg:800px"
           class="w-32 h-32 opacity-40 dark:opacity-30 filter drop-shadow-xl"
           style="animation: spin 20s linear infinite"
@@ -85,7 +86,7 @@
             class="relative text-5xl md:text-6xl lg:text-9xl font-black tracking-tighter text-gray-900 dark:text-white animate-slide-up"
           >
             aaron<span
-              class=" pr-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
+              class="pr-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
               >thommy</span
             >
           </h1>
@@ -106,7 +107,6 @@
               Guitarist & Pianist
             </span>
           </p>
-          
         </div>
 
         <!-- Enhanced CTA Section -->
@@ -212,7 +212,10 @@
     --------------------------------------------------------->
 
     <!-- Enhanced Patreon CTA Section -->
-    <section class="mt-[-2em] mb-[-2em] relative py-32 overflow-hidden" id="patreon-cta">
+    <section
+      class="mt-[-2em] mb-[-2em] relative py-32 overflow-hidden"
+      id="patreon-cta"
+    >
       <!-- Dynamic Gradient Background -->
       <div
         class="absolute inset-0 bg-gradient-to-br from-orange-50 via-pink-50 to-purple-50 dark:from-orange-900/20 dark:via-red-900/20 dark:to-purple-900/20"
@@ -988,8 +991,6 @@
         </div>
       </div>
     </section>
-
-    
   </div>
 </template>
 
