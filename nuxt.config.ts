@@ -1,19 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: false },
+  devtools: { enabled: true },
 
   site: {
-    url: 'https://aaronthommy.com',   
-    trailingSlash: false             
+    url: "https://aaronthommy.com",
+    trailingSlash: false,
   },
 
   modules: [
-    "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
+    "@nuxtjs/tailwindcss",
     "@dargmuesli/nuxt-cookie-control",
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
+    "nuxt-og-image",
   ],
   plugins: ["~/plugins/i18n.js"],
   css: [
@@ -22,16 +23,23 @@ export default defineNuxtConfig({
     "~/assets/css/patreon-section.css",
   ],
 
-   sitemap: {
-    autoLastmod: true,  
+  sitemap: {
+    autoLastmod: true,
     credits: false,
-    exclude: ['/old-index' ,'/tabs']     
+    exclude: ["/old-index", "/tabs"],
   },
 
   robots: {
-    allow: '/',                      
-    disallow: ['/admin','/old-index' ],        
-    sitemap: '/sitemap.xml'              
+    allow: "/",
+    disallow: ["/admin", "/old-index"],
+    sitemap: "/sitemap.xml",
+  },
+
+  ogImage: {
+    defaults: {
+      component: "AaronThommyBanner",
+      props: { title: "Aaron Thommy" },
+    },
   },
 
   /* ---------- Cookie Banner ---------- */
@@ -66,7 +74,6 @@ export default defineNuxtConfig({
       modalButtonSecondaryBackground: "linear-gradient(90deg,#EC4899,#6366F1)", // pink→indigo
       modalButtonSecondaryColor: "#fff",
     },
-    
 
     /* Deine Cookie-Kategorien (neue API-Felder) */
     cookies: {
