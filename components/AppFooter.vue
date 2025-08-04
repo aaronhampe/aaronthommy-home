@@ -43,9 +43,9 @@
             <!-- Logo -->
             <div class="inline-block">
               <h2
-                class="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                class="text-3xl font-bold text-gray-800 dark:text-white"
               >
-                aaron<span class="text-gray-800 dark:text-white">thommy</span>
+                aaron<span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">thommy</span>
               </h2>
               <div
                 class="h-0.5 w-full bg-gradient-to-r from-blue-400 to-purple-400 mt-2 rounded-full"
