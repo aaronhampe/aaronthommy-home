@@ -31,16 +31,42 @@ export default defineNuxtConfig({
   ],
 
    security: {
-    strict: true,   // behält linter / SRI / nonce-Feld (falls du es doch brauchst)
-    sri:    true,
-    nonce:  false,
+    strict: true,  // aktiviert alle Defaults
+    nonce : true,
+    sri   : true,
 
     headers: {
-      // Das hier verhindert die Meta-Tag-Erzeugung komplett:
-      contentSecurityPolicy: false
-    }
-  },
+      /* --- Content-Security-Policy wie gehabt --- */
+      contentSecurityPolicy: {
+        "img-src"    : ["self", "data:", "https://i.ytimg.com"],
+        "style-src"  : ["self", "unsafe-inline",
+                        "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+        "font-src"   : ["'self'", "https://fonts.gstatic.com"],
+        "script-src" : ["'strict-dynamic'", "'nonce-{{nonce}}'",
+                        "https://www.google.com", "https://www.gstatic.com",
+                        "https://plausible.io"],
+        "connect-src": ["'self'", "https://plausible.io", "https://formspree.io"],
+        "frame-src"  : ["https://www.youtube.com", "https://www.google.com"]
+      },
 
+      /* --- Fehlende / korrigierte Header --- */
+      strictTransportSecurity: {
+        maxAge           : 63072000,   // 2 Jahre (empfohlen) :contentReference[oaicite:3]{index=3}
+        includeSubdomains: true,
+        preload          : true        // optional, aber gibt Extrapunkte
+      },
+
+      referrerPolicy           : 'strict-origin-when-cross-origin',
+      xFrameOptions            : 'SAMEORIGIN',
+      xContentTypeOptions      : 'nosniff',
+      crossOriginResourcePolicy: 'same-origin'
+    },
+
+    /* Middleware (bleibt unverändert) */
+    rateLimiter        : { tokensPerInterval: 200, interval: 'minute' },
+    requestSizeLimiter : { maxRequestSizeInBytes: 10_000 }
+  },
+  
   sitemap: {
     autoLastmod: true,
     credits: false,
