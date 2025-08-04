@@ -6,5 +6,9 @@
   Header set   X-Content-Type-Options        "nosniff"
   Header set   Cross-Origin-Resource-Policy  "same-origin"
 
+# --- Content-Security-Policy ---
+
+Header always set Content-Security-Policy "\
+ connect-src https://formspree.io;
 
 </IfModule>
