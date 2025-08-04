@@ -31,9 +31,14 @@ export default defineNuxtConfig({
   ],
 
    security: {
-    strict: true,
-    sri: true,
-    nonce: false     // Nonces sind statisch sinnlos
+    strict: true,   // behält linter / SRI / nonce-Feld (falls du es doch brauchst)
+    sri:    true,
+    nonce:  false,
+
+    headers: {
+      // Das hier verhindert die Meta-Tag-Erzeugung komplett:
+      contentSecurityPolicy: false
+    }
   },
 
   sitemap: {
