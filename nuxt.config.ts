@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   ],
 
    security: {
-    // Nonce + SRI → Strict CSP für SSR
+    strict: true,
     nonce: true,
     sri: true,
 
@@ -37,6 +37,13 @@ export default defineNuxtConfig({
       /** nur dort anpassen, wo deine App extern lädt */
       contentSecurityPolicy: {                    // alles andere bleibt Default
         "img-src":   ["'self'", "data:", "https://i.ytimg.com"],
+        "style-src": [
+          "'self'",
+          "'unsafe-inline'", // Tailwind CSS benötigt das
+          "https://fonts.googleapis.com",
+          "https://fonts.gstatic.com"
+        ],
+        "font-src":  ["'self'", "https://fonts.gstatic.com"],
         "script-src": [
           "'strict-dynamic'",
           "'nonce-{{nonce}}'",
@@ -44,7 +51,7 @@ export default defineNuxtConfig({
           "https://www.gstatic.com",
           "https://plausible.io"
         ],
-        "connect-src": ["'self'", "https://plausible.io"],
+        "connect-src": ["'self'", "https://plausible.io", "https://formspree.io"],
         "frame-src":   ["https://www.youtube.com", "https://www.google.com"]
       },
 
