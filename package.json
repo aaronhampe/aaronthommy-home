@@ -23,6 +23,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^6.0.8",
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/robots": "^5.4.0",
     "@nuxtjs/sitemap": "^7.4.3",

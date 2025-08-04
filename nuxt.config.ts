@@ -1,4 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'   
+import { resolve } from 'pathe'
+
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
@@ -15,7 +19,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "nuxt-og-image",
-    '@nuxt/image',
+    "@nuxt/image",
     "nuxt-security",
   ],
 
@@ -45,32 +49,67 @@ export default defineNuxtConfig({
     },
   },
 
-  
   image: {
-    provider: 'ipx',
-    format: ['webp', 'avif', 'jpg'],      // Browser bekommt das Beste, das er kann
+    provider: "ipx",
+    format: ["webp", "avif", "jpg"], // Browser bekommt das Beste, das er kann
     screens: {
       xs: 320,
       sm: 640,
       md: 768,
       lg: 1024,
       xl: 1280,
-      '2xl': 1536
+      "2xl": 1536,
     },
-    quality: 70
+    quality: 70,
   },
 
   security: {
-    // 1) HTTP-Header (alle Defaults geben schon A+ im Mozilla-Observatory)
+
+    nonce: true,            
+    sri:   true, 
+   
     headers: {
-      strictTransportSecurity: {          // HSTS
-        maxAge: 63072000,                // 2 Jahre
+      strictTransportSecurity: {
+        // HSTS
+        maxAge: 63072000, // 2 Jahre
         includeSubdomains: true,
-        preload: true
+        preload: true,
       },
-      xFrameOptions: 'SAMEORIGIN',
-      referrerPolicy: 'no-referrer-when-downgrade',
+
+      xFrameOptions: "SAMEORIGIN",
+      referrerPolicy: "no-referrer-when-downgrade",
+      xContentTypeOptions: "nosniff",
+      xXSSProtection: "0",
+
+      contentSecurityPolicy: {
+        "script-src": [
+          "'self'",
+          "https:",
+          "'strict-dynamic'",
+          "'nonce-{{nonce}}'",
+        ],
+        "style-src": [
+          "'self'",
+          "https:",
+          // Tailwind injects inlined <style> tags → unsafe-inline bleibt vorerst
+          "'unsafe-inline'",
+        ],
+        "img-src": ["'self'", "data:", "https://i.ytimg.com"],
+        "object-src": ["'none'"],
+        "base-uri": ["'none'"],
+        "upgrade-insecure-requests": true,
+      },
+
+      permissionsPolicy: {
+        // Nur die Features erlauben, die wir brauchen
+        accelerometer: "none",
+        autoplay: "none",
+        camera: "none",
+        fullscreen: "self",
+        geolocation: "none",
+      },
     },
+    rateLimiter: { tokensPerInterval: 200, interval: "minute" },
   },
 
   /* ---------- Cookie Banner ---------- */
@@ -135,6 +174,17 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    plugins: [
+      VueI18nPlugin({
+        include: resolve(__dirname, 'locales/**')  // Pfad zu *.json oder *.yaml
+      })
+    ],
+    define: {
+      // sorgt dafür, dass nur der runtime-only-Build gebündelt wird
+      __VUE_I18N_FULL_INSTALL__: true,
+      __VUE_I18N_LEGACY_API__: false,
+      __INTLIFY_PROD_DEVTOOLS__: false
+    },
     optimizeDeps: {
       include: ["vue", "vue-router", "pinia", "swiper", "vue-i18n"],
     },
