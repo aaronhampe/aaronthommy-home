@@ -10,7 +10,11 @@
 
 Header always set Content-Security-Policy "default-src 'self'; \
  img-src 'self' data: https://i.ytimg.com; \
- style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; \
+ style-src 'self' 'unsafe-hashes' https://fonts.googleapis.com https://fonts.gstatic.com \
+    'sha256-lSEA2bQNKfntfxTEyx66cHYgsiOLpeqXpOCFkpEQan0=' \
+    'sha256-D19EafzzvSfqBdEcXqnB57j4uGtVnG8+UNaCzZO8jTY=' \
+    'sha256-ikBQp3jS9aNUNnKF2k2yJmZcEmcYIbrWX9jAq/tE17g=' \
+    'sha384-BwoYy6sHm+Av3wF3KPIR4NLc00ABitR4U0S3TlDbss8FwK9JbIAR9g/j4z+ecoHo'; \
  style-src-attr 'unsafe-inline'; \
  font-src 'self' https://fonts.gstatic.com; \
  script-src 'self' https://www.google.com https://www.gstatic.com https://plausible.io; \
