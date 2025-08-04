@@ -28,6 +28,50 @@ export default defineNuxtConfig({
     "~/assets/css/patreon-section.css",
   ],
 
+   security: {
+    // Nonce + SRI → Strict CSP für SSR
+    nonce: true,
+    sri: true,
+
+    headers: {
+      /** nur dort anpassen, wo deine App extern lädt */
+      contentSecurityPolicy: {                    // alles andere bleibt Default
+        "img-src":   ["'self'", "data:", "https://i.ytimg.com"],
+        "script-src": [
+          "'strict-dynamic'",
+          "'nonce-{{nonce}}'",
+          "https://www.google.com",  // reCAPTCHA
+          "https://www.gstatic.com",
+          "https://plausible.io"
+        ],
+        "connect-src": ["'self'", "https://plausible.io"],
+        "frame-src":   ["https://www.youtube.com", "https://www.google.com"]
+      },
+
+      strictTransportSecurity: {   // 180 Tage reichen fürs Testen
+        maxAge: 60 * 60 * 24 * 180,
+        includeSubdomains: true
+      },
+
+      referrerPolicy: "strict-origin-when-cross-origin",
+      xFrameOptions:  "SAMEORIGIN",
+      xContentTypeOptions: "nosniff",
+
+      permissionsPolicy: {
+        accelerometer: "none",
+        autoplay:      "none",
+        camera:        "none",
+        fullscreen:    "self",
+        geolocation:   "none",
+        microphone:    "none"
+      }
+    },
+
+    /** Middleware */
+    rateLimiter:  { tokensPerInterval: 200, interval: "minute" },            // :contentReference[oaicite:2]{index=2}
+    requestSizeLimiter: { maxRequestSizeInBytes: 10_000 },                   // :contentReference[oaicite:3]{index=3}
+  },
+
   sitemap: {
     autoLastmod: true,
     credits: false,
