@@ -29,54 +29,40 @@ export default defineNuxtConfig({
   ],
 
    security: {
-    strict: true,
-    nonce: true,
-    sri: true,
+    strict: true,  // aktiviert alle Defaults
+    nonce : true,
+    sri   : true,
 
     headers: {
-      /** nur dort anpassen, wo deine App extern lädt */
-      contentSecurityPolicy: {                    // alles andere bleibt Default
-        "img-src":   ["'self'", "data:", "https://i.ytimg.com"],
-        "style-src": [
-          "'self'",
-          "'unsafe-inline'", // Tailwind CSS benötigt das
-          "https://fonts.googleapis.com",
-          "https://fonts.gstatic.com"
-        ],
-        "font-src":  ["'self'", "https://fonts.gstatic.com"],
-        "script-src": [
-          "'strict-dynamic'",
-          "'nonce-{{nonce}}'",
-          "https://www.google.com",  // reCAPTCHA
-          "https://www.gstatic.com",
-          "https://plausible.io"
-        ],
+      /* --- Content-Security-Policy wie gehabt --- */
+      contentSecurityPolicy: {
+        "img-src"    : ["'self'", "data:", "https://i.ytimg.com"],
+        "style-src"  : ["'self'", "'unsafe-inline'",
+                        "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+        "font-src"   : ["'self'", "https://fonts.gstatic.com"],
+        "script-src" : ["'strict-dynamic'", "'nonce-{{nonce}}'",
+                        "https://www.google.com", "https://www.gstatic.com",
+                        "https://plausible.io"],
         "connect-src": ["'self'", "https://plausible.io", "https://formspree.io"],
-        "frame-src":   ["https://www.youtube.com", "https://www.google.com"]
+        "frame-src"  : ["https://www.youtube.com", "https://www.google.com"]
       },
 
-      strictTransportSecurity: {   // 180 Tage reichen fürs Testen
-        maxAge: 60 * 60 * 24 * 180,
-        includeSubdomains: true
+      /* --- Fehlende / korrigierte Header --- */
+      strictTransportSecurity: {
+        maxAge           : 63072000,   // 2 Jahre (empfohlen) :contentReference[oaicite:3]{index=3}
+        includeSubdomains: true,
+        preload          : true        // optional, aber gibt Extrapunkte
       },
 
-      referrerPolicy: "strict-origin-when-cross-origin",
-      xFrameOptions:  "SAMEORIGIN",
-      xContentTypeOptions: "nosniff",
-
-      permissionsPolicy: {
-        accelerometer: "none",
-        autoplay:      "none",
-        camera:        "none",
-        fullscreen:    "self",
-        geolocation:   "none",
-        microphone:    "none"
-      }
+      referrerPolicy           : 'strict-origin-when-cross-origin',
+      xFrameOptions            : 'SAMEORIGIN',
+      xContentTypeOptions      : 'nosniff',
+      crossOriginResourcePolicy: 'same-origin'
     },
 
-    /** Middleware */
-    rateLimiter:  { tokensPerInterval: 200, interval: "minute" },            // :contentReference[oaicite:2]{index=2}
-    requestSizeLimiter: { maxRequestSizeInBytes: 10_000 },                   // :contentReference[oaicite:3]{index=3}
+    /* Middleware (bleibt unverändert) */
+    rateLimiter        : { tokensPerInterval: 200, interval: 'minute' },
+    requestSizeLimiter : { maxRequestSizeInBytes: 10_000 }
   },
 
   sitemap: {
