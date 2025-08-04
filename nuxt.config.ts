@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   site: {
     url: "https://aaronthommy.com",
@@ -70,9 +70,7 @@ export default defineNuxtConfig({
       },
       xFrameOptions: 'SAMEORIGIN',
       referrerPolicy: 'no-referrer-when-downgrade',
-
-      
-    }
+    },
   },
 
   /* ---------- Cookie Banner ---------- */
