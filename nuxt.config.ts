@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { writeFile } from 'node:fs/promises'
+
 export default defineNuxtConfig({
 
   compatibilityDate: "2024-11-01",
@@ -36,8 +38,8 @@ export default defineNuxtConfig({
     headers: {
       /* --- Content-Security-Policy wie gehabt --- */
       contentSecurityPolicy: {
-        "img-src"    : ["'self'", "data:", "https://i.ytimg.com"],
-        "style-src"  : ["'self'", "'unsafe-inline'",
+        "img-src"    : ["self", "data:", "https://i.ytimg.com"],
+        "style-src"  : ["self", "unsafe-inline",
                         "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
         "font-src"   : ["'self'", "https://fonts.gstatic.com"],
         "script-src" : ["'strict-dynamic'", "'nonce-{{nonce}}'",
