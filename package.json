@@ -11,20 +11,16 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^9.0.8",
-    "@nuxtjs/i18n": "^8.0.0",
     "lucide-vue-next": "^0.475.0",
     "nodemailer": "^7.0.3",
     "nuxt-og-image": "^5.1.9",
     "plausible-tracker": "^0.3.9",
-    "pnpm": "^10.14.0",
     "swiper": "^11.2.6",
-    "vue": "latest",
-    "vue-recaptcha-v3": "^2.0.1",
-    "vue-router": "latest"
+    "vue-recaptcha-v3": "^2.0.1"
   },
   "devDependencies": {
-    "@intlify/unplugin-vue-i18n": "^6.0.8",
     "@nuxt/image": "^1.11.0",
+    "@nuxtjs/i18n": "^10.0.3",
     "@nuxtjs/robots": "^5.4.0",
     "@nuxtjs/sitemap": "^7.4.3",
     "@nuxtjs/tailwindcss": "^6.13.1",
