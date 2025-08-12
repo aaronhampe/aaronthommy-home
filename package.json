@@ -15,6 +15,7 @@
     "nodemailer": "^7.0.3",
     "nuxt-og-image": "^5.1.9",
     "plausible-tracker": "^0.3.9",
+    "pnpm": "^10.14.0",
     "swiper": "^11.2.6",
     "vue-recaptcha-v3": "^2.0.1"
   },
