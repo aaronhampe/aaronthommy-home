@@ -33,6 +33,23 @@ const stringColors = [
 ]
 
 /*
+ * Song metadata for enhanced PDF output
+ */
+const songMetadata = ref({
+  title: 'Untitled Song',
+  artist: '',
+  album: '',
+  bpm: 120,
+  timeSignature: '4/4',
+  key: 'C Major',
+  capo: 0,
+  tuning: 'Standard (EADGBE)',
+  difficulty: 'Beginner',
+  genre: '',
+  notes: ''
+})
+
+/*
  * An individual column in the tab (one time position).  
  * Each column holds an array of six notes (one per string).  
  * A value of `null` means that string is not played in that column.  
@@ -64,6 +81,16 @@ const maxVisibleColumns = ref(8)
  * Starting index for visible columns (for horizontal pagination)
  */
 const visibleStartIndex = ref(0)
+
+/*
+ * Show/hide metadata panel
+ */
+const showMetadataPanel = ref(false)
+
+/*
+ * Show/hide save/load panel
+ */
+const showSaveLoadPanel = ref(false)
 
 /*
  * A safe reference to the currently selected column.
@@ -205,22 +232,251 @@ function generateAscii(): string[] {
 }
 
 /*
- * Create and download a PDF representation of the current tab.  
- * The PDF will use a monospaced font (Courier) to align the ASCII art.  
+ * Create and download a professional PDF with proper lines and metadata
  */
 async function downloadPDF() {
-  // Dynamically import on the client only
   const { jsPDF } = await import('jspdf')
   const doc = new jsPDF()
-  doc.setFont('Courier', 'normal')
-  doc.setFontSize(12)
-  const lines = generateAscii()
-  let y = 15
-  lines.forEach((line) => {
-    doc.text(line, 10, y)
-    y += 7
-  })
-  doc.save('guitar-tab.pdf')
+  
+  // PDF page dimensions and margins
+  const pageWidth = doc.internal.pageSize.width
+  const pageHeight = doc.internal.pageSize.height
+  const leftMargin = 20
+  const rightMargin = 20
+  const availableWidth = pageWidth - leftMargin - rightMargin
+  
+  // Set up fonts
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(16)
+  
+  let yPosition = 20
+  
+  // Title and metadata header
+  doc.text(songMetadata.value.title || 'Untitled Song', pageWidth / 2, yPosition, { align: 'center' })
+  yPosition += 8
+  
+  if (songMetadata.value.artist) {
+    doc.setFontSize(12)
+    doc.text(`by ${songMetadata.value.artist}`, pageWidth / 2, yPosition, { align: 'center' })
+    yPosition += 6
+  }
+  
+  // Metadata line
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(10)
+  const metadataLine = [
+    songMetadata.value.bpm ? `♩ = ${songMetadata.value.bpm}` : '',
+    songMetadata.value.timeSignature || '',
+    songMetadata.value.key ? `Key: ${songMetadata.value.key}` : '',
+    songMetadata.value.capo > 0 ? `Capo: ${songMetadata.value.capo}` : ''
+  ].filter(Boolean).join('  •  ')
+  
+  if (metadataLine) {
+    doc.text(metadataLine, pageWidth / 2, yPosition, { align: 'center' })
+    yPosition += 10
+  }
+  
+  // Tuning info
+  if (songMetadata.value.tuning && songMetadata.value.tuning !== 'Standard (EADGBE)') {
+    doc.text(`Tuning: ${songMetadata.value.tuning}`, leftMargin, yPosition)
+    yPosition += 6
+  }
+  
+  yPosition += 10
+  
+  // Calculate tablature dimensions
+  const stringSpacing = 10
+  const columnWidth = 15
+  const stringLabelWidth = 20
+  const tabLineHeight = stringNames.length * stringSpacing
+  
+  // Calculate how many columns fit per line
+  const availableTabWidth = availableWidth - stringLabelWidth
+  const columnsPerLine = Math.floor(availableTabWidth / columnWidth)
+  
+  // Split columns into lines
+  const totalColumns = columns.value.length
+  const numberOfLines = Math.ceil(totalColumns / columnsPerLine)
+  
+  for (let lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+    const startCol = lineIndex * columnsPerLine
+    const endCol = Math.min(startCol + columnsPerLine, totalColumns)
+    const currentLineColumns = endCol - startCol
+    const currentLineWidth = currentLineColumns * columnWidth
+    
+    // Check if we need a new page
+    if (yPosition + tabLineHeight + 30 > pageHeight - 30) {
+      doc.addPage()
+      yPosition = 30
+    }
+    
+    // Draw line number if there are multiple lines
+    if (numberOfLines > 1) {
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(10)
+      doc.text(`Line ${lineIndex + 1}`, leftMargin, yPosition - 5)
+    }
+    
+    // Draw tablature lines for current section
+    for (let stringIndex = 0; stringIndex < stringNames.length; stringIndex++) {
+      const stringY = yPosition + (stringIndex * stringSpacing)
+      
+      // String label
+      doc.setFont('courier', 'bold')
+      doc.setFontSize(12)
+      doc.text(stringNames[stringIndex] || '', leftMargin + 5, stringY + 3)
+      
+      // Draw the string line
+      doc.setLineWidth(0.5)
+      doc.setDrawColor(0, 0, 0)
+      const lineStartX = leftMargin + stringLabelWidth
+      const lineEndX = lineStartX + currentLineWidth
+      doc.line(lineStartX, stringY, lineEndX, stringY)
+      
+      // Add fret numbers with circles
+      doc.setFont('courier', 'bold')
+      doc.setFontSize(9)
+      
+      for (let colIndex = startCol; colIndex < endCol; colIndex++) {
+        const col = columns.value[colIndex]
+        const fret = col ? col.notes[stringIndex] : null
+        const relativeColIndex = colIndex - startCol
+        const xPos = lineStartX + (relativeColIndex * columnWidth) + (columnWidth / 2)
+        
+        if (fret !== null) {
+          const fretStr = String(fret)
+          
+          // Draw circle background for fret number
+          doc.setFillColor(255, 255, 255)
+          doc.setDrawColor(0, 0, 0)
+          doc.setLineWidth(0.8)
+          const circleRadius = fretStr.length > 1 ? 5 : 4
+          doc.circle(xPos, stringY, circleRadius, 'FD') // F = fill, D = draw border
+          
+          // Draw fret number
+          doc.setTextColor(0, 0, 0)
+          doc.text(fretStr, xPos, stringY + 2.5, { align: 'center' })
+        }
+      }
+    }
+    
+    // Add vertical measure lines every 4 beats
+    doc.setLineWidth(0.5)
+    doc.setDrawColor(120, 120, 120)
+    const lineStartX = leftMargin + stringLabelWidth
+    
+    for (let i = 0; i <= currentLineColumns; i += 4) {
+      if (i === 0 || i === currentLineColumns || (startCol + i) % 4 === 0) {
+        const xPos = lineStartX + (i * columnWidth)
+        doc.line(xPos, yPosition - 3, xPos, yPosition + tabLineHeight + 3)
+      }
+    }
+    
+    // Add lighter beat lines (every beat)
+    doc.setLineWidth(0.2)
+    doc.setDrawColor(180, 180, 180)
+    for (let i = 1; i < currentLineColumns; i++) {
+      if (i % 4 !== 0) { // Don't draw where we already have measure lines
+        const xPos = lineStartX + (i * columnWidth)
+        doc.line(xPos, yPosition, xPos, yPosition + tabLineHeight)
+      }
+    }
+    
+    // Move to next line position
+    yPosition += tabLineHeight + 25
+  }
+  
+  // Add notes section if provided
+  if (songMetadata.value.notes && songMetadata.value.notes.trim()) {
+    // Check if we need a new page for notes
+    if (yPosition + 40 > pageHeight - 30) {
+      doc.addPage()
+      yPosition = 30
+    }
+    
+    yPosition += 10
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(12)
+    doc.text('Notes:', leftMargin, yPosition)
+    yPosition += 8
+    
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(10)
+    const splitText = doc.splitTextToSize(songMetadata.value.notes, availableWidth)
+    doc.text(splitText, leftMargin, yPosition)
+  }
+  
+  // Add footer to all pages
+  const pageCount = doc.internal.getNumberOfPages()
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i)
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(8)
+    const footerText = `Generated with Guitar Tab Generator • ${new Date().toLocaleDateString()}`
+    const pageNumberText = pageCount > 1 ? ` • Page ${i}/${pageCount}` : ''
+    doc.text(footerText + pageNumberText, pageWidth / 2, pageHeight - 15, { align: 'center' })
+  }
+  
+  // Save the PDF
+  const filename = (songMetadata.value.title || 'untitled').replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_tab.pdf'
+  doc.save(filename)
+}
+
+/*
+ * Save current tab to localStorage
+ */
+function saveTab() {
+  const tabData = {
+    metadata: songMetadata.value,
+    columns: columns.value,
+    savedAt: new Date().toISOString()
+  }
+  
+  const savedTabs = JSON.parse(localStorage.getItem('guitarTabs') || '[]')
+  const existingIndex = savedTabs.findIndex((tab: any) => tab.metadata.title === songMetadata.value.title)
+  
+  if (existingIndex >= 0) {
+    savedTabs[existingIndex] = tabData
+  } else {
+    savedTabs.push(tabData)
+  }
+  
+  localStorage.setItem('guitarTabs', JSON.stringify(savedTabs))
+  alert('Tab gespeichert!')
+}
+
+/*
+ * Load saved tabs from localStorage
+ */
+const savedTabs = computed(() => {
+  try {
+    return JSON.parse(localStorage.getItem('guitarTabs') || '[]')
+  } catch {
+    return []
+  }
+})
+
+/*
+ * Load a specific tab
+ */
+function loadTab(tabData: any) {
+  songMetadata.value = { ...tabData.metadata }
+  columns.value = [...tabData.columns]
+  currentColumnIndex.value = 0
+  visibleStartIndex.value = 0
+  showSaveLoadPanel.value = false
+  alert('Tab geladen!')
+}
+
+/*
+ * Delete a saved tab
+ */
+function deleteTab(title: string) {
+  if (!confirm(`Tab "${title}" wirklich löschen?`)) return
+  
+  const savedTabsList = JSON.parse(localStorage.getItem('guitarTabs') || '[]')
+  const filtered = savedTabsList.filter((tab: any) => tab.metadata.title !== title)
+  localStorage.setItem('guitarTabs', JSON.stringify(filtered))
 }
 
 /*
@@ -230,6 +486,29 @@ function clearCurrentColumn() {
   const column = columns.value[currentColumnIndex.value]
   if (column) {
     column.notes = Array(stringNames.length).fill(null)
+  }
+}
+
+/*
+ * Duplicate current column
+ */
+function duplicateColumn() {
+  const currentCol = columns.value[currentColumnIndex.value]
+  if (currentCol) {
+    const duplicatedCol = { notes: [...currentCol.notes] }
+    columns.value.splice(currentColumnIndex.value + 1, 0, duplicatedCol)
+    selectColumn(currentColumnIndex.value + 1)
+  }
+}
+
+/*
+ * Clear all columns
+ */
+function clearAllColumns() {
+  if (confirm('Alle Spalten leeren? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+    columns.value = [{ notes: Array(stringNames.length).fill(null) }]
+    currentColumnIndex.value = 0
+    visibleStartIndex.value = 0
   }
 }
 
@@ -255,19 +534,164 @@ const currentColumnHasNotes = computed(() => {
         </p>
       </div>
 
+      <!-- Song Metadata Panel -->
+      <div v-if="showMetadataPanel" class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-6">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+            🎵 Song-Informationen
+          </h2>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Titel *</label>
+            <input v-model="songMetadata.title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Künstler</label>
+            <input v-model="songMetadata.artist" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Album</label>
+            <input v-model="songMetadata.album" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">BPM</label>
+            <input v-model.number="songMetadata.bpm" type="number" min="40" max="300" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Taktart</label>
+            <select v-model="songMetadata.timeSignature" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option>4/4</option>
+              <option>3/4</option>
+              <option>2/4</option>
+              <option>6/8</option>
+              <option>12/8</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tonart</label>
+            <select v-model="songMetadata.key" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option>C Major</option>
+              <option>G Major</option>
+              <option>D Major</option>
+              <option>A Major</option>
+              <option>E Major</option>
+              <option>B Major</option>
+              <option>F# Major</option>
+              <option>F Major</option>
+              <option>Bb Major</option>
+              <option>Eb Major</option>
+              <option>Ab Major</option>
+              <option>Db Major</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kapodaster</label>
+            <select v-model.number="songMetadata.capo" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option :value="0">Kein Kapo</option>
+              <option v-for="n in 12" :key="n" :value="n">{{ n }}. Bund</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Schwierigkeit</label>
+            <select v-model="songMetadata.difficulty" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+              <option>Expert</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Genre</label>
+            <input v-model="songMetadata.genre" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+          </div>
+          <div class="md:col-span-2 lg:col-span-3">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Notizen</label>
+            <textarea v-model="songMetadata.notes" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" placeholder="Zusätzliche Informationen, Spieltechniken, etc."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save/Load Panel -->
+      <div v-if="showSaveLoadPanel" class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-6">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+            💾 Speichern & Laden
+          </h2>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-4 mb-6">
+            <button @click="saveTab" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2">
+              💾 Aktuellen Tab speichern
+            </button>
+          </div>
+          
+          <div v-if="savedTabs.length > 0">
+            <h3 class="font-semibold mb-3 text-gray-800 dark:text-gray-200">Gespeicherte Tabs:</h3>
+            <div class="grid gap-3">
+              <div v-for="tab in savedTabs" :key="tab.metadata.title" class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex justify-between items-center">
+                <div>
+                  <h4 class="font-semibold text-gray-800 dark:text-gray-200">{{ tab.metadata.title }}</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{ tab.metadata.artist || 'Unbekannter Künstler' }} • {{ tab.columns.length }} Spalten
+                    <br />
+                    <span class="text-xs">Gespeichert: {{ new Date(tab.savedAt).toLocaleString() }}</span>
+                  </p>
+                </div>
+                <div class="flex gap-2">
+                  <button @click="loadTab(tab)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
+                    Laden
+                  </button>
+                  <button @click="deleteTab(tab.metadata.title)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+                    Löschen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-else class="text-center text-gray-500 dark:text-gray-400 py-8">
+            Keine gespeicherten Tabs gefunden.
+          </div>
+        </div>
+      </div>
+
       <!-- Current Column Info Card -->
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 mb-6 border border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between flex-wrap gap-4">
           <div class="flex items-center gap-3">
             <div class="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
             <span class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-              Aktuelle Spalte: {{ currentColumnIndex + 1 }} / {{ columns.length }}
+              {{ songMetadata.title }} • Spalte: {{ currentColumnIndex + 1 }} / {{ columns.length }}
             </span>
             <span class="text-sm text-gray-500 dark:text-gray-400">
               ({{ currentColumnHasNotes ? 'mit Noten' : 'leer' }})
             </span>
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 flex-wrap">
+            <!-- Toggle panels -->
+            <button
+              @click="showMetadataPanel = !showMetadataPanel"
+              :class="[
+                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
+                showMetadataPanel 
+                  ? 'bg-purple-500 hover:bg-purple-600 text-white'
+                  : 'bg-gray-500 hover:bg-gray-600 text-white'
+              ]"
+            >
+              🎵 Info {{ showMetadataPanel ? '▼' : '▶' }}
+            </button>
+            <button
+              @click="showSaveLoadPanel = !showSaveLoadPanel"
+              :class="[
+                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
+                showSaveLoadPanel 
+                  ? 'bg-green-500 hover:bg-green-600 text-white'
+                  : 'bg-gray-500 hover:bg-gray-600 text-white'
+              ]"
+            >
+              💾 Speichern {{ showSaveLoadPanel ? '▼' : '▶' }}
+            </button>
+            
             <!-- Column navigation buttons -->
             <button
               @click="selectColumn(Math.max(0, currentColumnIndex - 1))"
@@ -301,6 +725,13 @@ const currentColumnHasNotes = computed(() => {
               class="px-3 py-1 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
             >
               🗑️ Leeren
+            </button>
+            <button
+              @click="duplicateColumn"
+              class="px-3 py-1 text-sm bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
+              title="Spalte duplizieren"
+            >
+              📋 Duplizieren
             </button>
             <button
               @click="addColumn"
@@ -557,6 +988,13 @@ const currentColumnHasNotes = computed(() => {
             }"
           >
             🗑️ Spalte entfernen
+          </button>
+          <button
+            type="button"
+            class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg hover:shadow-xl flex items-center gap-2"
+            @click="clearAllColumns"
+          >
+            🧹 Alles löschen
           </button>
         </div>
       </div>
