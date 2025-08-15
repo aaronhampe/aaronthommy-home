@@ -9,28 +9,184 @@ import { ref, computed } from 'vue'
 // We'll import it dynamically on the client to avoid SSR errors.
 
 /*
- * Number of frets to display.  
- * You can increase this value if you need more frets.  
+ * Instrument configurations
  */
-const numFrets = 12
+interface InstrumentConfig {
+  name: string
+  emoji: string
+  stringNames: string[]
+  stringColors: string[]
+  openFrequencies: number[]
+  numFrets: number
+}
+
+const instruments: Record<string, InstrumentConfig> = {
+  acoustic: {
+    name: 'Akustikgitarre',
+    emoji: '🎸',
+    stringNames: ['e', 'B', 'G', 'D', 'A', 'E'],
+    stringColors: [
+      'border-yellow-400',
+      'border-orange-400', 
+      'border-red-400',
+      'border-purple-400',
+      'border-blue-400',
+      'border-gray-400'
+    ],
+    openFrequencies: [329.63, 246.94, 196.00, 146.83, 110.00, 82.41],
+    numFrets: 12
+  },
+  electric: {
+    name: 'E-Gitarre',
+    emoji: '🎸',
+    stringNames: ['e', 'B', 'G', 'D', 'A', 'E'],
+    stringColors: [
+      'border-yellow-400',
+      'border-orange-400',
+      'border-red-400', 
+      'border-purple-400',
+      'border-blue-400',
+      'border-gray-400'
+    ],
+    openFrequencies: [329.63, 246.94, 196.00, 146.83, 110.00, 82.41],
+    numFrets: 22
+  },
+  ukulele: {
+    name: 'Ukulele',
+    emoji: '🪕',
+    stringNames: ['A', 'E', 'C', 'G'],
+    stringColors: [
+      'border-yellow-400',
+      'border-orange-400',
+      'border-red-400',
+      'border-purple-400'
+    ],
+    openFrequencies: [440.00, 329.63, 261.63, 392.00], // A4, E4, C4, G4
+    numFrets: 15
+  }
+}
 
 /*
- * Names of the strings from highest (thin) to lowest (thick).  
- * Using lowercase 'e' for the first string to differentiate from the low E.  
+ * Current instrument selection
  */
-const stringNames = ['e', 'B', 'G', 'D', 'A', 'E']
+const currentInstrument = ref<string>('acoustic')
 
 /*
- * String colors for visual differentiation
+ * Computed values based on current instrument
  */
-const stringColors = [
-  'border-yellow-400',  // e - thinnest, brightest
-  'border-orange-400',  // B
-  'border-red-400',     // G
-  'border-purple-400',  // D
-  'border-blue-400',    // A
-  'border-gray-400'     // E - thickest, darkest
-]
+const instrumentConfig = computed(() => instruments[currentInstrument.value] ?? instruments.acoustic)
+const numFrets = computed(() => (instrumentConfig.value?.numFrets ?? 12))
+const stringNames = computed(() => instrumentConfig.value?.stringNames ?? ['e', 'B', 'G', 'D', 'A', 'E'])
+const stringColors = computed(() => instrumentConfig.value?.stringColors ?? (instruments.acoustic?.stringColors ?? ['border-yellow-400','border-orange-400','border-red-400','border-purple-400','border-blue-400','border-gray-400']))
+const openStringFrequencies = computed(() => instrumentConfig.value?.openFrequencies ?? [329.63, 246.94, 196.00, 146.83, 110.00, 82.41])
+
+/*
+ * Function to reset columns when instrument changes
+ */
+function resetColumnsForInstrument() {
+  columns.value = [{ notes: Array(stringNames.value.length).fill(null) }]
+  currentColumnIndex.value = 0
+  visibleStartIndex.value = 0
+}
+
+/*
+ * Sound system for guitar fret playback
+ * Using Web Audio API to generate guitar-like tones
+ */
+
+// Audio context for sound generation
+let audioContext: AudioContext | null = null
+
+// Initialize audio context (must be done after user interaction)
+function initAudio() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+  }
+  return audioContext
+}
+
+// Calculate frequency for a specific fret on a string
+function getFretFrequency(stringIndex: number, fret: number): number {
+  const baseFreq = openStringFrequencies.value[stringIndex]
+  if (!baseFreq) return 440 // Fallback to A4
+  // Each fret is a semitone higher (multiply by 2^(1/12))
+  return baseFreq * Math.pow(2, fret / 12)
+}
+
+// Play a guitar note with realistic timbre
+async function playGuitarNote(stringIndex: number, fret: number) {
+  try {
+    const ctx = initAudio()
+    if (!ctx) return
+
+    // Resume context if suspended (required by many browsers)
+    if (ctx.state === 'suspended') {
+      await ctx.resume()
+    }
+
+    const frequency = getFretFrequency(stringIndex, fret)
+    const now = ctx.currentTime
+    const duration = 1.2 // Note duration in seconds
+
+    // Create oscillators for harmonics (guitar-like timbre)
+    const fundamental = ctx.createOscillator()
+    const harmonic2 = ctx.createOscillator()
+    const harmonic3 = ctx.createOscillator()
+
+    // Create gain nodes for each harmonic
+    const fundGain = ctx.createGain()
+    const harm2Gain = ctx.createGain()
+    const harm3Gain = ctx.createGain()
+    const masterGain = ctx.createGain()
+
+    // Set frequencies (fundamental + harmonics)
+    fundamental.frequency.setValueAtTime(frequency, now)
+    harmonic2.frequency.setValueAtTime(frequency * 2, now)
+    harmonic3.frequency.setValueAtTime(frequency * 3, now)
+
+    // Set oscillator types for guitar-like sound
+    fundamental.type = 'sawtooth'
+    harmonic2.type = 'sine'
+    harmonic3.type = 'triangle'
+
+    // Set gain levels for realistic guitar timbre
+    fundGain.gain.setValueAtTime(0.4, now)
+    harm2Gain.gain.setValueAtTime(0.2, now)
+    harm3Gain.gain.setValueAtTime(0.1, now)
+
+    // Create realistic attack-decay-sustain-release envelope
+    masterGain.gain.setValueAtTime(0, now)
+    masterGain.gain.linearRampToValueAtTime(0.3, now + 0.01) // Quick attack
+    masterGain.gain.exponentialRampToValueAtTime(0.2, now + 0.1) // Decay
+    masterGain.gain.linearRampToValueAtTime(0.15, now + 0.6) // Sustain
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration) // Release
+
+    // Connect the audio graph
+    fundamental.connect(fundGain)
+    harmonic2.connect(harm2Gain)
+    harmonic3.connect(harm3Gain)
+
+    fundGain.connect(masterGain)
+    harm2Gain.connect(masterGain)
+    harm3Gain.connect(masterGain)
+    masterGain.connect(ctx.destination)
+
+    // Start and stop the oscillators
+    fundamental.start(now)
+    harmonic2.start(now)
+    harmonic3.start(now)
+
+    fundamental.stop(now + duration)
+    harmonic2.stop(now + duration)
+    harmonic3.stop(now + duration)
+
+  } catch (error) {
+    console.warn('Audio playback failed:', error)
+  }
+}
+
+// Sound enabled/disabled toggle
+const soundEnabled = ref(true)
 
 /*
  * Song metadata for enhanced PDF output
@@ -63,7 +219,7 @@ interface TabColumn {
  * Initialise with one empty column.  
  */
 const columns = ref<TabColumn[]>([
-  { notes: Array(stringNames.length).fill(null) }
+  { notes: Array(stringNames.value.length).fill(null) }
 ])
 
 /*
@@ -99,7 +255,7 @@ const showSaveLoadPanel = ref(false)
 const currentColumn = computed<TabColumn>(() => {
   const idx = currentColumnIndex.value
   const col = columns.value[idx]
-  return col ?? { notes: Array(stringNames.length).fill(null) }
+  return col ?? { notes: Array(stringNames.value.length).fill(null) }
 })
 
 /*
@@ -169,21 +325,105 @@ function scrollRight() {
 /*
  * Toggle a note on the fretboard for the currently selected column.  
  * If the cell already contains the selected fret, it removes it.  
- * Otherwise it sets the fret number.  
+ * Otherwise it sets the fret number and plays the sound.
  */
 function toggleNote(stringIndex: number, fret: number) {
   const idx = currentColumnIndex.value
   const column = columns.value[idx]
   if (!column) return
   const current = column.notes[stringIndex] ?? null
-  column.notes[stringIndex] = current === fret ? null : fret
+  const newValue = current === fret ? null : fret
+  column.notes[stringIndex] = newValue
+  
+  // Play sound when adding a note (not when removing)
+  if (newValue !== null && soundEnabled.value) {
+    playGuitarNote(stringIndex, fret)
+  }
+}
+
+/*
+ * Play sound for an existing note in the tab (when clicking tab preview)
+ */
+function playNoteFromTab(stringIndex: number, columnIndex: number) {
+  const column = columns.value[columnIndex]
+  if (!column || !soundEnabled.value) return
+  
+  const fret = column.notes[stringIndex]
+  if (fret !== null && fret !== undefined) {
+    playGuitarNote(stringIndex, fret)
+  }
+}
+
+/*
+ * Play all notes in the current column as a chord
+ */
+function playCurrentChord() {
+  if (!soundEnabled.value) return
+  
+  const column = columns.value[currentColumnIndex.value]
+  if (!column) return
+  
+  // Play notes with slight delay to create a natural chord strumming effect
+  column.notes.forEach((fret, stringIndex) => {
+    if (fret !== null && fret !== undefined) {
+      setTimeout(() => {
+        playGuitarNote(stringIndex, fret)
+      }, stringIndex * 50) // 50ms delay between strings
+    }
+  })
+}
+
+/*
+ * Play the entire tab sequence
+ */
+const isPlaying = ref(false)
+
+async function playEntireTab() {
+  if (!soundEnabled.value || isPlaying.value) return
+  
+  isPlaying.value = true
+  
+  // Calculate playback speed based on BPM (default 120 if not set)
+  const bpm = songMetadata.value.bpm || 120
+  const playbackSpeed = 60000 / bpm // Convert BPM to milliseconds per beat
+  
+  try {
+    for (let columnIndex = 0; columnIndex < columns.value.length; columnIndex++) {
+      if (!isPlaying.value) break // Allow stopping playback
+      
+      // Highlight current column during playback
+      currentColumnIndex.value = columnIndex
+      ensureColumnVisible(columnIndex)
+      
+      const column = columns.value[columnIndex]
+      if (column) {
+        // Play all notes in this column simultaneously
+        column.notes.forEach((fret, stringIndex) => {
+          if (fret !== null && fret !== undefined) {
+            playGuitarNote(stringIndex, fret)
+          }
+        })
+      }
+      
+      // Wait before next column based on BPM
+      if (columnIndex < columns.value.length - 1) {
+        await new Promise(resolve => setTimeout(resolve, playbackSpeed))
+      }
+    }
+  } finally {
+    isPlaying.value = false
+  }
+}
+
+function stopPlayback() {
+  isPlaying.value = false
 }
 
 /*
  * Add a new empty column to the tab and make it the current one.  
  */
 function addColumn() {
-  columns.value.push({ notes: Array(stringNames.length).fill(null) })
+  columns.value.push({ notes: Array(stringNames.value.length).fill(null) })
   const newIndex = columns.value.length - 1
   currentColumnIndex.value = newIndex
   ensureColumnVisible(newIndex)
@@ -217,8 +457,8 @@ function removeColumn(index?: number) {
  */
 function generateAscii(): string[] {
   const lines: string[] = []
-  for (let s = 0; s < stringNames.length; s++) {
-    let line = `${stringNames[s]}|`
+  for (let s = 0; s < stringNames.value.length; s++) {
+    let line = `${stringNames.value[s]}|`
     for (let c = 0; c < columns.value.length; c++) {
   const col = columns.value[c]
   const fret = col ? col.notes[s] : null
@@ -241,60 +481,103 @@ async function downloadPDF() {
   // PDF page dimensions and margins
   const pageWidth = doc.internal.pageSize.width
   const pageHeight = doc.internal.pageSize.height
-  const leftMargin = 20
-  const rightMargin = 20
+  const leftMargin = 25
+  const rightMargin = 25
   const availableWidth = pageWidth - leftMargin - rightMargin
   
-  // Set up fonts
+  let yPosition = 25
+  
+  // Header with professional styling
+  doc.setDrawColor(0, 0, 0)
+  doc.setLineWidth(2)
+  doc.line(leftMargin, 15, pageWidth - rightMargin, 15)
+  
+  // Title
   doc.setFont('helvetica', 'bold')
-  doc.setFontSize(16)
-  
-  let yPosition = 20
-  
-  // Title and metadata header
+  doc.setFontSize(20)
   doc.text(songMetadata.value.title || 'Untitled Song', pageWidth / 2, yPosition, { align: 'center' })
-  yPosition += 8
+  yPosition += 12
   
+  // Artist
   if (songMetadata.value.artist) {
-    doc.setFontSize(12)
+    doc.setFontSize(14)
+    doc.setFont('helvetica', 'italic')
     doc.text(`by ${songMetadata.value.artist}`, pageWidth / 2, yPosition, { align: 'center' })
-    yPosition += 6
-  }
-  
-  // Metadata line
-  doc.setFont('helvetica', 'normal')
-  doc.setFontSize(10)
-  const metadataLine = [
-    songMetadata.value.bpm ? `♩ = ${songMetadata.value.bpm}` : '',
-    songMetadata.value.timeSignature || '',
-    songMetadata.value.key ? `Key: ${songMetadata.value.key}` : '',
-    songMetadata.value.capo > 0 ? `Capo: ${songMetadata.value.capo}` : ''
-  ].filter(Boolean).join('  •  ')
-  
-  if (metadataLine) {
-    doc.text(metadataLine, pageWidth / 2, yPosition, { align: 'center' })
     yPosition += 10
   }
   
-  // Tuning info
-  if (songMetadata.value.tuning && songMetadata.value.tuning !== 'Standard (EADGBE)') {
-    doc.text(`Tuning: ${songMetadata.value.tuning}`, leftMargin, yPosition)
-    yPosition += 6
+  // Professional metadata box
+  doc.setDrawColor(120, 120, 120)
+  doc.setLineWidth(1)
+  const metadataBoxHeight = 25
+  doc.rect(leftMargin, yPosition, availableWidth, metadataBoxHeight)
+  
+  // Fill metadata box with light gray
+  doc.setFillColor(248, 248, 248)
+  doc.rect(leftMargin, yPosition, availableWidth, metadataBoxHeight, 'F')
+  
+  // Metadata content in columns
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(10)
+  doc.setTextColor(0, 0, 0)
+  
+  const metadataY = yPosition + 8
+  const col1X = leftMargin + 10
+  const col2X = leftMargin + (availableWidth / 3)
+  const col3X = leftMargin + (2 * availableWidth / 3)
+  
+  // Column 1: Tempo and Time Signature
+  if (songMetadata.value.bpm) {
+    doc.text('Tempo:', col1X, metadataY)
+    doc.setFont('helvetica', 'normal')
+    doc.text(`♩ = ${songMetadata.value.bpm} BPM`, col1X + 25, metadataY)
+    doc.setFont('helvetica', 'bold')
+  }
+  if (songMetadata.value.timeSignature) {
+    doc.text('Time:', col1X, metadataY + 8)
+    doc.setFont('helvetica', 'normal')
+    doc.text(songMetadata.value.timeSignature, col1X + 25, metadataY + 8)
   }
   
-  yPosition += 10
+  // Column 2: Key and Capo
+  doc.setFont('helvetica', 'bold')
+  if (songMetadata.value.key) {
+    doc.text('Key:', col2X, metadataY)
+    doc.setFont('helvetica', 'normal')
+    doc.text(songMetadata.value.key, col2X + 15, metadataY)
+    doc.setFont('helvetica', 'bold')
+  }
+  if (songMetadata.value.capo > 0) {
+    doc.text('Capo:', col2X, metadataY + 8)
+    doc.setFont('helvetica', 'normal')
+    doc.text(`${songMetadata.value.capo}. Bund`, col2X + 20, metadataY + 8)
+  }
   
-  // Calculate tablature dimensions
-  const stringSpacing = 10
-  const columnWidth = 15
-  const stringLabelWidth = 20
-  const tabLineHeight = stringNames.length * stringSpacing
+  // Column 3: Instrument and Tuning
+  doc.setFont('helvetica', 'bold')
+  doc.text('Instrument:', col3X, metadataY)
+  doc.setFont('helvetica', 'normal')
+  doc.text(instrumentConfig.value?.name || currentInstrument.value, col3X + 30, metadataY)
   
-  // Calculate how many columns fit per line
+  if (songMetadata.value.tuning && songMetadata.value.tuning !== 'Standard') {
+    doc.setFont('helvetica', 'bold')
+    doc.text('Tuning:', col3X, metadataY + 8)
+    doc.setFont('helvetica', 'normal')
+    doc.text(songMetadata.value.tuning, col3X + 25, metadataY + 8)
+  }
+  
+  yPosition += metadataBoxHeight + 15
+  
+  // Professional tablature formatting
+  const stringSpacing = 12
+  const columnWidth = 18
+  const stringLabelWidth = 25
+  const tabLineHeight = (stringNames.value.length - 1) * stringSpacing
+  
+  // Calculate columns per line for better spacing
   const availableTabWidth = availableWidth - stringLabelWidth
   const columnsPerLine = Math.floor(availableTabWidth / columnWidth)
   
-  // Split columns into lines
   const totalColumns = columns.value.length
   const numberOfLines = Math.ceil(totalColumns / columnsPerLine)
   
@@ -302,40 +585,40 @@ async function downloadPDF() {
     const startCol = lineIndex * columnsPerLine
     const endCol = Math.min(startCol + columnsPerLine, totalColumns)
     const currentLineColumns = endCol - startCol
-    const currentLineWidth = currentLineColumns * columnWidth
     
-    // Check if we need a new page
-    if (yPosition + tabLineHeight + 30 > pageHeight - 30) {
+    // Check for page break
+    if (yPosition + tabLineHeight + 40 > pageHeight - 40) {
       doc.addPage()
-      yPosition = 30
+      yPosition = 40
     }
     
-    // Draw line number if there are multiple lines
+    // System number for multi-line tabs
     if (numberOfLines > 1) {
       doc.setFont('helvetica', 'bold')
-      doc.setFontSize(10)
-      doc.text(`Line ${lineIndex + 1}`, leftMargin, yPosition - 5)
+      doc.setFontSize(12)
+      doc.text(`${lineIndex + 1}.`, leftMargin - 5, yPosition + (tabLineHeight / 2))
     }
     
-    // Draw tablature lines for current section
-    for (let stringIndex = 0; stringIndex < stringNames.length; stringIndex++) {
+    // Draw tablature staff
+    for (let stringIndex = 0; stringIndex < stringNames.value.length; stringIndex++) {
       const stringY = yPosition + (stringIndex * stringSpacing)
       
-      // String label
+      // String name/tuning labels with professional styling
       doc.setFont('courier', 'bold')
-      doc.setFontSize(12)
-      doc.text(stringNames[stringIndex] || '', leftMargin + 5, stringY + 3)
+      doc.setFontSize(11)
+      doc.setTextColor(0, 0, 0)
+      doc.text(stringNames.value[stringIndex] || 'E', leftMargin + 3, stringY + 3)
       
-      // Draw the string line
-      doc.setLineWidth(0.5)
+      // Draw tablature lines with proper thickness
+      doc.setLineWidth(0.8)
       doc.setDrawColor(0, 0, 0)
       const lineStartX = leftMargin + stringLabelWidth
-      const lineEndX = lineStartX + currentLineWidth
+      const lineEndX = lineStartX + (currentLineColumns * columnWidth)
       doc.line(lineStartX, stringY, lineEndX, stringY)
       
-      // Add fret numbers with circles
+      // Add fret numbers with enhanced styling
       doc.setFont('courier', 'bold')
-      doc.setFontSize(9)
+      doc.setFontSize(10)
       
       for (let colIndex = startCol; colIndex < endCol; colIndex++) {
         const col = columns.value[colIndex]
@@ -346,79 +629,116 @@ async function downloadPDF() {
         if (fret !== null) {
           const fretStr = String(fret)
           
-          // Draw circle background for fret number
-          doc.setFillColor(255, 255, 255)
-          doc.setDrawColor(0, 0, 0)
-          doc.setLineWidth(0.8)
-          const circleRadius = fretStr.length > 1 ? 5 : 4
-          doc.circle(xPos, stringY, circleRadius, 'FD') // F = fill, D = draw border
-          
-          // Draw fret number
-          doc.setTextColor(0, 0, 0)
-          doc.text(fretStr, xPos, stringY + 2.5, { align: 'center' })
+          // Professional fret number styling
+          if (fretStr === '0') {
+            // Open string - use circle
+            doc.setFillColor(255, 255, 255)
+            doc.setDrawColor(0, 0, 0)
+            doc.setLineWidth(1.2)
+            doc.circle(xPos, stringY, 4.5, 'D')
+            doc.setTextColor(0, 0, 0)
+            doc.text('0', xPos, stringY + 2.8, { align: 'center' })
+          } else {
+            // Regular fret numbers - clean and clear
+            doc.setTextColor(0, 0, 0)
+            if (fretStr.length > 1) {
+              // Two-digit fret numbers
+              doc.setFontSize(8)
+              doc.text(fretStr, xPos, stringY + 2.5, { align: 'center' })
+              doc.setFontSize(10)
+            } else {
+              // Single-digit fret numbers
+              doc.text(fretStr, xPos, stringY + 3, { align: 'center' })
+            }
+          }
         }
       }
     }
     
-    // Add vertical measure lines every 4 beats
-    doc.setLineWidth(0.5)
-    doc.setDrawColor(120, 120, 120)
+    // Professional barline system
+    doc.setLineWidth(1.5)
+    doc.setDrawColor(0, 0, 0)
     const lineStartX = leftMargin + stringLabelWidth
     
-    for (let i = 0; i <= currentLineColumns; i += 4) {
-      if (i === 0 || i === currentLineColumns || (startCol + i) % 4 === 0) {
-        const xPos = lineStartX + (i * columnWidth)
-        doc.line(xPos, yPosition - 3, xPos, yPosition + tabLineHeight + 3)
-      }
+    // Start and end barlines
+    doc.line(lineStartX, yPosition - 2, lineStartX, yPosition + tabLineHeight + 2)
+    doc.line(lineStartX + (currentLineColumns * columnWidth), yPosition - 2, 
+             lineStartX + (currentLineColumns * columnWidth), yPosition + tabLineHeight + 2)
+    
+    // Measure lines every 4 beats
+    doc.setLineWidth(0.8)
+    doc.setDrawColor(80, 80, 80)
+    for (let i = 4; i < currentLineColumns; i += 4) {
+      const xPos = lineStartX + (i * columnWidth)
+      doc.line(xPos, yPosition - 1, xPos, yPosition + tabLineHeight + 1)
     }
     
-    // Add lighter beat lines (every beat)
-    doc.setLineWidth(0.2)
-    doc.setDrawColor(180, 180, 180)
+    // Beat subdivision lines (lighter)
+    doc.setLineWidth(0.3)
+    doc.setDrawColor(150, 150, 150)
     for (let i = 1; i < currentLineColumns; i++) {
-      if (i % 4 !== 0) { // Don't draw where we already have measure lines
+      if (i % 4 !== 0) {
         const xPos = lineStartX + (i * columnWidth)
         doc.line(xPos, yPosition, xPos, yPosition + tabLineHeight)
       }
     }
     
-    // Move to next line position
-    yPosition += tabLineHeight + 25
+    yPosition += tabLineHeight + 30
   }
   
-  // Add notes section if provided
+  // Professional notes section
   if (songMetadata.value.notes && songMetadata.value.notes.trim()) {
-    // Check if we need a new page for notes
-    if (yPosition + 40 > pageHeight - 30) {
+    if (yPosition + 50 > pageHeight - 40) {
       doc.addPage()
-      yPosition = 30
+      yPosition = 40
     }
     
-    yPosition += 10
+    // Notes header with line
+    yPosition += 15
     doc.setFont('helvetica', 'bold')
-    doc.setFontSize(12)
-    doc.text('Notes:', leftMargin, yPosition)
-    yPosition += 8
+    doc.setFontSize(10)
+    doc.text('Performance Notes', leftMargin, yPosition)
+    doc.setLineWidth(1)
+    doc.setDrawColor(0, 0, 0)
+    doc.line(leftMargin, yPosition + 3, pageWidth - rightMargin, yPosition + 3)
+    yPosition += 12
     
+    // Notes content
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(10)
     const splitText = doc.splitTextToSize(songMetadata.value.notes, availableWidth)
     doc.text(splitText, leftMargin, yPosition)
   }
   
-  // Add footer to all pages
+  // Professional footer on all pages
   const pageCount = doc.getNumberOfPages()
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i)
+    
+    // Footer line
+    doc.setLineWidth(1)
+    doc.setDrawColor(120, 120, 120)
+    doc.line(leftMargin, pageHeight - 25, pageWidth - rightMargin, pageHeight - 25)
+    
+    // Footer text
     doc.setFont('helvetica', 'normal')
     doc.setFontSize(8)
-    const footerText = `Generated with Guitar Tab Generator • ${new Date().toLocaleDateString()}`
-    const pageNumberText = pageCount > 1 ? ` • Page ${i}/${pageCount}` : ''
-    doc.text(footerText + pageNumberText, pageWidth / 2, pageHeight - 15, { align: 'center' })
+    doc.setTextColor(100, 100, 100)
+    const createdText = `Created with aaronthommy's Guitar Tab Generator • ${new Date().toLocaleDateString('de-DE')}`
+    const pageText = pageCount > 1 ? `Page ${i} of ${pageCount}` : ''
+    
+    doc.text(createdText, leftMargin, pageHeight - 15)
+    if (pageText) {
+      doc.text(pageText, pageWidth - rightMargin, pageHeight - 15, { align: 'right' })
+    }
   }
   
-  // Save the PDF
-  const filename = (songMetadata.value.title || 'untitled').replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_tab.pdf'
+  // Save with professional filename
+  const filename = (songMetadata.value.title || 'untitled')
+    .replace(/[^a-zA-Z0-9äöüÄÖÜß\s-]/g, '')
+    .replace(/\s+/g, '_')
+    .toLowerCase() + '_guitar_tab.pdf'
+  
   doc.save(filename)
 }
 
@@ -485,7 +805,7 @@ function deleteTab(title: string) {
 function clearCurrentColumn() {
   const column = columns.value[currentColumnIndex.value]
   if (column) {
-    column.notes = Array(stringNames.length).fill(null)
+    column.notes = Array(stringNames.value.length).fill(null)
   }
 }
 
@@ -506,7 +826,7 @@ function duplicateColumn() {
  */
 function clearAllColumns() {
   if (confirm('Alle Spalten leeren? Diese Aktion kann nicht rückgängig gemacht werden.')) {
-    columns.value = [{ notes: Array(stringNames.length).fill(null) }]
+    columns.value = [{ notes: Array(stringNames.value.length).fill(null) }]
     currentColumnIndex.value = 0
     visibleStartIndex.value = 0
   }
@@ -521,17 +841,34 @@ const currentColumnHasNotes = computed(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-900">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-900 mt-20">
     <div class="container mx-auto py-8 px-4">
       <!-- Page Heading -->
       <div class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl mt-20 font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-          🎸 Guitar Tab Generator
+        <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          {{ instrumentConfig?.emoji }} {{ instrumentConfig?.name }} Tab Generator
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Erstelle professionelle Gitarren-Tabulaturen mit unserem interaktiven Generator. 
-          Wähle Bünde am Gitarrenhals und exportiere deine Tabs als PDF.
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">
+          Erstelle professionelle {{ instrumentConfig?.name }}-Tabulaturen mit unserem interaktiven Generator. 
+          Wähle Bünde am Instrumenthals und exportiere deine Tabs als PDF.
         </p>
+        
+        <!-- Instrument Selection -->
+        <div class="flex justify-center gap-3 mb-4">
+          <button
+            v-for="(instrument, key) in instruments"
+            :key="key"
+            @click="currentInstrument = key; resetColumnsForInstrument()"
+            :class="[
+              'px-4 py-2 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-2',
+              currentInstrument === key
+                ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-105'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
+            ]"
+          >
+            {{ instrument.emoji }} {{ instrument.name }}
+          </button>
+        </div>
       </div>
 
       <!-- Song Metadata Panel -->
@@ -670,6 +1007,18 @@ const currentColumnHasNotes = computed(() => {
           <div class="flex gap-2 flex-wrap">
             <!-- Toggle panels -->
             <button
+              @click="soundEnabled = !soundEnabled"
+              :class="[
+                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
+                soundEnabled 
+                  ? 'bg-green-500 hover:bg-green-600 text-white'
+                  : 'bg-red-500 hover:bg-red-600 text-white'
+              ]"
+              title="Sound ein/ausschalten"
+            >
+              {{ soundEnabled ? '🔊' : '🔇' }} Sound
+            </button>
+            <button
               @click="showMetadataPanel = !showMetadataPanel"
               :class="[
                 'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
@@ -721,6 +1070,14 @@ const currentColumnHasNotes = computed(() => {
             </button>
             <button
               v-if="currentColumnHasNotes"
+              @click="playCurrentChord"
+              class="px-3 py-1 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
+              title="Alle Noten dieser Spalte als Akkord abspielen"
+            >
+              🎸 Akkord
+            </button>
+            <button
+              v-if="currentColumnHasNotes"
               @click="clearCurrentColumn"
               class="px-3 py-1 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
             >
@@ -743,13 +1100,154 @@ const currentColumnHasNotes = computed(() => {
         </div>
       </div>
 
-      <!-- Fretboard Interface -->
+      <!-- Tab Grid (Preview & Column selection) - Moved above fretboard for better UX -->
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-8">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              📺 Tabulatur-Vorschau (Monitor)
+              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                (Klicke auf eine Spalte zum Bearbeiten & Abspielen)
+              </span>
+            </h2>
+            
+            <!-- Column navigation and info -->
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-500 dark:text-gray-400">
+                Spalten {{ visibleStartIndex + 1 }}-{{ Math.min(visibleStartIndex + maxVisibleColumns, columns.length) }} von {{ columns.length }}
+              </span>
+              
+              <!-- Navigation buttons -->
+              <div class="flex gap-1">
+                <button
+                  @click="scrollLeft"
+                  :disabled="!canScrollLeft"
+                  :class="[
+                    'p-2 rounded-lg transition-colors duration-200',
+                    canScrollLeft 
+                      ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
+                  ]"
+                  title="Vorherige Spalten anzeigen"
+                >
+                  ←
+                </button>
+                <button
+                  @click="scrollRight"
+                  :disabled="!canScrollRight"
+                  :class="[
+                    'p-2 rounded-lg transition-colors duration-200',
+                    canScrollRight 
+                      ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
+                      : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
+                  ]"
+                  title="Nächste Spalten anzeigen"
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="overflow-hidden">
+          <table class="w-full" style="table-layout: fixed;">
+            <thead>
+              <tr class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
+                <th class="p-3 text-left w-20">
+                  <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Saite</span>
+                </th>
+                <!-- Visible column headers with enhanced styling -->
+                <th
+                  v-for="col in visibleColumns"
+                  :key="col.originalIndex"
+                  class="p-2 text-center w-16"
+                >
+                  <div class="flex justify-center">
+                    <button
+                      type="button"
+                      @click="selectColumn(col.originalIndex)"
+                      :class="[
+                        'px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
+                        currentColumnIndex === col.originalIndex
+                          ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-105 ring-2 ring-indigo-300 focus:ring-indigo-500'
+                          : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 shadow-md hover:shadow-lg focus:ring-gray-400'
+                      ]"
+                    >
+                      {{ col.originalIndex + 1 }}
+                    </button>
+                  </div>
+                </th>
+                <!-- Fixed add column button -->
+                <th class="p-2 text-center w-16 sticky right-0 bg-gray-50 dark:bg-gray-700 border-l border-gray-200 dark:border-gray-600">
+                  <button
+                    type="button"
+                    class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg"
+                    @click="addColumn"
+                    title="Neue Spalte hinzufügen"
+                  >
+                    ➕
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows for each string with visual enhancements -->
+              <tr
+                v-for="(stringName, sIndex) in stringNames"
+                :key="sIndex"
+                class="border-t border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150"
+              >
+                <th class="p-3 text-left">
+                  <div class="flex items-center gap-3">
+                    <span class="text-lg font-bold text-gray-700 dark:text-gray-200 min-w-[20px]">
+                      {{ stringName }}
+                    </span>
+                    <div 
+                      :class="[
+                        'h-0.5 flex-1 rounded-full',
+                        stringColors[sIndex]
+                      ]"
+                    ></div>
+                  </div>
+                </th>
+                <td
+                  v-for="col in visibleColumns"
+                  :key="col.originalIndex"
+                  class="p-1 text-center w-16"
+                >
+                  <button
+                    type="button"
+                    @click="selectColumn(col.originalIndex); playNoteFromTab(sIndex, col.originalIndex)"
+                    :class="[
+                      'w-12 h-12 flex items-center justify-center rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
+                      col.originalIndex === currentColumnIndex 
+                        ? 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900 text-indigo-700 dark:text-indigo-300 ring-2 ring-blue-300 dark:ring-blue-600'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600',
+                      col.notes[sIndex] !== null ? 'shadow-lg' : 'shadow-md'
+                    ]"
+                    :title="col.notes[sIndex] !== null ? `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte, Bund ${col.notes[sIndex]} - Klick zum Abspielen` : `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte - leer`"
+                  >
+                    {{ col.notes[sIndex] === null ? '—' : col.notes[sIndex] }}
+                  </button>
+                </td>
+                <!-- Empty cell for alignment with add button (fixed position) -->
+                <td class="p-1 w-16">
+                  <div class="w-12 h-12"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Fretboard Interface (Keyboard) - Sticky at bottom for better UX -->
+      <div class="sticky bottom-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-indigo-200 dark:border-indigo-700 mb-8 z-10">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-            🎯 Gitarrenhals
+            ⌨️ {{ instrumentConfig?.name }}-Hals (Eingabe)
             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-              (Klicke auf einen Bund zum Hinzufügen/Entfernen)
+              (Klicke auf einen Bund zum Hinzufügen/Entfernen - funktioniert wie eine Tastatur)
             </span>
           </h2>
         </div>
@@ -818,147 +1316,10 @@ const currentColumnHasNotes = computed(() => {
                         ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-110 ring-2 ring-indigo-300'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 shadow-md hover:shadow-lg'
                     ]"
+                    :title="`${stringNames[sIndex]} string, Bund ${fret - 1}${soundEnabled ? ' - Sound aktiviert' : ''}`"
                   >
                     {{ fret - 1 }}
                   </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Tab Grid (Preview & Column selection) -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-8">
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              📝 Tabulatur-Vorschau
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                (Klicke auf eine Spalte zum Bearbeiten)
-              </span>
-            </h2>
-            
-            <!-- Column navigation and info -->
-            <div class="flex items-center gap-3">
-              <span class="text-sm text-gray-500 dark:text-gray-400">
-                Spalten {{ visibleStartIndex + 1 }}-{{ Math.min(visibleStartIndex + maxVisibleColumns, columns.length) }} von {{ columns.length }}
-              </span>
-              
-              <!-- Navigation buttons -->
-              <div class="flex gap-1">
-                <button
-                  @click="scrollLeft"
-                  :disabled="!canScrollLeft"
-                  :class="[
-                    'p-2 rounded-lg transition-colors duration-200',
-                    canScrollLeft 
-                      ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
-                  ]"
-                  title="Vorherige Spalten anzeigen"
-                >
-                  ←
-                </button>
-                <button
-                  @click="scrollRight"
-                  :disabled="!canScrollRight"
-                  :class="[
-                    'p-2 rounded-lg transition-colors duration-200',
-                    canScrollRight 
-                      ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
-                  ]"
-                  title="Nächste Spalten anzeigen"
-                >
-                  →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="overflow-hidden">
-          <table class="table-auto w-full">
-            <thead>
-              <tr class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
-                <th class="p-3 text-left min-w-[80px]">
-                  <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Saite</span>
-                </th>
-                <!-- Visible column headers with enhanced styling -->
-                <th
-                  v-for="col in visibleColumns"
-                  :key="col.originalIndex"
-                  class="p-2 text-center min-w-[60px]"
-                >
-                  <button
-                    type="button"
-                    @click="selectColumn(col.originalIndex)"
-                    :class="[
-                      'px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
-                      currentColumnIndex === col.originalIndex
-                        ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-105 ring-2 ring-indigo-300 focus:ring-indigo-500'
-                        : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 shadow-md hover:shadow-lg focus:ring-gray-400'
-                    ]"
-                  >
-                    {{ col.originalIndex + 1 }}
-                  </button>
-                </th>
-                <!-- Fixed add column button -->
-                <th class="p-2 text-center min-w-[60px]">
-                  <button
-                    type="button"
-                    class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg"
-                    @click="addColumn"
-                    title="Neue Spalte hinzufügen"
-                  >
-                    ➕
-                  </button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Rows for each string with visual enhancements -->
-              <tr
-                v-for="(stringName, sIndex) in stringNames"
-                :key="sIndex"
-                class="border-t border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150"
-              >
-                <th class="p-3 text-left">
-                  <div class="flex items-center gap-3">
-                    <span class="text-lg font-bold text-gray-700 dark:text-gray-200 min-w-[20px]">
-                      {{ stringName }}
-                    </span>
-                    <div 
-                      :class="[
-                        'h-0.5 flex-1 rounded-full',
-                        stringColors[sIndex]
-                      ]"
-                    ></div>
-                  </div>
-                </th>
-                <td
-                  v-for="col in visibleColumns"
-                  :key="col.originalIndex"
-                  class="p-1 text-center"
-                >
-                  <button
-                    type="button"
-                    @click="selectColumn(col.originalIndex)"
-                    :class="[
-                      'w-12 h-12 flex items-center justify-center rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
-                      col.originalIndex === currentColumnIndex 
-                        ? 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900 text-indigo-700 dark:text-indigo-300 ring-2 ring-blue-300 dark:ring-blue-600'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600',
-                      col.notes[sIndex] !== null ? 'shadow-lg' : 'shadow-md'
-                    ]"
-                  >
-                    {{ col.notes[sIndex] === null ? '—' : col.notes[sIndex] }}
-                  </button>
-                </td>
-                <!-- Empty cell for alignment with add button (fixed position) -->
-                <td class="p-1">
-                  <div class="w-12 h-12"></div>
                 </td>
               </tr>
             </tbody>
@@ -1002,12 +1363,40 @@ const currentColumnHasNotes = computed(() => {
       <!-- ASCII Preview -->
       <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 p-4 border-b border-gray-200 dark:border-gray-600">
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-            👁️ ASCII-Vorschau
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-              (Kopiere den Text oder lade als PDF herunter)
-            </span>
-          </h2>
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              👁️ ASCII-Vorschau & Playback
+              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                (Kopiere den Text, lade als PDF herunter oder spiele die gesamte Tabulatur ab)
+              </span>
+            </h2>
+            
+            <!-- Playback Controls -->
+            <div class="flex gap-2">
+              <button
+                v-if="!isPlaying"
+                @click="playEntireTab"
+                :disabled="!soundEnabled || columns.length === 0"
+                :class="[
+                  'px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2',
+                  soundEnabled && columns.length > 0
+                    ? 'bg-green-500 hover:bg-green-600 text-white transform hover:scale-105'
+                    : 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                ]"
+                title="Gesamte Tabulatur abspielen"
+              >
+                ▶️ Tab abspielen
+              </button>
+              <button
+                v-if="isPlaying"
+                @click="stopPlayback"
+                class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-2"
+                title="Playback stoppen"
+              >
+                ⏹️ Stop
+              </button>
+            </div>
+          </div>
         </div>
         <div class="p-6">
           <div class="bg-black rounded-lg p-4 overflow-x-auto">
