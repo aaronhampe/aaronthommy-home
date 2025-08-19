@@ -173,7 +173,7 @@ const scrolled = ref(false);
 const navItems = [
   { key: "home", path: "/" },
   { key: "community", path: "/community" },
-  //{ key: "offers", path: "/offers" },
+  { key: "tabs", path: "/tabs" },
   { key: "social", path: "/social" },
   { key: "kontakt", path: "/kontakt" },
 ];

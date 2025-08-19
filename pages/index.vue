@@ -717,867 +717,6 @@
         class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
       ></div>
       <div
-        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-blue-400/60 dark:bg-blue-500/60 rounded-full animate-float-delayed"
-      ></div>
-      <div
-        class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-    </div>
-
-    <!-- Social Proof & Community Section with Flowing Background -->
-    <section
-      class="mt-[-2em] relative py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"
-    >
-      <!-- Animated Background Elements - Continuous from Hero -->
-      <div class="absolute inset-0">
-        <!-- Flowing Gradient Orbs - positioned to continue from hero -->
-        <div
-          class="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-pink-400/20 rounded-full blur-3xl animate-float-delayed"
-        ></div>
-        <div
-          class="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-300/10 to-blue-300/10 rounded-full blur-3xl animate-pulse-slow"
-        ></div>
-
-        <!-- Grid Pattern Overlay - matching hero -->
-        <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
-          <div
-            class="absolute inset-0"
-            style="
-              background-image: radial-gradient(
-                circle at 1px 1px,
-                rgba(59, 130, 246, 0.3) 1px,
-                transparent 0
-              );
-              background-size: 40px 40px;
-            "
-          ></div>
-        </div>
-
-        <!-- Floating Music Elements -->
-        <div
-          class="absolute top-1/4 left-1/6 opacity-10 dark:opacity-5 animate-float-note-1"
-        >
-          <svg
-            class="w-8 h-8 text-purple-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-        <div
-          class="absolute bottom-1/3 right-1/5 opacity-8 dark:opacity-4 animate-float-note-2"
-        >
-          <svg
-            class="w-6 h-6 text-blue-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-          <!-- Enhanced Header -->
-          <div class="mb-8">
-            <h2
-              class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
-            >
-              Follow My
-              <span
-                class="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
-              >
-                Musical Journey
-              </span>
-            </h2>
-            <div
-              class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full animate-expand-delayed"
-            ></div>
-          </div>
-
-          <p
-            class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Get daily inspiration and watch my latest performances across all
-            platforms
-          </p>
-        </div>
-
-        <!-- Enhanced Platform Stats with Glassmorphism -->
-        <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16"
-        >
-          <!-- TikTok -->
-          <a
-            href="https://www.tiktok.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-black/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-gray-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                TikTok
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Daily guitar & piano clips
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- Instagram -->
-          <a
-            href="https://www.instagram.com/aaronthommy_"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                Instagram
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Reels & behind-the-scenes
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy_</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- YouTube -->
-          <a
-            href="https://www.youtube.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                YouTube
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Tutorials & performances
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Enhanced Coming Soon Spotify with Glassmorphism -->
-        <div class="text-center mb-16">
-          <div class="relative inline-block">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 rounded-2xl blur-lg"
-            ></div>
-            <div
-              class="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/40 dark:border-gray-700/40 shadow-lg"
-            >
-              <div class="inline-flex items-center">
-                <div
-                  class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center mr-4"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-green-600 dark:text-green-400 font-semibold text-lg"
-                  >Coming Soon: Spotify Original Music</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Clean Glass Morphism Separator - Ohne dunkle Ränder -->
-    <div class="relative h-16 overflow-hidden">
-      <!-- Saubere Glaslinie ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/40 to-transparent dark:via-gray-500/40"
-      ></div>
-
-      <!-- Glaskugeln ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-      <div
-        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-purple-400/60 dark:bg-purple-500/60 rounded-full animate-float-delayed"
-      ></div>
-      <div
-        class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-    </div>
-
-    <!-- Social Proof & Community Section with Flowing Background -->
-    <section
-      class="mt-[-2em] relative py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"
-    >
-      <!-- Animated Background Elements - Continuous from Hero -->
-      <div class="absolute inset-0">
-        <!-- Flowing Gradient Orbs - positioned to continue from hero -->
-        <div
-          class="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-pink-400/20 rounded-full blur-3xl animate-float-delayed"
-        ></div>
-        <div
-          class="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-300/10 to-blue-300/10 rounded-full blur-3xl animate-pulse-slow"
-        ></div>
-
-        <!-- Grid Pattern Overlay - matching hero -->
-        <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
-          <div
-            class="absolute inset-0"
-            style="
-              background-image: radial-gradient(
-                circle at 1px 1px,
-                rgba(59, 130, 246, 0.3) 1px,
-                transparent 0
-              );
-              background-size: 40px 40px;
-            "
-          ></div>
-        </div>
-
-        <!-- Floating Music Elements -->
-        <div
-          class="absolute top-1/4 left-1/6 opacity-10 dark:opacity-5 animate-float-note-1"
-        >
-          <svg
-            class="w-8 h-8 text-purple-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-        <div
-          class="absolute bottom-1/3 right-1/5 opacity-8 dark:opacity-4 animate-float-note-2"
-        >
-          <svg
-            class="w-6 h-6 text-blue-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-          <!-- Enhanced Header -->
-          <div class="mb-8">
-            <h2
-              class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
-            >
-              Follow My
-              <span
-                class="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
-              >
-                Musical Journey
-              </span>
-            </h2>
-            <div
-              class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full animate-expand-delayed"
-            ></div>
-          </div>
-
-          <p
-            class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Get daily inspiration and watch my latest performances across all
-            platforms
-          </p>
-        </div>
-
-        <!-- Enhanced Platform Stats with Glassmorphism -->
-        <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16"
-        >
-          <!-- TikTok -->
-          <a
-            href="https://www.tiktok.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-black/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-gray-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                TikTok
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Daily guitar & piano clips
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- Instagram -->
-          <a
-            href="https://www.instagram.com/aaronthommy_"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                Instagram
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Reels & behind-the-scenes
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy_</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- YouTube -->
-          <a
-            href="https://www.youtube.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                YouTube
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Tutorials & performances
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Enhanced Coming Soon Spotify with Glassmorphism -->
-        <div class="text-center mb-16">
-          <div class="relative inline-block">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 rounded-2xl blur-lg"
-            ></div>
-            <div
-              class="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/40 dark:border-gray-700/40 shadow-lg"
-            >
-              <div class="inline-flex items-center">
-                <div
-                  class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center mr-4"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-green-600 dark:text-green-400 font-semibold text-lg"
-                  >Coming Soon: Spotify Original Music</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Clean Glass Morphism Separator - Ohne dunkle Ränder -->
-    <div class="relative h-16 overflow-hidden">
-      <!-- Saubere Glaslinie ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/40 to-transparent dark:via-gray-500/40"
-      ></div>
-
-      <!-- Glaskugeln ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-      <div
-        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-purple-400/60 dark:bg-purple-500/60 rounded-full animate-float-delayed"
-      ></div>
-      <div
-        class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-    </div>
-
-    <!-- Social Proof & Community Section with Flowing Background -->
-    <section
-      class="mt-[-2em] relative py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"
-    >
-      <!-- Animated Background Elements - Continuous from Hero -->
-      <div class="absolute inset-0">
-        <!-- Flowing Gradient Orbs - positioned to continue from hero -->
-        <div
-          class="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-pink-400/20 rounded-full blur-3xl animate-float-delayed"
-        ></div>
-        <div
-          class="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-float-slow"
-        ></div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-300/10 to-blue-300/10 rounded-full blur-3xl animate-pulse-slow"
-        ></div>
-
-        <!-- Grid Pattern Overlay - matching hero -->
-        <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
-          <div
-            class="absolute inset-0"
-            style="
-              background-image: radial-gradient(
-                circle at 1px 1px,
-                rgba(59, 130, 246, 0.3) 1px,
-                transparent 0
-              );
-              background-size: 40px 40px;
-            "
-          ></div>
-        </div>
-
-        <!-- Floating Music Elements -->
-        <div
-          class="absolute top-1/4 left-1/6 opacity-10 dark:opacity-5 animate-float-note-1"
-        >
-          <svg
-            class="w-8 h-8 text-purple-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-        <div
-          class="absolute bottom-1/3 right-1/5 opacity-8 dark:opacity-4 animate-float-note-2"
-        >
-          <svg
-            class="w-6 h-6 text-blue-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-          <!-- Enhanced Header -->
-          <div class="mb-8">
-            <h2
-              class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
-            >
-              Follow My
-              <span
-                class="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
-              >
-                Musical Journey
-              </span>
-            </h2>
-            <div
-              class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full animate-expand-delayed"
-            ></div>
-          </div>
-
-          <p
-            class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Get daily inspiration and watch my latest performances across all
-            platforms
-          </p>
-        </div>
-
-        <!-- Enhanced Platform Stats with Glassmorphism -->
-        <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16"
-        >
-          <!-- TikTok -->
-          <a
-            href="https://www.tiktok.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-black/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-gray-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                TikTok
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Daily guitar & piano clips
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- Instagram -->
-          <a
-            href="https://www.instagram.com/aaronthommy_"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                Instagram
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Reels & behind-the-scenes
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy_</span
-                >
-              </div>
-            </div>
-          </a>
-
-          <!-- YouTube -->
-          <a
-            href="https://www.youtube.com/@aaronthommy"
-            target="_blank"
-            class="group relative block"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
-            ></div>
-            <div
-              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
-            >
-              <!-- Animated Icon Container -->
-              <div
-                class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
-              >
-                <svg
-                  class="w-10 h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-                  />
-                </svg>
-              </div>
-
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                YouTube
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                Tutorials & performances
-              </p>
-
-              <!-- Enhanced Stats Badge -->
-              <div
-                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
-              >
-                <span
-                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >@aaronthommy</span
-                >
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Enhanced Coming Soon Spotify with Glassmorphism -->
-        <div class="text-center mb-16">
-          <div class="relative inline-block">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 rounded-2xl blur-lg"
-            ></div>
-            <div
-              class="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/40 dark:border-gray-700/40 shadow-lg"
-            >
-              <div class="inline-flex items-center">
-                <div
-                  class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center mr-4"
-                >
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-green-600 dark:text-green-400 font-semibold text-lg"
-                  >Coming Soon: Spotify Original Music</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Clean Glass Morphism Separator - Ohne dunkle Ränder -->
-    <div class="relative h-16 overflow-hidden">
-      <!-- Saubere Glaslinie ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/40 to-transparent dark:via-gray-500/40"
-      ></div>
-
-      <!-- Glaskugeln ohne Blur-Artefakte -->
-      <div
-        class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
-      ></div>
-      <div
         class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-purple-400/60 dark:bg-purple-500/60 rounded-full animate-float-delayed"
       ></div>
       <div
@@ -1721,7 +860,9 @@
           </div>
 
           <!-- Feature Highlights with Glassmorphism Cards -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12"
+          >
             <!-- Interactive Fretboard -->
             <div class="group relative">
               <div
@@ -1745,11 +886,16 @@
                   </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center">
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
                   Interactive Fretboard
                 </h3>
-                <p class="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-                  Click on frets to add notes with visual feedback and intuitive controls
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
+                  Click on frets to add notes with visual feedback and intuitive
+                  controls
                 </p>
               </div>
             </div>
@@ -1781,11 +927,16 @@
                   </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center">
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
                   Professional PDFs
                 </h3>
-                <p class="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-                  Export tabs with proper lines, metadata, and multi-page support
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
+                  Export tabs with proper lines, metadata, and multi-page
+                  support
                 </p>
               </div>
             </div>
@@ -1817,10 +968,14 @@
                   </svg>
                 </div>
 
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center">
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
                   Save & Share
                 </h3>
-                <p class="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
                   Save your tabs locally and share professional PDFs with others
                 </p>
               </div>
@@ -1969,6 +1124,274 @@
         class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
       ></div>
     </div>
+
+    <!-- Social Proof & Community Section with Flowing Background -->
+    <section
+      class="mt-[-2em] relative py-20 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-white dark:from-blue-900/20 dark:via-purple-900/20 dark:to-gray-900"
+    >
+      <!-- Animated Background Elements - Continuous from Hero -->
+      <div class="absolute inset-0">
+        <!-- Flowing Gradient Orbs - positioned to continue from hero -->
+        <div
+          class="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-float-slow"
+        ></div>
+        <div
+          class="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-indigo-400/20 to-pink-400/20 rounded-full blur-3xl animate-float-delayed"
+        ></div>
+        <div
+          class="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-float-slow"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-300/10 to-blue-300/10 rounded-full blur-3xl animate-pulse-slow"
+        ></div>
+
+        <!-- Grid Pattern Overlay - matching hero -->
+        <div class="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]">
+          <div
+            class="absolute inset-0"
+            style="
+              background-image: radial-gradient(
+                circle at 1px 1px,
+                rgba(59, 130, 246, 0.3) 1px,
+                transparent 0
+              );
+              background-size: 40px 40px;
+            "
+          ></div>
+        </div>
+
+        <!-- Floating Music Elements -->
+        <div
+          class="absolute top-1/4 left-1/6 opacity-10 dark:opacity-5 animate-float-note-1"
+        >
+          <svg
+            class="w-8 h-8 text-purple-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+            />
+          </svg>
+        </div>
+        <div
+          class="absolute bottom-1/3 right-1/5 opacity-8 dark:opacity-4 animate-float-note-2"
+        >
+          <svg
+            class="w-6 h-6 text-blue-400"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+          <!-- Enhanced Header -->
+          <div class="mb-8">
+            <h2
+              class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6 tracking-tight"
+            >
+              Follow My
+              <span
+                class="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent animate-gradient-x"
+              >
+                Musical Journey
+              </span>
+            </h2>
+            <div
+              class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full animate-expand-delayed"
+            ></div>
+          </div>
+
+          <p
+            class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+          >
+            Get daily inspiration and watch my latest performances across all
+            platforms
+          </p>
+        </div>
+
+        <!-- Enhanced Platform Stats with Glassmorphism -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16"
+        >
+          <!-- TikTok -->
+          <a
+            href="https://www.tiktok.com/@aaronthommy"
+            target="_blank"
+            class="group relative block"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-gray-900/20 to-black/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+            ></div>
+            <div
+              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
+            >
+              <!-- Animated Icon Container -->
+              <div
+                class="w-20 h-20 bg-gradient-to-r from-gray-800 to-black rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298.001.595.045.88.13V9.4A6.33 6.33 0 007 8a6.3 6.3 0 00-5 9.75 6.3 6.3 0 0010.49-4.06V9.4a8.16 8.16 0 004.58 1.34h.43V7.35a5.06 5.06 0 01-2.91-.66z"
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                TikTok
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                Daily guitar & piano clips
+              </p>
+
+              <!-- Enhanced Stats Badge -->
+              <div
+                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
+              >
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >@aaronthommy</span
+                >
+              </div>
+            </div>
+          </a>
+
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/aaronthommy_"
+            target="_blank"
+            class="group relative block"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+            ></div>
+            <div
+              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
+            >
+              <!-- Animated Icon Container -->
+              <div
+                class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                Instagram
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                Reels & behind-the-scenes
+              </p>
+
+              <!-- Enhanced Stats Badge -->
+              <div
+                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
+              >
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >@aaronthommy_</span
+                >
+              </div>
+            </div>
+          </a>
+
+          <!-- YouTube -->
+          <a
+            href="https://www.youtube.com/@aaronthommy"
+            target="_blank"
+            class="group relative block"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+            ></div>
+            <div
+              class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-3 transition-all duration-500"
+            >
+              <!-- Animated Icon Container -->
+              <div
+                class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
+                  />
+                </svg>
+              </div>
+
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                YouTube
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                Tutorials & performances
+              </p>
+
+              <!-- Enhanced Stats Badge -->
+              <div
+                class="inline-flex items-center px-4 py-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-full border border-white/30 dark:border-gray-600/30"
+              >
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >@aaronthommy</span
+                >
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Enhanced Coming Soon Spotify with Glassmorphism -->
+        <div class="text-center mb-16">
+          <div class="relative inline-block">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 rounded-2xl blur-lg"
+            ></div>
+            <div
+              class="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/40 dark:border-gray-700/40 shadow-lg"
+            >
+              <div class="inline-flex items-center">
+                <div
+                  class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <svg
+                    class="w-5 h-5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"
+                    />
+                  </svg>
+                </div>
+                <span
+                  class="text-green-600 dark:text-green-400 font-semibold text-lg"
+                  >Coming Soon: Spotify Original Music</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -2029,7 +1452,7 @@ useHead({
     {
       name: "keywords",
       content:
-        "guitar tabs, piano sheets, music lessons, patreon, guitar covers, piano covers, music tutorials",
+        "guitar tabs, guitar tab generator, piano sheets, music lessons, patreon, guitar covers, piano covers, music tutorials",
     },
     {
       property: "og:title",

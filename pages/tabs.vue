@@ -4,7 +4,7 @@
 // Users can select notes on a fretboard, organise them into columns (time steps),
 // preview the resulting ASCII tab and export it as a PDF.  
 
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 // jsPDF is used to generate the PDF download.  
 // We'll import it dynamically on the client to avoid SSR errors.
 
@@ -227,6 +227,7 @@ const columns = ref<TabColumn[]>([
  * When the user clicks on a column header in the tab grid, this value changes.  
  */
 const currentColumnIndex = ref(0)
+const showMobileFretboard = ref(false)
 
 /*
  * Number of columns to show in the viewport (responsive)
@@ -339,6 +340,16 @@ function toggleNote(stringIndex: number, fret: number) {
   if (newValue !== null && soundEnabled.value) {
     playGuitarNote(stringIndex, fret)
   }
+}
+
+/*
+ * Clear note for specific string in current column
+ */
+function clearNote(stringIndex: number) {
+  const idx = currentColumnIndex.value
+  const column = columns.value[idx]
+  if (!column) return
+  column.notes[stringIndex] = null
 }
 
 /*
@@ -838,35 +849,56 @@ function clearAllColumns() {
 const currentColumnHasNotes = computed(() => {
   return currentColumn.value.notes.some(note => note !== null)
 })
+
+/*
+ * Navigation methods for mobile fretboard
+ */
+function goToPreviousColumn() {
+  if (currentColumnIndex.value > 0) {
+    selectColumn(currentColumnIndex.value - 1)
+  }
+}
+
+function goToNextColumn() {
+  if (currentColumnIndex.value < columns.value.length - 1) {
+    selectColumn(currentColumnIndex.value + 1)
+  }
+}
+
+// Add reactive variable for selected mobile string
+const selectedMobileString = ref(0)
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-900 mt-20">
     <div class="container mx-auto py-8 px-4">
-      <!-- Page Heading -->
-      <div class="text-center mb-8">
-        <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-          {{ instrumentConfig?.emoji }} {{ instrumentConfig?.name }} Tab Generator
+      <!-- Page Heading - Mobile Optimized -->
+      <div class="text-center mb-6 md:mb-8">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3 md:mb-4">
+          {{ instrumentConfig?.emoji }} {{ instrumentConfig?.name }} <span class="hidden sm:inline">Tab Generator</span><span class="sm:hidden">Tabs</span>
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">
-          Erstelle professionelle {{ instrumentConfig?.name }}-Tabulaturen mit unserem interaktiven Generator. 
-          Wähle Bünde am Instrumenthals und exportiere deine Tabs als PDF.
+        <p class="text-sm md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-4 md:mb-6 px-2">
+          <span class="hidden sm:inline">Erstelle professionelle {{ instrumentConfig?.name }}-Tabulaturen mit unserem interaktiven Generator. 
+          Wähle Bünde am Instrumenthals und exportiere deine Tabs als PDF.</span>
+          <span class="sm:hidden">Erstelle {{ instrumentConfig?.name }}-Tabs. Wähle Bünde und exportiere als PDF.</span>
         </p>
         
-        <!-- Instrument Selection -->
-        <div class="flex justify-center gap-3 mb-4">
+        <!-- Instrument Selection - Mobile Optimized -->
+        <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-3 md:mb-4 px-2">
           <button
             v-for="(instrument, key) in instruments"
             :key="key"
             @click="currentInstrument = key; resetColumnsForInstrument()"
             :class="[
-              'px-4 py-2 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-2',
+              'px-3 py-2 md:px-4 md:py-2 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-1 md:gap-2',
               currentInstrument === key
                 ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-105'
                 : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'
             ]"
           >
-            {{ instrument.emoji }} {{ instrument.name }}
+            <span class="text-base md:text-lg">{{ instrument.emoji }}</span>
+            <span class="hidden sm:inline">{{ instrument.name }}</span>
+            <span class="sm:hidden text-xs">{{ instrument.name.split(' ')[0] }}</span>
           </button>
         </div>
       </div>
@@ -1100,21 +1132,22 @@ const currentColumnHasNotes = computed(() => {
         </div>
       </div>
 
-      <!-- Tab Grid (Preview & Column selection) - Moved above fretboard for better UX -->
+      <!-- Tab Grid (Preview & Column selection) - Mobile Optimized -->
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-8">
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              📺 Tabulatur-Vorschau (Monitor)
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                (Klicke auf eine Spalte zum Bearbeiten & Abspielen)
+        <!-- Header - Responsive -->
+        <div class="p-3 md:p-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+            <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              📺 <span class="hidden sm:inline">Tabulatur-Vorschau</span><span class="sm:hidden">Tabs</span>
+              <span class="hidden md:inline text-sm font-normal text-gray-500 dark:text-gray-400">
+                (Klicke zum Bearbeiten & Abspielen)
               </span>
             </h2>
             
-            <!-- Column navigation and info -->
-            <div class="flex items-center gap-3">
-              <span class="text-sm text-gray-500 dark:text-gray-400">
-                Spalten {{ visibleStartIndex + 1 }}-{{ Math.min(visibleStartIndex + maxVisibleColumns, columns.length) }} von {{ columns.length }}
+            <!-- Mobile: Compact column info and navigation -->
+            <div class="flex items-center justify-between md:justify-end gap-3">
+              <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                {{ visibleStartIndex + 1 }}-{{ Math.min(visibleStartIndex + maxVisibleColumns, columns.length) }} / {{ columns.length }}
               </span>
               
               <!-- Navigation buttons -->
@@ -1123,12 +1156,12 @@ const currentColumnHasNotes = computed(() => {
                   @click="scrollLeft"
                   :disabled="!canScrollLeft"
                   :class="[
-                    'p-2 rounded-lg transition-colors duration-200',
+                    'p-1.5 md:p-2 rounded-lg transition-colors duration-200 text-sm md:text-base',
                     canScrollLeft 
                       ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
                   ]"
-                  title="Vorherige Spalten anzeigen"
+                  title="Vorherige Spalten"
                 >
                   ←
                 </button>
@@ -1136,7 +1169,7 @@ const currentColumnHasNotes = computed(() => {
                   @click="scrollRight"
                   :disabled="!canScrollRight"
                   :class="[
-                    'p-2 rounded-lg transition-colors duration-200',
+                    'p-1.5 md:p-2 rounded-lg transition-colors duration-200 text-sm md:text-base',
                     canScrollRight 
                       ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
@@ -1150,25 +1183,29 @@ const currentColumnHasNotes = computed(() => {
           </div>
         </div>
         
+        <!-- Mobile-optimized Table -->
         <div class="overflow-hidden">
           <table class="w-full" style="table-layout: fixed;">
             <thead>
               <tr class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
-                <th class="p-3 text-left w-20">
-                  <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Saite</span>
+                <th class="p-2 md:p-3 text-left w-16 md:w-20">
+                  <span class="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-300">
+                    <span class="hidden sm:inline">Saite</span>
+                    <span class="sm:hidden">S.</span>
+                  </span>
                 </th>
-                <!-- Visible column headers with enhanced styling -->
+                <!-- Visible column headers - Mobile optimized -->
                 <th
                   v-for="col in visibleColumns"
                   :key="col.originalIndex"
-                  class="p-2 text-center w-16"
+                  class="p-1 md:p-2 text-center w-12 md:w-16"
                 >
                   <div class="flex justify-center">
                     <button
                       type="button"
                       @click="selectColumn(col.originalIndex)"
                       :class="[
-                        'px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
+                        'px-2 py-1 md:px-3 md:py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
                         currentColumnIndex === col.originalIndex
                           ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-105 ring-2 ring-indigo-300 focus:ring-indigo-500'
                           : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500 shadow-md hover:shadow-lg focus:ring-gray-400'
@@ -1178,34 +1215,35 @@ const currentColumnHasNotes = computed(() => {
                     </button>
                   </div>
                 </th>
-                <!-- Fixed add column button -->
-                <th class="p-2 text-center w-16 sticky right-0 bg-gray-50 dark:bg-gray-700 border-l border-gray-200 dark:border-gray-600">
+                <!-- Fixed add column button - Mobile optimized -->
+                <th class="p-1 md:p-2 text-center w-12 md:w-16 sticky right-0 bg-gray-50 dark:bg-gray-700 border-l border-gray-200 dark:border-gray-600">
                   <button
                     type="button"
-                    class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-3 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg"
+                    class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-2 py-1 md:px-3 md:py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg"
                     @click="addColumn"
-                    title="Neue Spalte hinzufügen"
+                    title="Neue Spalte"
                   >
-                    ➕
+                    <span class="md:hidden">+</span>
+                    <span class="hidden md:inline">➕</span>
                   </button>
                 </th>
               </tr>
             </thead>
             <tbody>
-              <!-- Rows for each string with visual enhancements -->
+              <!-- String rows - Mobile optimized -->
               <tr
                 v-for="(stringName, sIndex) in stringNames"
                 :key="sIndex"
                 class="border-t border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150"
               >
-                <th class="p-3 text-left">
-                  <div class="flex items-center gap-3">
-                    <span class="text-lg font-bold text-gray-700 dark:text-gray-200 min-w-[20px]">
+                <th class="p-2 md:p-3 text-left">
+                  <div class="flex items-center gap-1 md:gap-3">
+                    <span class="text-sm md:text-lg font-bold text-gray-700 dark:text-gray-200 min-w-[16px] md:min-w-[20px]">
                       {{ stringName }}
                     </span>
                     <div 
                       :class="[
-                        'h-0.5 flex-1 rounded-full',
+                        'h-0.5 flex-1 rounded-full hidden sm:block',
                         stringColors[sIndex]
                       ]"
                     ></div>
@@ -1214,13 +1252,13 @@ const currentColumnHasNotes = computed(() => {
                 <td
                   v-for="col in visibleColumns"
                   :key="col.originalIndex"
-                  class="p-1 text-center w-16"
+                  class="p-0.5 md:p-1 text-center w-12 md:w-16"
                 >
                   <button
                     type="button"
                     @click="selectColumn(col.originalIndex); playNoteFromTab(sIndex, col.originalIndex)"
                     :class="[
-                      'w-12 h-12 flex items-center justify-center rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
+                      'w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-xl font-bold text-xs md:text-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2',
                       col.originalIndex === currentColumnIndex 
                         ? 'bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900 text-indigo-700 dark:text-indigo-300 ring-2 ring-blue-300 dark:ring-blue-600'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600',
@@ -1231,9 +1269,9 @@ const currentColumnHasNotes = computed(() => {
                     {{ col.notes[sIndex] === null ? '—' : col.notes[sIndex] }}
                   </button>
                 </td>
-                <!-- Empty cell for alignment with add button (fixed position) -->
-                <td class="p-1 w-16">
-                  <div class="w-12 h-12"></div>
+                <!-- Empty cell for alignment - Mobile optimized -->
+                <td class="p-0.5 md:p-1 w-12 md:w-16">
+                  <div class="w-8 h-8 md:w-12 md:h-12"></div>
                 </td>
               </tr>
             </tbody>
@@ -1241,8 +1279,154 @@ const currentColumnHasNotes = computed(() => {
         </div>
       </div>
 
-      <!-- Fretboard Interface (Keyboard) - Sticky at bottom for better UX -->
-      <div class="sticky bottom-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-indigo-200 dark:border-indigo-700 mb-8 z-10">
+      <!-- Mobile: Sticky Fretboard (like Desktop) - positioned OVER the actions -->
+      <div class="md:hidden sticky bottom-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-indigo-200 dark:border-indigo-700 mb-8 z-10">
+        <!-- Mobile Header - Compact -->
+        <div class="px-3 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-t-xl">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">🎸</span>
+              <div class="text-sm">
+                <div class="font-semibold">{{ instrumentConfig?.name }}-Hals</div>
+                <div class="text-xs opacity-90">Spalte {{ currentColumnIndex + 1 }} / {{ columns.length }}</div>
+              </div>
+            </div>
+            <!-- Mobile Column Navigation -->
+            <div class="flex items-center gap-1">
+              <button
+                @click="goToPreviousColumn"
+                :disabled="currentColumnIndex === 0"
+                :class="[
+                  'w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-all duration-200',
+                  currentColumnIndex === 0
+                    ? 'bg-white/20 text-white/50 cursor-not-allowed'
+                    : 'bg-white/20 hover:bg-white/30 text-white active:scale-95'
+                ]"
+              >
+                ←
+              </button>
+              <span class="px-2 py-1 bg-white/20 rounded text-xs font-bold min-w-[32px] text-center">
+                {{ currentColumnIndex + 1 }}
+              </span>
+              <button
+                @click="goToNextColumn"
+                :disabled="currentColumnIndex === columns.length - 1"
+                :class="[
+                  'w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-all duration-200',
+                  currentColumnIndex === columns.length - 1
+                    ? 'bg-white/20 text-white/50 cursor-not-allowed'
+                    : 'bg-white/20 hover:bg-white/30 text-white active:scale-95'
+                ]"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Fretboard Content - Ultra Compact -->
+        <div class="px-2 py-3 max-h-[40vh] overflow-y-auto">
+          <!-- Current String Selector -->
+          <div class="mb-3">
+            <div class="flex gap-1 justify-center">
+              <button
+                v-for="(stringName, sIndex) in stringNames"
+                :key="sIndex"
+                @click="selectedMobileString = sIndex"
+                :class="[
+                  'flex-1 py-2 px-1 rounded-lg text-xs font-bold transition-all duration-200 border-2',
+                  selectedMobileString === sIndex
+                    ? 'bg-indigo-500 text-white border-indigo-600 shadow-lg scale-105'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600'
+                ]"
+              >
+                <div class="font-bold">{{ stringName }}</div>
+                <div class="text-xs opacity-75">
+                  {{ currentColumn.notes[sIndex] !== null ? currentColumn.notes[sIndex] : '—' }}
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Selected String Display -->
+          <div class="mb-3 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-lg">
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Saite: {{ stringNames[selectedMobileString] }}
+              </span>
+              <div 
+                :class="[
+                  'w-4 h-1 rounded-full',
+                  stringColors[selectedMobileString]
+                ]"
+              ></div>
+              <button
+                v-if="currentColumn.notes[selectedMobileString] !== null"
+                @click="clearNote(selectedMobileString)"
+                class="px-2 py-0.5 bg-red-500 text-white rounded text-xs hover:bg-red-600 transition-colors"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- Fret Selector for Selected String -->
+          <div class="grid grid-cols-6 gap-1.5">
+            <button
+              v-for="fret in Math.min(numFrets + 1, 18)"
+              :key="fret"
+              @click="toggleNote(selectedMobileString, fret - 1)"
+              :class="[
+                'aspect-square flex items-center justify-center rounded-lg font-bold transition-all duration-200 text-sm border-2',
+                currentColumn.notes[selectedMobileString] === (fret - 1)
+                  ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white border-indigo-600 shadow-lg scale-105'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 hover:border-gray-400 dark:hover:border-gray-500 active:scale-95',
+                fret - 1 === 0 ? 'ring-2 ring-yellow-400 ring-opacity-50' : '',
+                [3, 5, 7, 9, 12, 15].includes(fret - 1) ? 'ring-1 ring-blue-400 ring-opacity-30' : ''
+              ]"
+            >
+              {{ fret - 1 }}
+            </button>
+          </div>
+
+          <!-- Quick Actions Row -->
+          <div class="flex gap-2 mt-3">
+            <button
+              @click="playCurrentChord"
+              :disabled="!currentColumnHasNotes"
+              :class="[
+                'flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all duration-200',
+                currentColumnHasNotes
+                  ? 'bg-green-500 hover:bg-green-600 text-white active:scale-95'
+                  : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ]"
+            >
+              🔊 Akkord
+            </button>
+            <button
+              @click="addColumn"
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-xs font-semibold transition-all duration-200 active:scale-95"
+            >
+              ➕
+            </button>
+            <button
+              @click="clearCurrentColumn"
+              :disabled="!currentColumnHasNotes"
+              :class="[
+                'px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200',
+                currentColumnHasNotes
+                  ? 'bg-orange-500 hover:bg-orange-600 text-white active:scale-95'
+                  : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ]"
+            >
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop: Sticky Bottom (unchanged for desktop) -->
+      <div class="hidden md:block sticky bottom-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-indigo-200 dark:border-indigo-700 mb-8 z-10">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
             ⌨️ {{ instrumentConfig?.name }}-Hals (Eingabe)
@@ -1314,7 +1498,7 @@ const currentColumnHasNotes = computed(() => {
                       'w-10 h-10 flex items-center justify-center rounded-xl font-semibold transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                       currentColumn.notes[sIndex] === (fret - 1)
                         ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg scale-110 ring-2 ring-indigo-300'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 shadow-md hover:shadow-lg'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                     ]"
                     :title="`${stringNames[sIndex]} string, Bund ${fret - 1}${soundEnabled ? ' - Sound aktiviert' : ''}`"
                   >
@@ -1327,20 +1511,22 @@ const currentColumnHasNotes = computed(() => {
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-8">
-        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">Aktionen</h3>
-        <div class="flex flex-wrap gap-4 justify-center">
+      <!-- Action Buttons - Mobile Optimized -->
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 mb-8">
+        <h3 class="text-base md:text-lg font-bold text-gray-800 dark:text-gray-200 mb-3 md:mb-4 text-center">
+          <span class="hidden sm:inline">Aktionen</span><span class="sm:hidden">Actions</span>
+        </h3>
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 sm:justify-center">
           <button
             type="button"
-            class="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl flex items-center gap-2"
+            class="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
             @click="downloadPDF"
           >
-            📄 PDF herunterladen
+            📄 <span class="hidden sm:inline">PDF herunterladen</span><span class="sm:hidden">PDF</span>
           </button>
           <button
             type="button"
-            class="bg-gradient-to-br from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-lg hover:shadow-xl flex items-center gap-2"
+            class="bg-gradient-to-br from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
             @click="removeColumn()"
             :disabled="columns.length <= 1"
             :class="{ 
@@ -1348,59 +1534,59 @@ const currentColumnHasNotes = computed(() => {
               'hover:shadow-xl': columns.length > 1 
             }"
           >
-            🗑️ Spalte entfernen
+            🗑️ <span class="hidden sm:inline">Spalte entfernen</span><span class="sm:hidden">Delete</span>
           </button>
           <button
             type="button"
-            class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg hover:shadow-xl flex items-center gap-2"
+            class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
             @click="clearAllColumns"
           >
-            🧹 Alles löschen
+            🧹 <span class="hidden sm:inline">Alles löschen</span><span class="sm:hidden">Clear</span>
           </button>
         </div>
       </div>
 
-      <!-- ASCII Preview -->
+      <!-- ASCII Preview - Mobile Optimized -->
       <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 p-4 border-b border-gray-200 dark:border-gray-600">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              👁️ ASCII-Vorschau & Playback
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                (Kopiere den Text, lade als PDF herunter oder spiele die gesamte Tabulatur ab)
+        <div class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 p-3 md:p-4 border-b border-gray-200 dark:border-gray-600">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+              👁️ <span class="hidden sm:inline">ASCII-Vorschau & Playback</span><span class="sm:hidden">ASCII & Play</span>
+              <span class="hidden lg:inline text-sm font-normal text-gray-500 dark:text-gray-400">
+                (Kopiere, PDF oder spiele ab)
               </span>
             </h2>
             
-            <!-- Playback Controls -->
+            <!-- Playback Controls - Mobile Optimized -->
             <div class="flex gap-2">
               <button
                 v-if="!isPlaying"
                 @click="playEntireTab"
                 :disabled="!soundEnabled || columns.length === 0"
                 :class="[
-                  'px-4 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2',
+                  'px-3 md:px-4 py-2 rounded-lg text-sm md:text-base font-semibold transition-all duration-200 flex items-center gap-1 md:gap-2',
                   soundEnabled && columns.length > 0
                     ? 'bg-green-500 hover:bg-green-600 text-white transform hover:scale-105'
                     : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 ]"
                 title="Gesamte Tabulatur abspielen"
               >
-                ▶️ Tab abspielen
+                ▶️ <span class="hidden sm:inline">Tab abspielen</span><span class="sm:hidden">Play</span>
               </button>
               <button
                 v-if="isPlaying"
                 @click="stopPlayback"
-                class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-2"
+                class="px-3 md:px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 flex items-center gap-1 md:gap-2"
                 title="Playback stoppen"
               >
-                ⏹️ Stop
+                ⏹️ <span class="hidden sm:inline">Stop</span><span class="sm:hidden">Stop</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="p-6">
-          <div class="bg-black rounded-lg p-4 overflow-x-auto">
-            <pre class="whitespace-pre text-sm font-mono text-green-400 leading-relaxed">{{ generateAscii().join('\n') }}</pre>
+        <div class="p-3 md:p-6">
+          <div class="bg-black rounded-lg p-2 md:p-4 overflow-x-auto">
+            <pre class="whitespace-pre text-xs md:text-sm font-mono text-green-400 leading-relaxed">{{ generateAscii().join('\n') }}</pre>
           </div>
         </div>
       </div>
