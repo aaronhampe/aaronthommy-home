@@ -2,6 +2,7 @@
   "header": {
     "home": "Home",
     "community": "Community",
+    "tabs": "Tabs",
     "kontakt": "Contact",
     "offers": "Offers",
     "social": "Social Media"
@@ -99,6 +100,138 @@
       "followTitle": "Follow me on Social Media",
       "ctaTitle": "Let's stay in touch!",
       "ctaText": "Follow me on social media for daily musical inspiration, new tutorials and updates on upcoming projects."
+    }
+  },
+  "tabs": {
+    "generator": {
+      "title": "Guitar Tab Generator",
+      "subtitle": "Create professional guitar tablatures with our interactive generator. Select frets on the instrument neck and export your tabs as PDF.",
+      "tutorial": {
+        "title": "Quick Start Guide",
+        "step1": "Select your instrument",
+        "step2": "Click on frets below to add notes",
+        "step3": "Add new columns for more chords",
+        "step4": "Listen to your tab with the play button",
+        "step5": "Export as professional PDF",
+        "understood": "Got it! 🎸",
+        "demo": "Show demo",
+        "help": "🤔 How does it work?"
+      },
+      "instruments": {
+        "acoustic": "Acoustic Guitar",
+        "electric": "Electric Guitar",
+        "ukulele": "Ukulele"
+      },
+      "ui": {
+        "column": "Column",
+        "of": "of",
+        "withNotes": "with notes",
+        "empty": "empty",
+        "sound": "Sound",
+        "on": "On",
+        "off": "Off",
+        "info": "Info",
+        "save": "Save",
+        "back": "Back",
+        "forward": "Forward",
+        "chord": "Chord",
+        "new": "New",
+        "clear": "Clear",
+        "copy": "Copy",
+        "navigate": "Navigate",
+        "play": "Play",
+        "newColumn": "New Column",
+        "duplicate": "Duplicate",
+        "delete": "Delete Column",
+        "clearAll": "Clear All",
+        "downloadPdf": "Download PDF",
+        "generating": "Creating PDF...",
+        "playTab": "Play Tab",
+        "playing": "Playing...",
+        "load": "Load",
+        "saveLoad": "Save & Load",
+        "saveCurrentTab": "Save Current Tab",
+        "savedTabs": "Saved Tabs",
+        "unknownArtist": "Unknown Artist",
+        "columns": "Columns",
+        "saved": "Saved",
+        "noSavedTabs": "No saved tabs found",
+        "tabs": "Tabs",
+        "tabPreview": "Tab Preview",
+        "ascii": "ASCII & Play",
+        "asciiPreview": "ASCII Preview & Playback",
+        "actions": "Actions",
+        "removeColumn": "Remove Column",
+        "remove": "Remove"
+      },
+      "actions": {
+        "title": "Actions",
+        "subtitle": "Export, manage or delete your tablature",
+        "stats": {
+          "columns": "columns",
+          "column": "column",
+          "withNotes": "with notes"
+        }
+      },
+      "preview": {
+        "title": "Tablature Preview",
+        "subtitle": "Click to edit & play",
+        "ascii": "ASCII Preview & Playback"
+      },
+      "fretboard": {
+        "title": "Instrument Neck",
+        "subtitle": "Click on a fret to add/remove - works like a keyboard",
+        "string": "String",
+        "playChord": "Play chord"
+      },
+      "metadata": {
+        "title": "Song Information",
+        "songTitle": "Title",
+        "artist": "Artist",
+        "album": "Album",
+        "bpm": "BPM",
+        "timeSignature": "Time Signature",
+        "key": "Key",
+        "capo": "Capo",
+        "noCapo": "No Capo",
+        "fret": "Fret",
+        "difficulty": "Difficulty",
+        "genre": "Genre",
+        "notes": "Notes",
+        "notesPlaceholder": "Additional information, playing techniques, etc.",
+        "difficulties": {
+          "beginner": "Beginner",
+          "intermediate": "Intermediate", 
+          "advanced": "Advanced",
+          "expert": "Expert"
+        }
+      },
+      "saveLoad": {
+        "title": "Save & Load",
+        "saveTab": "Save current tab",
+        "savedTabs": "Saved tabs:",
+        "unknownArtist": "Unknown Artist",
+        "columns": "columns",
+        "saved": "Saved",
+        "load": "Load",
+        "delete": "Delete",
+        "noSavedTabs": "No saved tabs found.",
+        "confirmDelete": "Really delete tab \"{title}\"?",
+        "tabSaved": "Tab saved!",
+        "tabLoaded": "Tab loaded!"
+      },
+      "shortcuts": {
+        "navigate": "Navigate",
+        "play": "Play",
+        "new": "New"
+      },
+      "messages": {
+        "pdfError": "Error creating PDF. Please try again.",
+        "clearAllConfirm": "Clear all columns? This action cannot be undone.",
+        "exportManageDelete": "Export, manage or delete your tablature",
+        "generatingPdf": "Creating PDF...",
+        "playing": "Playing..."
+      }
     }
   }
 }

@@ -5,6 +5,11 @@
 // preview the resulting ASCII tab and export it as a PDF.  
 
 import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+// Internationalization
+const { t } = useI18n()
+
 // jsPDF is used to generate the PDF download.  
 // We'll import it dynamically on the client to avoid SSR errors.
 
@@ -65,6 +70,14 @@ const instruments: Record<string, InstrumentConfig> = {
     numFrets: 15
   }
 }
+
+/*
+ * Computed instrument name with i18n
+ */
+const instrumentName = computed(() => {
+  const instrumentKey = currentInstrument.value
+  return t(`tabs.generator.instruments.${instrumentKey}`)
+})
 
 /*
  * Current instrument selection
@@ -483,274 +496,302 @@ function generateAscii(): string[] {
 }
 
 /*
- * Create and download a professional PDF with proper lines and metadata
+ * Create and download a professional PDF with improved formatting
  */
 async function downloadPDF() {
-  const { jsPDF } = await import('jspdf')
-  const doc = new jsPDF()
+  isGeneratingPDF.value = true
   
-  // PDF page dimensions and margins
-  const pageWidth = doc.internal.pageSize.width
-  const pageHeight = doc.internal.pageSize.height
-  const leftMargin = 25
-  const rightMargin = 25
-  const availableWidth = pageWidth - leftMargin - rightMargin
-  
-  let yPosition = 25
-  
-  // Header with professional styling
-  doc.setDrawColor(0, 0, 0)
-  doc.setLineWidth(2)
-  doc.line(leftMargin, 15, pageWidth - rightMargin, 15)
-  
-  // Title
-  doc.setFont('helvetica', 'bold')
-  doc.setFontSize(20)
-  doc.text(songMetadata.value.title || 'Untitled Song', pageWidth / 2, yPosition, { align: 'center' })
-  yPosition += 12
-  
-  // Artist
-  if (songMetadata.value.artist) {
-    doc.setFontSize(14)
-    doc.setFont('helvetica', 'italic')
-    doc.text(`by ${songMetadata.value.artist}`, pageWidth / 2, yPosition, { align: 'center' })
-    yPosition += 10
-  }
-  
-  // Professional metadata box
-  doc.setDrawColor(120, 120, 120)
-  doc.setLineWidth(1)
-  const metadataBoxHeight = 25
-  doc.rect(leftMargin, yPosition, availableWidth, metadataBoxHeight)
-  
-  // Fill metadata box with light gray
-  doc.setFillColor(248, 248, 248)
-  doc.rect(leftMargin, yPosition, availableWidth, metadataBoxHeight, 'F')
-  
-  // Metadata content in columns
-  doc.setFont('helvetica', 'bold')
-  doc.setFontSize(10)
-  doc.setTextColor(0, 0, 0)
-  
-  const metadataY = yPosition + 8
-  const col1X = leftMargin + 10
-  const col2X = leftMargin + (availableWidth / 3)
-  const col3X = leftMargin + (2 * availableWidth / 3)
-  
-  // Column 1: Tempo and Time Signature
-  if (songMetadata.value.bpm) {
-    doc.text('Tempo:', col1X, metadataY)
-    doc.setFont('helvetica', 'normal')
-    doc.text(`♩ = ${songMetadata.value.bpm} BPM`, col1X + 25, metadataY)
-    doc.setFont('helvetica', 'bold')
-  }
-  if (songMetadata.value.timeSignature) {
-    doc.text('Time:', col1X, metadataY + 8)
-    doc.setFont('helvetica', 'normal')
-    doc.text(songMetadata.value.timeSignature, col1X + 25, metadataY + 8)
-  }
-  
-  // Column 2: Key and Capo
-  doc.setFont('helvetica', 'bold')
-  if (songMetadata.value.key) {
-    doc.text('Key:', col2X, metadataY)
-    doc.setFont('helvetica', 'normal')
-    doc.text(songMetadata.value.key, col2X + 15, metadataY)
-    doc.setFont('helvetica', 'bold')
-  }
-  if (songMetadata.value.capo > 0) {
-    doc.text('Capo:', col2X, metadataY + 8)
-    doc.setFont('helvetica', 'normal')
-    doc.text(`${songMetadata.value.capo}. Bund`, col2X + 20, metadataY + 8)
-  }
-  
-  // Column 3: Instrument and Tuning
-  doc.setFont('helvetica', 'bold')
-  doc.text('Instrument:', col3X, metadataY)
-  doc.setFont('helvetica', 'normal')
-  doc.text(instrumentConfig.value?.name || currentInstrument.value, col3X + 30, metadataY)
-  
-  if (songMetadata.value.tuning && songMetadata.value.tuning !== 'Standard') {
-    doc.setFont('helvetica', 'bold')
-    doc.text('Tuning:', col3X, metadataY + 8)
-    doc.setFont('helvetica', 'normal')
-    doc.text(songMetadata.value.tuning, col3X + 25, metadataY + 8)
-  }
-  
-  yPosition += metadataBoxHeight + 15
-  
-  // Professional tablature formatting
-  const stringSpacing = 12
-  const columnWidth = 18
-  const stringLabelWidth = 25
-  const tabLineHeight = (stringNames.value.length - 1) * stringSpacing
-  
-  // Calculate columns per line for better spacing
-  const availableTabWidth = availableWidth - stringLabelWidth
-  const columnsPerLine = Math.floor(availableTabWidth / columnWidth)
-  
-  const totalColumns = columns.value.length
-  const numberOfLines = Math.ceil(totalColumns / columnsPerLine)
-  
-  for (let lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
-    const startCol = lineIndex * columnsPerLine
-    const endCol = Math.min(startCol + columnsPerLine, totalColumns)
-    const currentLineColumns = endCol - startCol
+  try {
+    const { jsPDF } = await import('jspdf')
+    const doc = new jsPDF()
     
-    // Check for page break
-    if (yPosition + tabLineHeight + 40 > pageHeight - 40) {
-      doc.addPage()
-      yPosition = 40
+    // PDF page dimensions and margins
+    const pageWidth = doc.internal.pageSize.width
+    const pageHeight = doc.internal.pageSize.height
+    const leftMargin = 20
+    const rightMargin = 20
+    const availableWidth = pageWidth - leftMargin - rightMargin
+    
+    let yPosition = 20
+    
+    // Professional header with gradient effect
+    doc.setDrawColor(79, 70, 229) // Indigo color
+    doc.setLineWidth(3)
+    doc.line(leftMargin, 12, pageWidth - rightMargin, 12)
+    
+    // Title with better spacing
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(24)
+    doc.setTextColor(79, 70, 229)
+    doc.text(songMetadata.value.title || 'Untitled Guitar Tab', pageWidth / 2, yPosition, { align: 'center' })
+    yPosition += 15
+    
+    // Artist with improved styling
+    if (songMetadata.value.artist) {
+      doc.setFontSize(16)
+      doc.setFont('helvetica', 'italic')
+      doc.setTextColor(100, 100, 100)
+      doc.text(`by ${songMetadata.value.artist}`, pageWidth / 2, yPosition, { align: 'center' })
+      yPosition += 12
     }
     
-    // System number for multi-line tabs
-    if (numberOfLines > 1) {
-      doc.setFont('helvetica', 'bold')
+    // Additional song info if available
+    if (songMetadata.value.album) {
       doc.setFontSize(12)
-      doc.text(`${lineIndex + 1}.`, leftMargin - 5, yPosition + (tabLineHeight / 2))
+      doc.setFont('helvetica', 'normal')
+      doc.setTextColor(120, 120, 120)
+      doc.text(`Album: ${songMetadata.value.album}`, pageWidth / 2, yPosition, { align: 'center' })
+      yPosition += 8
     }
     
-    // Draw tablature staff
-    for (let stringIndex = 0; stringIndex < stringNames.value.length; stringIndex++) {
-      const stringY = yPosition + (stringIndex * stringSpacing)
+    yPosition += 5 // Extra spacing
+    
+    // Professional metadata section with improved layout
+    doc.setDrawColor(180, 180, 180)
+    doc.setLineWidth(1)
+    const metadataBoxHeight = 35
+    doc.setFillColor(248, 250, 252) // Very light gray
+    doc.roundedRect(leftMargin, yPosition, availableWidth, metadataBoxHeight, 3, 3, 'FD')
+    
+    // Metadata grid with proper spacing
+    const metadataY = yPosition + 8
+    const colWidth = availableWidth / 3
+    
+    // Reset font styling for metadata
+    doc.setFont('helvetica', 'normal')
+    doc.setFontSize(9)
+    doc.setTextColor(60, 60, 60)
+    
+    // Column 1: Tempo & Time Signature
+    let currentY = metadataY
+    if (songMetadata.value.bpm) {
+      doc.setFont('helvetica', 'bold')
+      doc.text('Tempo:', leftMargin + 8, currentY)
+      doc.setFont('helvetica', 'normal')
+      doc.text(`♩ = ${songMetadata.value.bpm} BPM`, leftMargin + 28, currentY)
+      currentY += 8
+    }
+    if (songMetadata.value.timeSignature) {
+      doc.setFont('helvetica', 'bold')
+      doc.text('Takt:', leftMargin + 8, currentY)
+      doc.setFont('helvetica', 'normal')
+      doc.text(songMetadata.value.timeSignature, leftMargin + 26, currentY)
+      currentY += 8
+    }
+    
+    // Column 2: Key & Capo  
+    currentY = metadataY
+    if (songMetadata.value.key) {
+      doc.setFont('helvetica', 'bold')
+      doc.text('Tonart:', leftMargin + colWidth + 8, currentY)
+      doc.setFont('helvetica', 'normal')
+      doc.text(songMetadata.value.key, leftMargin + colWidth + 32, currentY)
+      currentY += 8
+    }
+    if (songMetadata.value.capo > 0) {
+      doc.setFont('helvetica', 'bold')
+      doc.text('Kapodaster:', leftMargin + colWidth + 8, currentY)
+      doc.setFont('helvetica', 'normal')
+      doc.text(`${songMetadata.value.capo}. Bund`, leftMargin + colWidth + 40, currentY)
+      currentY += 8
+    }
+    
+    // Column 3: Instrument & Difficulty
+    currentY = metadataY
+    doc.setFont('helvetica', 'bold')
+    doc.text('Instrument:', leftMargin + (colWidth * 2) + 8, currentY)
+    doc.setFont('helvetica', 'normal')
+    doc.text(instrumentConfig.value?.name || currentInstrument.value, leftMargin + (colWidth * 2) + 40, currentY)
+    currentY += 8
+    
+    if (songMetadata.value.difficulty) {
+      doc.setFont('helvetica', 'bold')
+      doc.text('Level:', leftMargin + (colWidth * 2) + 8, currentY)
+      doc.setFont('helvetica', 'normal')
+      doc.text(songMetadata.value.difficulty, leftMargin + (colWidth * 2) + 28, currentY)
+    }
+    
+    yPosition += metadataBoxHeight + 20
+    
+    // Enhanced tablature formatting
+    const stringSpacing = 14
+    const columnWidth = 16
+    const stringLabelWidth = 22
+    const tabLineHeight = (stringNames.value.length - 1) * stringSpacing
+    
+    // Calculate optimal columns per line
+    const availableTabWidth = availableWidth - stringLabelWidth - 10
+    const columnsPerLine = Math.floor(availableTabWidth / columnWidth)
+    
+    const totalColumns = columns.value.length
+    const numberOfLines = Math.ceil(totalColumns / columnsPerLine)
+    
+    // Add section title
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.setTextColor(79, 70, 229)
+    doc.text('Tabulatur', leftMargin, yPosition - 5)
+    
+    for (let lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+      const startCol = lineIndex * columnsPerLine
+      const endCol = Math.min(startCol + columnsPerLine, totalColumns)
+      const currentLineColumns = endCol - startCol
       
-      // String name/tuning labels with professional styling
-      doc.setFont('courier', 'bold')
-      doc.setFontSize(11)
-      doc.setTextColor(0, 0, 0)
-      doc.text(stringNames.value[stringIndex] || 'E', leftMargin + 3, stringY + 3)
+      // Check for page break with better spacing
+      if (yPosition + tabLineHeight + 50 > pageHeight - 30) {
+        doc.addPage()
+        yPosition = 30
+      }
       
-      // Draw tablature lines with proper thickness
-      doc.setLineWidth(0.8)
-      doc.setDrawColor(0, 0, 0)
-      const lineStartX = leftMargin + stringLabelWidth
-      const lineEndX = lineStartX + (currentLineColumns * columnWidth)
-      doc.line(lineStartX, stringY, lineEndX, stringY)
+      // System number for multi-line tabs
+      if (numberOfLines > 1) {
+        doc.setFont('helvetica', 'bold')
+        doc.setFontSize(10)
+        doc.setTextColor(100, 100, 100)
+        doc.text(`${lineIndex + 1}.`, leftMargin - 10, yPosition + (tabLineHeight / 2))
+      }
       
-      // Add fret numbers with enhanced styling
-      doc.setFont('courier', 'bold')
-      doc.setFontSize(10)
-      
-      for (let colIndex = startCol; colIndex < endCol; colIndex++) {
-        const col = columns.value[colIndex]
-        const fret = col ? col.notes[stringIndex] : null
-        const relativeColIndex = colIndex - startCol
-        const xPos = lineStartX + (relativeColIndex * columnWidth) + (columnWidth / 2)
+      // Enhanced tablature staff
+      for (let stringIndex = 0; stringIndex < stringNames.value.length; stringIndex++) {
+        const stringY = yPosition + (stringIndex * stringSpacing)
         
-        if (fret !== null) {
-          const fretStr = String(fret)
+        // String labels with better styling
+        doc.setFont('courier', 'bold')
+        doc.setFontSize(11)
+        doc.setTextColor(60, 60, 60)
+        const stringLabel = stringNames.value[stringIndex] || 'E'
+        doc.text(stringLabel, leftMargin + 8, stringY + 4, { align: 'center' })
+        
+        // Enhanced tablature lines
+        doc.setLineWidth(0.8)
+        doc.setDrawColor(60, 60, 60)
+        const lineStartX = leftMargin + stringLabelWidth
+        const lineEndX = lineStartX + (currentLineColumns * columnWidth)
+        doc.line(lineStartX, stringY, lineEndX, stringY)
+        
+        // Professional fret numbers
+        doc.setFont('courier', 'bold')
+        doc.setFontSize(10)
+        
+        for (let colIndex = startCol; colIndex < endCol; colIndex++) {
+          const col = columns.value[colIndex]
+          const fret = col ? col.notes[stringIndex] : null
+          const relativeColIndex = colIndex - startCol
+          const xPos = lineStartX + (relativeColIndex * columnWidth) + (columnWidth / 2)
           
-          // Professional fret number styling
-          if (fretStr === '0') {
-            // Open string - use circle
-            doc.setFillColor(255, 255, 255)
-            doc.setDrawColor(0, 0, 0)
-            doc.setLineWidth(1.2)
-            doc.circle(xPos, stringY, 4.5, 'D')
-            doc.setTextColor(0, 0, 0)
-            doc.text('0', xPos, stringY + 2.8, { align: 'center' })
-          } else {
-            // Regular fret numbers - clean and clear
-            doc.setTextColor(0, 0, 0)
-            if (fretStr.length > 1) {
-              // Two-digit fret numbers
-              doc.setFontSize(8)
-              doc.text(fretStr, xPos, stringY + 2.5, { align: 'center' })
-              doc.setFontSize(10)
+          if (fret !== null) {
+            const fretStr = String(fret)
+            
+            if (fretStr === '0') {
+              // Open string - enhanced circle
+              doc.setFillColor(255, 255, 255)
+              doc.setDrawColor(60, 60, 60)
+              doc.setLineWidth(1.5)
+              doc.circle(xPos, stringY, 5, 'D')
+              doc.setTextColor(60, 60, 60)
+              doc.setFont('courier', 'bold')
+              doc.text('0', xPos, stringY + 3.5, { align: 'center' })
             } else {
-              // Single-digit fret numbers
-              doc.text(fretStr, xPos, stringY + 3, { align: 'center' })
+              // Regular fret numbers with better positioning
+              doc.setTextColor(20, 20, 20)
+              doc.setFont('courier', 'bold')
+              if (fretStr.length > 1) {
+                doc.setFontSize(8)
+                doc.text(fretStr, xPos, stringY + 3, { align: 'center' })
+                doc.setFontSize(10)
+              } else {
+                doc.text(fretStr, xPos, stringY + 3.5, { align: 'center' })
+              }
             }
           }
         }
       }
-    }
-    
-    // Professional barline system
-    doc.setLineWidth(1.5)
-    doc.setDrawColor(0, 0, 0)
-    const lineStartX = leftMargin + stringLabelWidth
-    
-    // Start and end barlines
-    doc.line(lineStartX, yPosition - 2, lineStartX, yPosition + tabLineHeight + 2)
-    doc.line(lineStartX + (currentLineColumns * columnWidth), yPosition - 2, 
-             lineStartX + (currentLineColumns * columnWidth), yPosition + tabLineHeight + 2)
-    
-    // Measure lines every 4 beats
-    doc.setLineWidth(0.8)
-    doc.setDrawColor(80, 80, 80)
-    for (let i = 4; i < currentLineColumns; i += 4) {
-      const xPos = lineStartX + (i * columnWidth)
-      doc.line(xPos, yPosition - 1, xPos, yPosition + tabLineHeight + 1)
-    }
-    
-    // Beat subdivision lines (lighter)
-    doc.setLineWidth(0.3)
-    doc.setDrawColor(150, 150, 150)
-    for (let i = 1; i < currentLineColumns; i++) {
-      if (i % 4 !== 0) {
+      
+      // Professional barline system with better styling
+      doc.setLineWidth(2)
+      doc.setDrawColor(60, 60, 60)
+      const lineStartX = leftMargin + stringLabelWidth
+      
+      // Start and end barlines
+      doc.line(lineStartX, yPosition - 3, lineStartX, yPosition + tabLineHeight + 3)
+      doc.line(lineStartX + (currentLineColumns * columnWidth), yPosition - 3, 
+               lineStartX + (currentLineColumns * columnWidth), yPosition + tabLineHeight + 3)
+      
+      // Enhanced measure divisions
+      doc.setLineWidth(1)
+      doc.setDrawColor(120, 120, 120)
+      for (let i = 4; i < currentLineColumns; i += 4) {
         const xPos = lineStartX + (i * columnWidth)
-        doc.line(xPos, yPosition, xPos, yPosition + tabLineHeight)
+        doc.line(xPos, yPosition - 1, xPos, yPosition + tabLineHeight + 1)
+      }
+      
+      yPosition += tabLineHeight + 35
+    }
+    
+    // Enhanced notes section
+    if (songMetadata.value.notes && songMetadata.value.notes.trim()) {
+      if (yPosition + 60 > pageHeight - 30) {
+        doc.addPage()
+        yPosition = 30
+      }
+      
+      yPosition += 10
+      doc.setFont('helvetica', 'bold')
+      doc.setFontSize(12)
+      doc.setTextColor(79, 70, 229)
+      doc.text('Spielhinweise', leftMargin, yPosition)
+      
+      // Decorative line
+      doc.setDrawColor(200, 200, 200)
+      doc.setLineWidth(1)
+      doc.line(leftMargin + 35, yPosition - 2, pageWidth - rightMargin, yPosition - 2)
+      yPosition += 8
+      
+      // Notes content with better formatting
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(10)
+      doc.setTextColor(60, 60, 60)
+      const splitText = doc.splitTextToSize(songMetadata.value.notes, availableWidth - 10)
+      doc.text(splitText, leftMargin + 5, yPosition)
+    }
+    
+    // Professional footer
+    const pageCount = doc.getNumberOfPages()
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i)
+      
+      // Footer separator
+      doc.setLineWidth(0.5)
+      doc.setDrawColor(180, 180, 180)
+      doc.line(leftMargin, pageHeight - 20, pageWidth - rightMargin, pageHeight - 20)
+      
+      // Footer content
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(8)
+      doc.setTextColor(120, 120, 120)
+      
+      const createdText = `Erstellt mit aaronthommy's Guitar Tab Generator • ${new Date().toLocaleDateString('de-DE')}`
+      const pageText = pageCount > 1 ? `Seite ${i} von ${pageCount}` : ''
+      
+      doc.text(createdText, leftMargin, pageHeight - 12)
+      if (pageText) {
+        doc.text(pageText, pageWidth - rightMargin, pageHeight - 12, { align: 'right' })
       }
     }
     
-    yPosition += tabLineHeight + 30
+    // Generate clean filename
+    const filename = (songMetadata.value.title || 'untitled_guitar_tab')
+      .replace(/[^a-zA-Z0-9äöüÄÖÜß\s-]/g, '')
+      .replace(/\s+/g, '_')
+      .toLowerCase() + '.pdf'
+    
+    doc.save(filename)
+  } catch (error) {
+    console.error('PDF generation failed:', error)
+    alert('Fehler beim Erstellen des PDFs. Bitte versuche es erneut.')
+  } finally {
+    isGeneratingPDF.value = false
   }
-  
-  // Professional notes section
-  if (songMetadata.value.notes && songMetadata.value.notes.trim()) {
-    if (yPosition + 50 > pageHeight - 40) {
-      doc.addPage()
-      yPosition = 40
-    }
-    
-    // Notes header with line
-    yPosition += 15
-    doc.setFont('helvetica', 'bold')
-    doc.setFontSize(10)
-    doc.text('Performance Notes', leftMargin, yPosition)
-    doc.setLineWidth(1)
-    doc.setDrawColor(0, 0, 0)
-    doc.line(leftMargin, yPosition + 3, pageWidth - rightMargin, yPosition + 3)
-    yPosition += 12
-    
-    // Notes content
-    doc.setFont('helvetica', 'normal')
-    doc.setFontSize(10)
-    const splitText = doc.splitTextToSize(songMetadata.value.notes, availableWidth)
-    doc.text(splitText, leftMargin, yPosition)
-  }
-  
-  // Professional footer on all pages
-  const pageCount = doc.getNumberOfPages()
-  for (let i = 1; i <= pageCount; i++) {
-    doc.setPage(i)
-    
-    // Footer line
-    doc.setLineWidth(1)
-    doc.setDrawColor(120, 120, 120)
-    doc.line(leftMargin, pageHeight - 25, pageWidth - rightMargin, pageHeight - 25)
-    
-    // Footer text
-    doc.setFont('helvetica', 'normal')
-    doc.setFontSize(8)
-    doc.setTextColor(100, 100, 100)
-    const createdText = `Created with aaronthommy's Guitar Tab Generator • ${new Date().toLocaleDateString('de-DE')}`
-    const pageText = pageCount > 1 ? `Page ${i} of ${pageCount}` : ''
-    
-    doc.text(createdText, leftMargin, pageHeight - 15)
-    if (pageText) {
-      doc.text(pageText, pageWidth - rightMargin, pageHeight - 15, { align: 'right' })
-    }
-  }
-  
-  // Save with professional filename
-  const filename = (songMetadata.value.title || 'untitled')
-    .replace(/[^a-zA-Z0-9äöüÄÖÜß\s-]/g, '')
-    .replace(/\s+/g, '_')
-    .toLowerCase() + '_guitar_tab.pdf'
-  
-  doc.save(filename)
 }
 
 /*
@@ -867,21 +908,131 @@ function goToNextColumn() {
 
 // Add reactive variable for selected mobile string
 const selectedMobileString = ref(0)
+
+/*
+ * Tutorial and UX improvements
+ */
+const showTutorial = ref(true) // Show tutorial on first visit
+const isGeneratingPDF = ref(false) // Loading state for PDF generation
+
+/*
+ * Quick demo function for new users
+ */
+function showQuickDemo() {
+  // Create a simple demo tab with C major chord
+  columns.value = [
+    { notes: [null, 1, 0, 2, 3, null] }, // C major chord
+    { notes: [null, null, null, null, null, null] }, // Empty column
+  ]
+  currentColumnIndex.value = 0
+  visibleStartIndex.value = 0
+  
+  // Show a brief explanation
+  setTimeout(() => {
+    if (soundEnabled.value) {
+      playCurrentChord()
+    }
+  }, 500)
+}
+
+/*
+ * Keyboard shortcuts for better UX
+ */
+onMounted(() => {
+  const handleKeyPress = (event: KeyboardEvent) => {
+    // Skip if user is typing in input fields
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+      return
+    }
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        if (currentColumnIndex.value > 0) {
+          selectColumn(currentColumnIndex.value - 1)
+          event.preventDefault()
+        }
+        break
+      case 'ArrowRight':
+        if (currentColumnIndex.value < columns.value.length - 1) {
+          selectColumn(currentColumnIndex.value + 1)
+          event.preventDefault()
+        }
+        break
+      case ' ':
+        if (currentColumnHasNotes.value && soundEnabled.value) {
+          playCurrentChord()
+          event.preventDefault()
+        }
+        break
+      case 'n':
+      case 'N':
+        addColumn()
+        event.preventDefault()
+        break
+      case 'd':
+      case 'D':
+        if (event.ctrlKey || event.metaKey) {
+          duplicateColumn()
+          event.preventDefault()
+        }
+        break
+      case 'Delete':
+      case 'Backspace':
+        if (event.ctrlKey || event.metaKey) {
+          clearCurrentColumn()
+          event.preventDefault()
+        }
+        break
+    }
+  }
+
+  window.addEventListener('keydown', handleKeyPress)
+  
+  return () => {
+    window.removeEventListener('keydown', handleKeyPress)
+  }
+})
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-900 mt-20">
     <div class="container mx-auto py-8 px-4">
-      <!-- Page Heading - Mobile Optimized -->
+      <!-- Page Heading - Mobile Optimized with Tutorial Hint -->
       <div class="text-center mb-6 md:mb-8">
         <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3 md:mb-4">
-          {{ instrumentConfig?.emoji }} {{ instrumentConfig?.name }} <span class="hidden sm:inline">Tab Generator</span><span class="sm:hidden">Tabs</span>
+          {{ instrumentConfig?.emoji }} {{ instrumentName }} <span class="hidden sm:inline">{{ t('tabs.generator.title') }}</span><span class="sm:hidden">{{ t('header.tabs') }}</span>
         </h1>
         <p class="text-sm md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-4 md:mb-6 px-2">
-          <span class="hidden sm:inline">Erstelle professionelle {{ instrumentConfig?.name }}-Tabulaturen mit unserem interaktiven Generator. 
-          Wähle Bünde am Instrumenthals und exportiere deine Tabs als PDF.</span>
-          <span class="sm:hidden">Erstelle {{ instrumentConfig?.name }}-Tabs. Wähle Bünde und exportiere als PDF.</span>
+          {{ t('tabs.generator.subtitle') }}
         </p>
+
+        <!-- Quick Start Tutorial -->
+        <div v-if="showTutorial" class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 border border-blue-200 dark:border-blue-700 rounded-xl p-4 mb-6 mx-2">
+          <div class="flex items-start gap-3">
+            <div class="text-2xl">🎓</div>
+            <div class="flex-1 text-left">
+              <h3 class="font-bold text-blue-800 dark:text-blue-200 mb-2">{{ t('tabs.generator.tutorial.title') }}</h3>
+              <ol class="text-sm text-blue-700 dark:text-blue-300 space-y-1 list-decimal list-inside">
+                <li>{{ t('tabs.generator.tutorial.step1') }}</li>
+                <li>{{ t('tabs.generator.tutorial.step2') }}</li>
+                <li>{{ t('tabs.generator.tutorial.step3') }}</li>
+                <li>{{ t('tabs.generator.tutorial.step4') }}</li>
+                <li>{{ t('tabs.generator.tutorial.step5') }}</li>
+              </ol>
+              <div class="flex gap-2 mt-3">
+                <button @click="showTutorial = false" class="text-xs bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg transition-colors">
+                  {{ t('tabs.generator.tutorial.understood') }}
+                </button>
+                <button @click="showTutorial = false; showQuickDemo()" class="text-xs bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg transition-colors">
+                  {{ t('tabs.generator.tutorial.demo') }}
+                </button>
+              </div>
+            </div>
+            <button @click="showTutorial = false" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+              ✕
+            </button>
+          </div>
+        </div>
         
         <!-- Instrument Selection - Mobile Optimized -->
         <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-3 md:mb-4 px-2">
@@ -897,38 +1048,46 @@ const selectedMobileString = ref(0)
             ]"
           >
             <span class="text-base md:text-lg">{{ instrument.emoji }}</span>
-            <span class="hidden sm:inline">{{ instrument.name }}</span>
-            <span class="sm:hidden text-xs">{{ instrument.name.split(' ')[0] }}</span>
+            <span class="hidden sm:inline">{{ t(`tabs.generator.instruments.${key}`) }}</span>
+            <span class="sm:hidden text-xs">{{ t(`tabs.generator.instruments.${key}`).split(' ')[0] }}</span>
           </button>
         </div>
+
+        <!-- Quick Help Button -->
+        <button 
+          @click="showTutorial = true"
+          class="text-xs text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 mx-auto"
+        >
+          {{ t('tabs.generator.tutorial.help') }}
+        </button>
       </div>
 
       <!-- Song Metadata Panel -->
       <div v-if="showMetadataPanel" class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-6">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-            🎵 Song-Informationen
+            🎵 {{ t('tabs.generator.metadata.title') }}
           </h2>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Titel *</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.songTitle') }} *</label>
             <input v-model="songMetadata.title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Künstler</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.artist') }}</label>
             <input v-model="songMetadata.artist" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Album</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.album') }}</label>
             <input v-model="songMetadata.album" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">BPM</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.bpm') }}</label>
             <input v-model.number="songMetadata.bpm" type="number" min="40" max="300" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Taktart</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.timeSignature') }}</label>
             <select v-model="songMetadata.timeSignature" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
               <option>4/4</option>
               <option>3/4</option>
@@ -938,7 +1097,7 @@ const selectedMobileString = ref(0)
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tonart</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.key') }}</label>
             <select v-model="songMetadata.key" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
               <option>C Major</option>
               <option>G Major</option>
@@ -955,23 +1114,23 @@ const selectedMobileString = ref(0)
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kapodaster</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.capo') }}</label>
             <select v-model.number="songMetadata.capo" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-              <option :value="0">Kein Kapo</option>
-              <option v-for="n in 12" :key="n" :value="n">{{ n }}. Bund</option>
+              <option :value="0">{{ t('tabs.generator.metadata.noCapo') }}</option>
+              <option v-for="n in 12" :key="n" :value="n">{{ n }}. {{ t('tabs.generator.metadata.fret') }}</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Schwierigkeit</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.difficulty') }}</label>
             <select v-model="songMetadata.difficulty" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-              <option>Beginner</option>
-              <option>Intermediate</option>
-              <option>Advanced</option>
-              <option>Expert</option>
+              <option>{{ t('tabs.generator.metadata.difficulties.beginner') }}</option>
+              <option>{{ t('tabs.generator.metadata.difficulties.intermediate') }}</option>
+              <option>{{ t('tabs.generator.metadata.difficulties.advanced') }}</option>
+              <option>{{ t('tabs.generator.metadata.difficulties.expert') }}</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Genre</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t('tabs.generator.metadata.genre') }}</label>
             <input v-model="songMetadata.genre" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
           </div>
           <div class="md:col-span-2 lg:col-span-3">
@@ -985,150 +1144,181 @@ const selectedMobileString = ref(0)
       <div v-if="showSaveLoadPanel" class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mb-6">
         <div class="p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-            💾 Speichern & Laden
+            💾 {{ t('tabs.generator.ui.saveLoad') }}
           </h2>
         </div>
         <div class="p-6">
           <div class="flex gap-4 mb-6">
             <button @click="saveTab" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2">
-              💾 Aktuellen Tab speichern
+              💾 {{ t('tabs.generator.ui.saveCurrentTab') }}
             </button>
           </div>
           
           <div v-if="savedTabs.length > 0">
-            <h3 class="font-semibold mb-3 text-gray-800 dark:text-gray-200">Gespeicherte Tabs:</h3>
+            <h3 class="font-semibold mb-3 text-gray-800 dark:text-gray-200">{{ t('tabs.generator.ui.savedTabs') }}:</h3>
             <div class="grid gap-3">
               <div v-for="tab in savedTabs" :key="tab.metadata.title" class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg flex justify-between items-center">
                 <div>
                   <h4 class="font-semibold text-gray-800 dark:text-gray-200">{{ tab.metadata.title }}</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    {{ tab.metadata.artist || 'Unbekannter Künstler' }} • {{ tab.columns.length }} Spalten
+                    {{ tab.metadata.artist || t('tabs.generator.ui.unknownArtist') }} • {{ tab.columns.length }} {{ t('tabs.generator.ui.columns') }}
                     <br />
-                    <span class="text-xs">Gespeichert: {{ new Date(tab.savedAt).toLocaleString() }}</span>
+                    <span class="text-xs">{{ t('tabs.generator.ui.saved') }}: {{ new Date(tab.savedAt).toLocaleString() }}</span>
                   </p>
                 </div>
                 <div class="flex gap-2">
                   <button @click="loadTab(tab)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm">
-                    Laden
+                    {{ t('tabs.generator.ui.load') }}
                   </button>
                   <button @click="deleteTab(tab.metadata.title)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
-                    Löschen
+                    {{ t('tabs.generator.ui.delete') }}
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <div v-else class="text-center text-gray-500 dark:text-gray-400 py-8">
-            Keine gespeicherten Tabs gefunden.
+            {{ t('tabs.generator.ui.noSavedTabs') }}.
           </div>
         </div>
       </div>
 
-      <!-- Current Column Info Card -->
+      <!-- Current Column Info Card - Enhanced UX -->
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 mb-6 border border-gray-200 dark:border-gray-700">
         <div class="flex items-center justify-between flex-wrap gap-4">
+          <!-- Left: Current Status with Visual Indicator -->
           <div class="flex items-center gap-3">
-            <div class="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
-            <span class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-              {{ songMetadata.title }} • Spalte: {{ currentColumnIndex + 1 }} / {{ columns.length }}
-            </span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">
-              ({{ currentColumnHasNotes ? 'mit Noten' : 'leer' }})
-            </span>
+            <div class="relative">
+              <div class="w-4 h-4 bg-indigo-500 rounded-full animate-pulse"></div>
+              <div class="absolute inset-0 w-4 h-4 bg-indigo-500 rounded-full animate-ping opacity-20"></div>
+            </div>
+            <div>
+              <div class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                {{ songMetadata.title }}
+              </div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                <span>{{ t('tabs.generator.ui.column') }} {{ currentColumnIndex + 1 }} {{ t('tabs.generator.ui.of') }} {{ columns.length }}</span>
+                <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+                <span class="flex items-center gap-1">
+                  {{ currentColumnHasNotes ? '🎵 ' + t('tabs.generator.ui.withNotes') : '⭕ ' + t('tabs.generator.ui.empty') }}
+                </span>
+              </div>
+            </div>
           </div>
+          
+          <!-- Right: Action Buttons with Smart Layout -->
           <div class="flex gap-2 flex-wrap">
-            <!-- Toggle panels -->
-            <button
-              @click="soundEnabled = !soundEnabled"
-              :class="[
-                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
-                soundEnabled 
-                  ? 'bg-green-500 hover:bg-green-600 text-white'
-                  : 'bg-red-500 hover:bg-red-600 text-white'
-              ]"
-              title="Sound ein/ausschalten"
-            >
-              {{ soundEnabled ? '🔊' : '🔇' }} Sound
-            </button>
-            <button
-              @click="showMetadataPanel = !showMetadataPanel"
-              :class="[
-                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
-                showMetadataPanel 
-                  ? 'bg-purple-500 hover:bg-purple-600 text-white'
-                  : 'bg-gray-500 hover:bg-gray-600 text-white'
-              ]"
-            >
-              🎵 Info {{ showMetadataPanel ? '▼' : '▶' }}
-            </button>
-            <button
-              @click="showSaveLoadPanel = !showSaveLoadPanel"
-              :class="[
-                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
-                showSaveLoadPanel 
-                  ? 'bg-green-500 hover:bg-green-600 text-white'
-                  : 'bg-gray-500 hover:bg-gray-600 text-white'
-              ]"
-            >
-              💾 Speichern {{ showSaveLoadPanel ? '▼' : '▶' }}
-            </button>
+            <!-- Quick Toggle Buttons -->
+            <div class="flex gap-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+              <button
+                @click="soundEnabled = !soundEnabled"
+                :class="[
+                  'px-2 py-1 text-xs rounded-md transition-all duration-200 flex items-center gap-1 font-semibold',
+                  soundEnabled 
+                    ? 'bg-green-500 hover:bg-green-600 text-white shadow-sm'
+                    : 'bg-red-500 hover:bg-red-600 text-white shadow-sm'
+                ]"
+                :title="soundEnabled ? 'Sound deaktivieren' : 'Sound aktivieren'"
+              >
+                {{ soundEnabled ? '🔊' : '🔇' }}
+                <span class="hidden sm:inline">{{ soundEnabled ? t('tabs.generator.ui.on') : t('tabs.generator.ui.off') }}</span>
+              </button>
+              
+              <button
+                @click="showMetadataPanel = !showMetadataPanel"
+                :class="[
+                  'px-2 py-1 text-xs rounded-md transition-all duration-200 flex items-center gap-1 font-semibold',
+                  showMetadataPanel 
+                    ? 'bg-purple-500 hover:bg-purple-600 text-white shadow-sm'
+                    : 'bg-gray-400 hover:bg-gray-500 text-white shadow-sm'
+                ]"
+              >
+                🎵 <span class="hidden md:inline">{{ showMetadataPanel ? t('tabs.generator.ui.info') + ' ▼' : t('tabs.generator.ui.info') + ' ▶' }}</span>
+              </button>
+              
+              <button
+                @click="showSaveLoadPanel = !showSaveLoadPanel"
+                :class="[
+                  'px-2 py-1 text-xs rounded-md transition-all duration-200 flex items-center gap-1 font-semibold',
+                  showSaveLoadPanel 
+                    ? 'bg-green-500 hover:bg-green-600 text-white shadow-sm'
+                    : 'bg-gray-400 hover:bg-gray-500 text-white shadow-sm'
+                ]"
+              >
+                💾 <span class="hidden md:inline">{{ showSaveLoadPanel ? t('tabs.generator.ui.save') + ' ▼' : t('tabs.generator.ui.save') + ' ▶' }}</span>
+              </button>
+            </div>
             
-            <!-- Column navigation buttons -->
-            <button
-              @click="selectColumn(Math.max(0, currentColumnIndex - 1))"
-              :disabled="currentColumnIndex === 0"
-              :class="[
-                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
-                currentColumnIndex === 0 
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              ]"
-              title="Vorherige Spalte"
-            >
-              ← Zurück
-            </button>
-            <button
-              @click="selectColumn(Math.min(columns.length - 1, currentColumnIndex + 1))"
-              :disabled="currentColumnIndex === columns.length - 1"
-              :class="[
-                'px-3 py-1 text-sm rounded-lg transition-colors duration-200 flex items-center gap-1',
-                currentColumnIndex === columns.length - 1
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              ]"
-              title="Nächste Spalte"
-            >
-              Vor →
-            </button>
-            <button
-              v-if="currentColumnHasNotes"
-              @click="playCurrentChord"
-              class="px-3 py-1 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
-              title="Alle Noten dieser Spalte als Akkord abspielen"
-            >
-              🎸 Akkord
-            </button>
-            <button
-              v-if="currentColumnHasNotes"
-              @click="clearCurrentColumn"
-              class="px-3 py-1 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
-            >
-              🗑️ Leeren
-            </button>
-            <button
-              @click="duplicateColumn"
-              class="px-3 py-1 text-sm bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
-              title="Spalte duplizieren"
-            >
-              📋 Duplizieren
-            </button>
-            <button
-              @click="addColumn"
-              class="px-3 py-1 text-sm bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-1"
-            >
-              ➕ Neue Spalte
-            </button>
+            <!-- Column Navigation -->
+            <div class="flex gap-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+              <button
+                @click="selectColumn(Math.max(0, currentColumnIndex - 1))"
+                :disabled="currentColumnIndex === 0"
+                :class="[
+                  'px-3 py-1 text-sm rounded-md transition-all duration-200 flex items-center gap-1 font-semibold',
+                  currentColumnIndex === 0 
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
+                    : 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
+                ]"
+                title="Vorherige Spalte (Pfeil links)"
+              >
+                ← <span class="hidden sm:inline">{{ t('tabs.generator.ui.back') }}</span>
+              </button>
+              <button
+                @click="selectColumn(Math.min(columns.length - 1, currentColumnIndex + 1))"
+                :disabled="currentColumnIndex === columns.length - 1"
+                :class="[
+                  'px-3 py-1 text-sm rounded-md transition-all duration-200 flex items-center gap-1 font-semibold',
+                  currentColumnIndex === columns.length - 1
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
+                    : 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
+                ]"
+                title="Nächste Spalte (Pfeil rechts)"
+              >
+                <span class="hidden sm:inline">{{ t('tabs.generator.ui.forward') }}</span> →
+              </button>
+            </div>
+            
+            <!-- Context Actions -->
+            <div class="flex gap-1">
+              <button
+                v-if="currentColumnHasNotes"
+                @click="playCurrentChord"
+                class="px-3 py-1 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
+                title="Alle Noten dieser Spalte als Akkord abspielen"
+              >
+                🎸 <span class="hidden sm:inline">{{ t('tabs.generator.ui.chord') }}</span>
+              </button>
+              <button
+                @click="addColumn"
+                class="px-3 py-1 text-sm bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
+              >
+                ➕ <span class="hidden sm:inline">{{ t('tabs.generator.ui.new') }}</span>
+              </button>
+              <button
+                v-if="currentColumnHasNotes"
+                @click="clearCurrentColumn"
+                class="px-3 py-1 text-sm bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
+              >
+                🗑️ <span class="hidden sm:inline">{{ t('tabs.generator.ui.clear') }}</span>
+              </button>
+              <button
+                @click="duplicateColumn"
+                class="px-3 py-1 text-sm bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
+                title="Spalte duplizieren"
+              >
+                📋 <span class="hidden sm:inline">{{ t('tabs.generator.ui.copy') }}</span>
+              </button>
+            </div>
           </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="mt-3 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+          <div 
+            class="bg-gradient-to-r from-indigo-500 to-purple-600 h-2 rounded-full transition-all duration-300"
+            :style="{ width: `${((currentColumnIndex + 1) / columns.length) * 100}%` }"
+          ></div>
         </div>
       </div>
 
@@ -1138,7 +1328,7 @@ const selectedMobileString = ref(0)
         <div class="p-3 md:p-4 border-b border-gray-200 dark:border-gray-700">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
             <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              📺 <span class="hidden sm:inline">Tabulatur-Vorschau</span><span class="sm:hidden">Tabs</span>
+              📺 <span class="hidden sm:inline">{{ t('tabs.generator.ui.tabPreview') }}</span><span class="sm:hidden">{{ t('tabs.generator.ui.tabs') }}</span>
               <span class="hidden md:inline text-sm font-normal text-gray-500 dark:text-gray-400">
                 (Klicke zum Bearbeiten & Abspielen)
               </span>
@@ -1511,38 +1701,130 @@ const selectedMobileString = ref(0)
         </div>
       </div>
 
-      <!-- Action Buttons - Mobile Optimized -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 mb-8">
-        <h3 class="text-base md:text-lg font-bold text-gray-800 dark:text-gray-200 mb-3 md:mb-4 text-center">
-          <span class="hidden sm:inline">Aktionen</span><span class="sm:hidden">Actions</span>
-        </h3>
-        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 sm:justify-center">
+      <!-- Action Buttons - Enhanced UX with Smart Grouping -->
+      <div class="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 md:p-6 mb-8">
+        <div class="text-center mb-4">
+          <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 mb-2 flex items-center justify-center gap-2">
+            <span class="text-2xl">⚡</span>
+            <span>{{ t('tabs.generator.ui.actions') }}</span>
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            {{ t('tabs.generator.messages.exportManageDelete') }}
+          </p>
+        </div>
+
+        <!-- Primary Actions Row -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-4">
           <button
             type="button"
-            class="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+            class="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl text-sm md:text-base font-bold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group disabled:opacity-75 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
             @click="downloadPDF"
+            :disabled="isGeneratingPDF"
           >
-            📄 <span class="hidden sm:inline">PDF herunterladen</span><span class="sm:hidden">PDF</span>
+            <span class="text-lg">{{ isGeneratingPDF ? '⏳' : '📄' }}</span>
+            <span>{{ isGeneratingPDF ? t('tabs.generator.messages.generatingPdf') : t('tabs.generator.ui.downloadPdf') }}</span>
+            <div class="w-0 group-hover:w-4 transition-all duration-200 overflow-hidden">
+              <span class="text-lg">{{ isGeneratingPDF ? '' : '✨' }}</span>
+            </div>
           </button>
+          
+          <button
+            v-if="columns.length > 0 && columns.some(col => col.notes.some(note => note !== null))"
+            type="button"
+            class="bg-gradient-to-br from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl text-sm md:text-base font-bold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
+            @click="playEntireTab"
+            :disabled="isPlaying || !soundEnabled"
+            :class="{ 'opacity-50 cursor-not-allowed transform-none hover:scale-100': isPlaying || !soundEnabled }"
+          >
+            <span class="text-lg">{{ isPlaying ? '⏸️' : '▶️' }}</span>
+            <span>{{ isPlaying ? t('tabs.generator.messages.playing') : t('tabs.generator.ui.playTab') }}</span>
+            <div class="w-0 group-hover:w-4 transition-all duration-200 overflow-hidden">
+              <span class="text-lg">🎵</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Secondary Actions Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <button
             type="button"
-            class="bg-gradient-to-br from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+            class="bg-gradient-to-br from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
+            @click="addColumn"
+          >
+            <span>➕</span>
+            <span class="hidden sm:inline">{{ t('tabs.generator.ui.newColumn') }}</span>
+            <span class="sm:hidden">{{ t('tabs.generator.ui.new') }}</span>
+          </button>
+          
+          <button
+            type="button"
+            class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
             @click="removeColumn()"
             :disabled="columns.length <= 1"
             :class="{ 
-              'opacity-50 cursor-not-allowed transform-none hover:scale-100': columns.length <= 1,
-              'hover:shadow-xl': columns.length > 1 
+              'opacity-50 cursor-not-allowed transform-none hover:scale-100': columns.length <= 1 
             }"
           >
-            🗑️ <span class="hidden sm:inline">Spalte entfernen</span><span class="sm:hidden">Delete</span>
+            <span>🗑️</span>
+            <span class="hidden sm:inline">{{ t('tabs.generator.ui.removeColumn') }}</span>
+            <span class="sm:hidden">{{ t('tabs.generator.ui.remove') }}</span>
           </button>
+          
           <button
             type="button"
-            class="bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl text-sm md:text-base font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+            class="bg-gradient-to-br from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
+            @click="duplicateColumn"
+          >
+            <span>�</span>
+            <span class="hidden sm:inline">{{ t('tabs.generator.ui.duplicate') }}</span>
+            <span class="sm:hidden">{{ t('tabs.generator.ui.copy') }}</span>
+          </button>
+          
+          <button
+            type="button"
+            class="bg-gradient-to-br from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white px-3 py-2 md:px-4 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
             @click="clearAllColumns"
           >
-            🧹 <span class="hidden sm:inline">Alles löschen</span><span class="sm:hidden">Clear</span>
+            <span>🧹</span>
+            <span class="hidden sm:inline">{{ t('tabs.generator.ui.clearAll') }}</span>
+            <span class="sm:hidden">{{ t('tabs.generator.ui.clear') }}</span>
           </button>
+        </div>
+
+        <!-- Quick Stats with Keyboard Shortcuts Hint -->
+        <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex justify-center gap-4 text-xs md:text-sm text-gray-600 dark:text-gray-400">
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                <span>{{ columns.length }} {{ columns.length === 1 ? 'Spalte' : 'Spalten' }}</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>{{ columns.filter(col => col.notes.some(note => note !== null)).length }} mit Noten</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                <span>{{ instrumentConfig?.name || 'Standard' }}</span>
+              </div>
+            </div>
+            
+            <!-- Keyboard Shortcuts Hint -->
+            <div class="hidden md:flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <span class="flex items-center gap-1">
+                <kbd class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">←→</kbd>
+                <span>Navigate</span>
+              </span>
+              <span class="flex items-center gap-1">
+                <kbd class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">Space</kbd>
+                <span>Play</span>
+              </span>
+              <span class="flex items-center gap-1">
+                <kbd class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-xs">N</kbd>
+                <span>New</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1551,7 +1833,7 @@ const selectedMobileString = ref(0)
         <div class="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 p-3 md:p-4 border-b border-gray-200 dark:border-gray-600">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
-              👁️ <span class="hidden sm:inline">ASCII-Vorschau & Playback</span><span class="sm:hidden">ASCII & Play</span>
+              👁️ <span class="hidden sm:inline">{{ t('tabs.generator.ui.asciiPreview') }}</span><span class="sm:hidden">{{ t('tabs.generator.ui.ascii') }}</span>
               <span class="hidden lg:inline text-sm font-normal text-gray-500 dark:text-gray-400">
                 (Kopiere, PDF oder spiele ab)
               </span>
