@@ -46,7 +46,6 @@
             src="/img/aaronthommy-home-icon-600x600.png"
             alt="Vinyl Record aaronthommy"
             preload
-            provider="ipx"
             sizes="xs:100vw md:50vw lg:800px"
             class="w-64 h-64 opacity-60 dark:opacity-40 transition-all duration-700 filter drop-shadow-2xl"
             style="animation: spin 25s linear infinite"
