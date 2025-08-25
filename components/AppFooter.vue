@@ -83,6 +83,15 @@
                   {{ $t("header.home") }}
                 </NuxtLink>
                 <NuxtLink
+                  to="/tabs"
+                  class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
+                >
+                  <div
+                    class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
+                  ></div>
+                  {{ $t("Tabs") }}
+                </NuxtLink>
+                <NuxtLink
                   to="/social"
                   class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
                 >

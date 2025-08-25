@@ -49,8 +49,8 @@ export default defineNuxtConfig({
   },
 
   image: {
-    provider: "ipx",
-    format: ["webp", "avif", "jpg"], // Browser bekommt das Beste, das er kann
+    provider: "vercel",
+    format: ["webp", "avif", "jpg"],
     screens: {
       xs: 320,
       sm: 640,

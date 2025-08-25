@@ -2,6 +2,7 @@
   "header": {
     "home": "Home",
     "community": "Community",
+    "tabs": "Tabs",
     "kontakt": "Kontakt",
     "offers": "Angebote",
     "social": "Social Media"
@@ -99,6 +100,138 @@
       "followTitle": "Folge mir auf Social Media",
       "ctaTitle": "Lass uns in Verbindung bleiben!",
       "ctaText": "Folge mir auf Social Media für tägliche musikalische Inspirationen, neue Tutorials und Updates zu kommenden Projekten."
+    }
+  },
+  "tabs": {
+    "generator": {
+      "title": "Guitar Tab Generator",
+      "subtitle": "Erstelle professionelle Gitarren-Tabulaturen mit unserem interaktiven Generator. Wähle Bünde am Instrumenthals und exportiere deine Tabs als PDF.",
+      "tutorial": {
+        "title": "Schnellstart-Anleitung",
+        "step1": "Wähle dein Instrument aus",
+        "step2": "Klicke unten auf die Bünde, um Noten hinzuzufügen",
+        "step3": "Füge neue Spalten für weitere Akkorde hinzu",
+        "step4": "Höre dir deine Tab mit dem Play-Button an",
+        "step5": "Exportiere als professionelles PDF",
+        "understood": "Verstanden! 🎸",
+        "demo": "Demo zeigen",
+        "help": "🤔 Wie funktioniert's?"
+      },
+      "instruments": {
+        "acoustic": "Akustikgitarre",
+        "electric": "E-Gitarre",
+        "ukulele": "Ukulele"
+      },
+      "ui": {
+        "column": "Spalte",
+        "of": "von",
+        "withNotes": "mit Noten",
+        "empty": "leer",
+        "sound": "Sound",
+        "on": "An",
+        "off": "Aus",
+        "info": "Info",
+        "save": "Speichern",
+        "back": "Zurück",
+        "forward": "Vor",
+        "chord": "Akkord",
+        "new": "Neue",
+        "clear": "Leeren",
+        "copy": "Kopie",
+        "navigate": "Navigate",
+        "play": "Play",
+        "newColumn": "Neue Spalte",
+        "duplicate": "Duplizieren",
+        "delete": "Spalte weg",
+        "clearAll": "Alles weg",
+        "downloadPdf": "PDF herunterladen",
+        "generating": "Erstelle PDF...",
+        "playTab": "Tab abspielen",
+        "playing": "Spielt ab...",
+        "load": "Laden",
+        "saveLoad": "Speichern & Laden",
+        "saveCurrentTab": "Aktuellen Tab speichern",
+        "savedTabs": "Gespeicherte Tabs",
+        "unknownArtist": "Unbekannter Künstler",
+        "columns": "Spalten",
+        "saved": "Gespeichert",
+        "noSavedTabs": "Keine gespeicherten Tabs gefunden",
+        "tabs": "Tabs",
+        "tabPreview": "Tabulatur-Vorschau",
+        "ascii": "ASCII & Play",
+        "asciiPreview": "ASCII-Vorschau & Playback",
+        "actions": "Aktionen",
+        "removeColumn": "Spalte weg",
+        "remove": "Weg"
+      },
+      "actions": {
+        "title": "Aktionen",
+        "subtitle": "Exportiere, verwalte oder lösche deine Tabulatur",
+        "stats": {
+          "columns": "Spalten",
+          "column": "Spalte",
+          "withNotes": "mit Noten"
+        }
+      },
+      "preview": {
+        "title": "Tabulatur-Vorschau",
+        "subtitle": "Klicke zum Bearbeiten & Abspielen",
+        "ascii": "ASCII-Vorschau & Playback"
+      },
+      "fretboard": {
+        "title": "Instrumenthals",
+        "subtitle": "Klicke auf einen Bund zum Hinzufügen/Entfernen - funktioniert wie eine Tastatur",
+        "string": "Saite",
+        "playChord": "Akkord abspielen"
+      },
+      "metadata": {
+        "title": "Song-Informationen",
+        "songTitle": "Titel",
+        "artist": "Künstler",
+        "album": "Album",
+        "bpm": "BPM",
+        "timeSignature": "Taktart",
+        "key": "Tonart",
+        "capo": "Kapodaster",
+        "noCapo": "Kein Kapo",
+        "fret": "Bund",
+        "difficulty": "Schwierigkeit",
+        "genre": "Genre",
+        "notes": "Notizen",
+        "notesPlaceholder": "Zusätzliche Informationen, Spieltechniken, etc.",
+        "difficulties": {
+          "beginner": "Anfänger",
+          "intermediate": "Fortgeschritten",
+          "advanced": "Experte",
+          "expert": "Profi"
+        }
+      },
+      "saveLoad": {
+        "title": "Speichern & Laden",
+        "saveTab": "Aktuellen Tab speichern",
+        "savedTabs": "Gespeicherte Tabs:",
+        "unknownArtist": "Unbekannter Künstler",
+        "columns": "Spalten",
+        "saved": "Gespeichert",
+        "load": "Laden",
+        "delete": "Löschen",
+        "noSavedTabs": "Keine gespeicherten Tabs gefunden.",
+        "confirmDelete": "Tab \"{title}\" wirklich löschen?",
+        "tabSaved": "Tab gespeichert!",
+        "tabLoaded": "Tab geladen!"
+      },
+      "shortcuts": {
+        "navigate": "Navigate",
+        "play": "Play", 
+        "new": "New"
+      },
+      "messages": {
+        "pdfError": "Fehler beim Erstellen des PDFs. Bitte versuche es erneut.",
+        "clearAllConfirm": "Alle Spalten leeren? Diese Aktion kann nicht rückgängig gemacht werden.",
+        "exportManageDelete": "Exportiere, verwalte oder lösche deine Tabulatur",
+        "generatingPdf": "Erstelle PDF...",
+        "playing": "Spielt ab..."
+      }
     }
   }
 }

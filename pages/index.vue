@@ -717,7 +717,408 @@
         class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
       ></div>
       <div
-        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-blue-400/60 dark:bg-blue-500/60 rounded-full animate-float-delayed"
+        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-purple-400/60 dark:bg-purple-500/60 rounded-full animate-float-delayed"
+      ></div>
+      <div
+        class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
+      ></div>
+    </div>
+
+    <!-- Guitar Tab Generator Section -->
+    <section
+      class="mt-[-2em] mb-[-2em] relative py-24 overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900/20 dark:via-purple-900/20 dark:to-pink-900/20"
+      id="tab-generator"
+    >
+      <!-- Dynamic Gradient Background -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900/20 dark:via-indigo-900/20 dark:to-blue-900/20"
+      >
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+          <!-- Large Orbs with Enhanced Animation -->
+          <div
+            class="absolute -top-32 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-purple-400/25 to-indigo-400/25 rounded-full blur-3xl animate-float-orb-1"
+          ></div>
+          <div
+            class="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-gradient-to-br from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl animate-float-orb-2"
+          ></div>
+          <div
+            class="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-to-br from-blue-400/15 to-purple-400/15 rounded-full blur-3xl animate-float-orb-3"
+          ></div>
+
+          <!-- Grid Pattern Overlay -->
+          <div class="absolute inset-0 opacity-[0.01] dark:opacity-[0.025]">
+            <div
+              class="absolute inset-0"
+              style="
+                background-image: radial-gradient(
+                  circle at 2px 2px,
+                  rgba(99, 102, 241, 0.4) 1px,
+                  transparent 0
+                );
+                background-size: 45px 45px;
+              "
+            ></div>
+          </div>
+
+          <!-- Floating Guitar Icons -->
+          <div
+            class="absolute top-1/4 left-1/6 opacity-15 dark:opacity-8 animate-float-note-1"
+          >
+            <svg
+              class="w-12 h-12 text-purple-400"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M7,6A1,1 0 0,0 6,7V17A1,1 0 0,0 7,18H8A1,1 0 0,0 9,17V13.5H11V17A1,1 0 0,0 12,18H13A1,1 0 0,0 14,17V7A1,1 0 0,0 13,6H12A1,1 0 0,0 11,7V10.5H9V7A1,1 0 0,0 8,6H7Z"
+              />
+            </svg>
+          </div>
+          <div
+            class="absolute bottom-1/3 right-1/5 opacity-12 dark:opacity-6 animate-float-note-2"
+          >
+            <svg
+              class="w-8 h-8 text-indigo-400"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19,12H22L20,16H17L19,12M6.5,10C4.6,10 3,8.4 3,6.5S4.6,3 6.5,3 10,4.6 10,6.5 8.4,10 6.5,10M17.5,10C15.6,10 14,8.4 14,6.5S15.6,3 17.5,3 21,4.6 21,6.5 19.4,10 17.5,10M17.5,21C15.6,21 14,19.4 14,17.5S15.6,14 17.5,14 21,15.6 21,17.5 19.4,21 17.5,21M6.5,21C4.6,21 3,19.4 3,17.5S4.6,14 6.5,14 10,15.6 10,17.5 8.4,21 6.5,21Z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+          <!-- Enhanced Header Section -->
+          <div class="text-center mb-16">
+            <!-- Animated Tool Icon -->
+            <div class="relative group mb-8">
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-indigo-400/20 rounded-3xl blur-2xl group-hover:scale-110 transition-transform duration-700"
+              ></div>
+              <div
+                class="relative inline-flex items-center justify-center w-24 h-24 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 dark:border-gray-700/50 group-hover:scale-105 transition-all duration-500"
+              >
+                <svg
+                  class="h-14 w-14 group-hover:scale-110 transition-transform duration-300"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M19,12H22L20,16H17L19,12M6.5,10C4.6,10 3,8.4 3,6.5S4.6,3 6.5,3 10,4.6 10,6.5 8.4,10 6.5,10M17.5,10C15.6,10 14,8.4 14,6.5S15.6,3 17.5,3 21,4.6 21,6.5 19.4,10 17.5,10M17.5,21C15.6,21 14,19.4 14,17.5S15.6,14 17.5,14 21,15.6 21,17.5 19.4,21 17.5,21M6.5,21C4.6,21 3,19.4 3,17.5S4.6,14 6.5,14 10,15.6 10,17.5 8.4,21 6.5,21Z"
+                    fill="url(#guitar-gradient)"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="guitar-gradient"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" style="stop-color: #8b5cf6" />
+                      <stop offset="100%" style="stop-color: #6366f1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Enhanced Title with Staggered Animation -->
+            <div class="mb-8 animate-fade-in-sequence">
+              <h2
+                class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 tracking-tight"
+              >
+                Create Professional
+                <span class="relative inline-block">
+                  <span
+                    class="bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x"
+                    >Guitar Tabs</span
+                  >
+                  <div
+                    class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full animate-expand-delayed"
+                  ></div>
+                </span>
+              </h2>
+
+              <!-- Enhanced Subtitle -->
+              <p
+                class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              >
+                Use my
+                <span class="font-semibold text-purple-600 dark:text-purple-400"
+                  >free online guitar tab generator</span
+                >
+                to create, edit, and export professional tablatures with proper
+                formatting and PDF output.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Highlights with Glassmorphism Cards -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12"
+          >
+            <!-- Interactive Fretboard -->
+            <div class="group relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-purple-400/15 to-indigo-400/15 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+              ></div>
+              <div
+                class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500"
+              >
+                <!-- Animated Icon Container -->
+                <div
+                  class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                >
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M7,6A1,1 0 0,0 6,7V17A1,1 0 0,0 7,18H8A1,1 0 0,0 9,17V13.5H11V17A1,1 0 0,0 12,18H13A1,1 0 0,0 14,17V7A1,1 0 0,0 13,6H12A1,1 0 0,0 11,7V10.5H9V7A1,1 0 0,0 8,6H7Z"
+                    />
+                  </svg>
+                </div>
+
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
+                  Interactive Fretboard
+                </h3>
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
+                  Click on frets to add notes with visual feedback and intuitive
+                  controls
+                </p>
+              </div>
+            </div>
+
+            <!-- Professional PDFs -->
+            <div class="group relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-indigo-400/15 to-blue-400/15 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+              ></div>
+              <div
+                class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500"
+              >
+                <!-- Animated Icon Container -->
+                <div
+                  class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                >
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
+                  Professional PDFs
+                </h3>
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
+                  Export tabs with proper lines, metadata, and multi-page
+                  support
+                </p>
+              </div>
+            </div>
+
+            <!-- Save & Share -->
+            <div class="group relative">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-blue-400/15 to-cyan-400/15 rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+              ></div>
+              <div
+                class="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-xl group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500"
+              >
+                <!-- Animated Icon Container -->
+                <div
+                  class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                >
+                  <svg
+                    class="w-8 h-8 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12"
+                    />
+                  </svg>
+                </div>
+
+                <h3
+                  class="text-xl font-bold text-gray-900 dark:text-white mb-3 text-center"
+                >
+                  Save & Share
+                </h3>
+                <p
+                  class="text-gray-600 dark:text-gray-300 text-center leading-relaxed"
+                >
+                  Save your tabs locally and share professional PDFs with others
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main CTA -->
+          <div class="text-center">
+            <div class="relative group inline-block">
+              <!-- Enhanced Glow Effect -->
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-500"
+              ></div>
+
+              <NuxtLink
+                to="/tabs"
+                class="relative inline-flex items-center px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 hover:from-purple-600 hover:via-indigo-600 hover:to-blue-600 text-white text-lg md:text-xl font-bold md:font-black rounded-2xl md:rounded-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-xl hover:shadow-2xl border border-white/20 overflow-hidden group"
+              >
+                <!-- Shimmer Effect -->
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-800"
+                ></div>
+
+                <!-- Guitar Icon -->
+                <svg
+                  class="h-6 w-6 md:h-7 md:w-7 mr-3 md:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M7,6A1,1 0 0,0 6,7V17A1,1 0 0,0 7,18H8A1,1 0 0,0 9,17V13.5H11V17A1,1 0 0,0 12,18H13A1,1 0 0,0 14,17V7A1,1 0 0,0 13,6H12A1,1 0 0,0 11,7V10.5H9V7A1,1 0 0,0 8,6H7Z"
+                  />
+                </svg>
+
+                <span class="relative whitespace-nowrap"
+                  >Try Tab Generator</span
+                >
+
+                <!-- Arrow Icon -->
+                <svg
+                  class="w-5 h-5 md:w-6 md:h-6 ml-3 md:ml-4 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </NuxtLink>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="mt-6">
+              <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 dark:text-gray-400"
+              >
+                <!-- Free to Use -->
+                <div
+                  class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+                >
+                  <div
+                    class="flex-shrink-0 w-5 h-5 bg-green-500/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-3 h-3 text-green-600 dark:text-green-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-10.293a1 1 0 00-1.414-1.414L9 9.586 7.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="font-medium">Completely Free</span>
+                </div>
+
+                <!-- No Registration -->
+                <div
+                  class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+                >
+                  <div
+                    class="flex-shrink-0 w-5 h-5 bg-blue-500/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-3 h-3 text-blue-600 dark:text-blue-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <span class="font-medium">No Registration</span>
+                </div>
+
+                <!-- Works Offline -->
+                <div
+                  class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 dark:border-gray-700/30"
+                >
+                  <div
+                    class="flex-shrink-0 w-5 h-5 bg-purple-500/10 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-3 h-3 text-purple-600 dark:text-purple-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L4.414 9H17a1 1 0 100-2H4.414l1.879-1.293z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <span class="font-medium">Works Offline</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clean Glass Morphism Separator - Ohne dunkle Ränder -->
+    <div class="relative h-16 overflow-hidden">
+      <!-- Saubere Glaslinie ohne Blur-Artefakte -->
+      <div
+        class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/40 to-transparent dark:via-gray-500/40"
+      ></div>
+
+      <!-- Glaskugeln ohne Blur-Artefakte -->
+      <div
+        class="absolute top-1/2 left-1/4 w-2 h-2 -mt-1 -ml-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 w-3 h-3 -mt-1.5 -ml-1.5 bg-purple-400/60 dark:bg-purple-500/60 rounded-full animate-float-delayed"
       ></div>
       <div
         class="absolute top-1/2 right-1/4 w-2 h-2 -mt-1 -mr-1 bg-gray-200/60 dark:bg-gray-400/60 rounded-full animate-float"
@@ -1051,7 +1452,7 @@ useHead({
     {
       name: "keywords",
       content:
-        "guitar tabs, piano sheets, music lessons, patreon, guitar covers, piano covers, music tutorials",
+        "guitar tabs, guitar tab generator, piano sheets, music lessons, patreon, guitar covers, piano covers, music tutorials",
     },
     {
       property: "og:title",
