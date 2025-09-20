@@ -160,7 +160,7 @@
             <span
               class="px-4 py-2 bg-white/20 dark:bg-gray-800/40 backdrop-blur-xl rounded-full text-sm text-gray-600 dark:text-gray-300 border border-white/30 dark:border-gray-700/60 shadow-lg animate-float-pill-3 hover:scale-105 hover:bg-white/30 hover:dark:bg-gray-800/50 hover:shadow-xl transition-all duration-300 cursor-default group"
             >
-              <span class="relative z-10">🎥 Live Sessions</span>
+              <span class="relative z-10">🎥 Guitar Sessions</span>
               <div
                 class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               ></div>
