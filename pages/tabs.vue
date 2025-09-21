@@ -840,7 +840,7 @@ async function downloadPDF() {
       doc.setFontSize(8)
       doc.setTextColor(120, 120, 120)
       
-      const createdText = `Erstellt mit aaronthommy's Guitar Tab Generator • ${new Date().toLocaleDateString('de-DE')}`
+      const createdText = `aaronthommy's Guitar Tab Generator • ${new Date().toLocaleDateString('de-DE')}`
       const pageText = pageCount > 1 ? `Seite ${i} von ${pageCount}` : ''
       
       doc.text(createdText, leftMargin, pageHeight - 12)
@@ -858,7 +858,7 @@ async function downloadPDF() {
     doc.save(filename)
   } catch (error) {
     console.error('PDF generation failed:', error)
-    alert('Fehler beim Erstellen des PDFs. Bitte versuche es erneut.')
+    alert('Error generating PDF. Please try again.')
   } finally {
     isGeneratingPDF.value = false
   }
@@ -884,7 +884,7 @@ function saveTab() {
   }
   
   localStorage.setItem('guitarTabs', JSON.stringify(savedTabs))
-  alert('Tab gespeichert!')
+  alert('Tab saved!')
 }
 
 /*
@@ -907,14 +907,14 @@ function loadTab(tabData: any) {
   currentColumnIndex.value = 0
   visibleStartIndex.value = 0
   showSaveLoadPanel.value = false
-  alert('Tab geladen!')
+  alert('Tab loaded!')
 }
 
 /*
  * Delete a saved tab
  */
 function deleteTab(title: string) {
-  if (!confirm(`Tab "${title}" wirklich löschen?`)) return
+  if (!confirm(`Tab "${title}" delete?`)) return
   
   const savedTabsList = JSON.parse(localStorage.getItem('guitarTabs') || '[]')
   const filtered = savedTabsList.filter((tab: any) => tab.metadata.title !== title)
@@ -947,7 +947,7 @@ function duplicateColumn() {
  * Clear all columns
  */
 function clearAllColumns() {
-  if (confirm('Alle Spalten leeren? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+  if (confirm('Delete all columns? This action cannot be undone.')) {
     columns.value = [{ notes: Array(stringNames.value.length).fill(null) }]
     currentColumnIndex.value = 0
     visibleStartIndex.value = 0
@@ -1330,7 +1330,7 @@ onMounted(() => {
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
                     : 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
                 ]"
-                title="Vorherige Spalte (Pfeil links)"
+                title="Previous Column (Left Arrow)"
               >
                 ← <span class="hidden sm:inline">{{ t('tabs.generator.ui.back') }}</span>
               </button>
@@ -1343,7 +1343,7 @@ onMounted(() => {
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed dark:bg-gray-600 dark:text-gray-400'
                     : 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
                 ]"
-                title="Nächste Spalte (Pfeil rechts)"
+                title="Next Column (Right Arrow)"
               >
                 <span class="hidden sm:inline">{{ t('tabs.generator.ui.forward') }}</span> →
               </button>
@@ -1375,7 +1375,7 @@ onMounted(() => {
               <button
                 @click="duplicateColumn"
                 class="px-3 py-1 text-sm bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
-                title="Spalte duplizieren"
+                title="Duplicate Column"
               >
                 📋 <span class="hidden sm:inline">{{ t('tabs.generator.ui.copy') }}</span>
               </button>
@@ -1421,7 +1421,7 @@ onMounted(() => {
                       ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
                   ]"
-                  title="Vorherige Spalten"
+                  title="Previous Columns (Left Arrow)"
                 >
                   ←
                 </button>
@@ -1434,7 +1434,7 @@ onMounted(() => {
                       ? 'bg-blue-100 hover:bg-blue-200 text-blue-600 dark:bg-blue-900 dark:hover:bg-blue-800 dark:text-blue-300' 
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-600 dark:text-gray-500'
                   ]"
-                  title="Nächste Spalten anzeigen"
+                  title="Next Columns (Right Arrow)"
                 >
                   →
                 </button>
@@ -1481,7 +1481,7 @@ onMounted(() => {
                     type="button"
                     class="bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-2 py-1 md:px-3 md:py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-md hover:shadow-lg"
                     @click="addColumn"
-                    title="Neue Spalte"
+                    title="New Column"
                   >
                     <span class="md:hidden">+</span>
                     <span class="hidden md:inline">➕</span>
@@ -1524,7 +1524,7 @@ onMounted(() => {
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600',
                       col.notes[sIndex] !== null ? 'shadow-lg' : 'shadow-md'
                     ]"
-                    :title="col.notes[sIndex] !== null ? `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte, Bund ${col.notes[sIndex]} - Click to play` : `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte - empty`"
+                    :title="col.notes[sIndex] !== null ? `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Column, Fret ${col.notes[sIndex]} - Click to play` : `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Column - empty`"
                   >
                     {{ col.notes[sIndex] === null ? '—' : col.notes[sIndex] }}
                   </button>
@@ -1548,7 +1548,7 @@ onMounted(() => {
               <span class="text-lg">🎸</span>
               <div class="text-sm">
                 <div class="font-semibold">{{ instrumentConfig?.name }}-Hals</div>
-                <div class="text-xs opacity-90">Spalte {{ currentColumnIndex + 1 }} / {{ columns.length }}</div>
+                <div class="text-xs opacity-90">Column {{ currentColumnIndex + 1 }} / {{ columns.length }}</div>
               </div>
             </div>
             <!-- Mobile Column Navigation -->
@@ -1867,11 +1867,11 @@ onMounted(() => {
             <div class="flex justify-center gap-4 text-xs md:text-sm text-gray-600 dark:text-gray-400">
               <div class="flex items-center gap-1">
                 <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                <span>{{ columns.length }} {{ columns.length === 1 ? 'Spalte' : 'Spalten' }}</span>
+                <span>{{ columns.length }} {{ columns.length === 1 ? 'Column' : 'Columns' }}</span>
               </div>
               <div class="flex items-center gap-1">
                 <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span>{{ columns.filter(col => col.notes.some(note => note !== null)).length }} mit Noten</span>
+                <span>{{ columns.filter(col => col.notes.some(note => note !== null)).length }} with Notes</span>
               </div>
               <div class="flex items-center gap-1">
                 <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
