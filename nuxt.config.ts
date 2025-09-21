@@ -68,7 +68,7 @@ export default defineNuxtConfig({
     { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' }
   ],
   langDir: 'locales/',
-  defaultLocale: 'de'
+  defaultLocale: 'en'
 },
 
   cookieControl: {
