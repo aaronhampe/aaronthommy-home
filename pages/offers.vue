@@ -4,7 +4,7 @@
         <!-- Header -->
         <div class="mb-12">
           <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            {{ $t('pages.offers.title') }}
+            Offers
           </h1>
           <div class="h-1 w-20 bg-blue-500 dark:bg-blue-400 rounded"></div>
         </div>
@@ -28,7 +28,7 @@
                 AaronThommy <span class="text-orange-600 dark:text-orange-400">Music Circle</span>
               </h2>
               <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
-                Werde Teil meiner exklusiven Patreon-Community und erhalte Zugang zu einzigartigen Inhalten, persönlichem Feedback und einer engagierten Musikergemeinschaft.
+                Become part of my exclusive Patreon community and get access to unique content, personal feedback and an engaged community of musicians.
               </p>
               <a
                 href="https://patreon.com/AaronThommyMusicCircle?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink"
@@ -38,41 +38,41 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z" fill="white"/>
                 </svg>
-                Werde jetzt Patron
+                Become a Patron now
               </a>
             </div>
             <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Was dich erwartet:</h3>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">What you get:</h3>
               <ul class="space-y-3">
                 <li class="flex items-start">
                   <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-gray-700 dark:text-gray-300">Exklusive Guitar Tabs & Piano Sheets</span>
+                  <span class="text-gray-700 dark:text-gray-300">Exclusive Guitar Tabs & Piano Sheets</span>
                 </li>
                 <li class="flex items-start">
                   <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-gray-700 dark:text-gray-300">Monatliche Live-Sessions & Q&As</span>
+                  <span class="text-gray-700 dark:text-gray-300">Monthly live sessions & Q&As</span>
                 </li>
                 <li class="flex items-start">
                   <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-gray-700 dark:text-gray-300">Behind-the-Scenes Content & Tutorials</span>
+                  <span class="text-gray-700 dark:text-gray-300">Behind-the-scenes content & tutorials</span>
                 </li>
                 <li class="flex items-start">
                   <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-gray-700 dark:text-gray-300">Persönliches Feedback zu deinem Spiel</span>
+                  <span class="text-gray-700 dark:text-gray-300">Personal feedback on your playing</span>
                 </li>
                 <li class="flex items-start">
                   <svg class="w-6 h-6 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-gray-700 dark:text-gray-300">Zugang zum exklusiven Discord Server</span>
+                  <span class="text-gray-700 dark:text-gray-300">Access to the exclusive Discord server</span>
                 </li>
               </ul>
             </div>
@@ -82,14 +82,14 @@
         <!-- Future Offers Section -->
         <div class="mb-16">
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Weitere Angebote
+            More offers
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <!-- Placeholder Card, später erweiterbar -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Demnächst</h3>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Coming soon</h3>
               <p class="text-gray-600 dark:text-gray-300 text-center">
-                Hier entstehen bald neue Angebote wie E-Books, exklusive Tutorials und Affiliate-Deals.
+                New offers such as e-books, exclusive tutorials and affiliate deals coming soon.
               </p>
             </div>
           </div>
@@ -100,11 +100,9 @@
   
   <script setup>
   import { onMounted } from "vue";
-  import { useI18n } from 'vue-i18n';
   import { useThemeStore } from "~/stores/themeStore";
   
   const themeStore = useThemeStore();
-  const { t } = useI18n();
   
   onMounted(() => {
     // Theme-Einstellungen initialisieren

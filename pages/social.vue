@@ -191,11 +191,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useI18n } from "vue-i18n";
 import { useThemeStore } from '~/stores/themeStore';
 import SocialEmbed from "~/components/SocialEmbed.vue";
 
-const { t } = useI18n();
 const themeStore = useThemeStore();
 
 // Featured Video (nur noch eins)

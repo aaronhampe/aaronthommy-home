@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "nuxt-og-image",
     "@nuxt/image",
-    "@nuxtjs/i18n"
+    // Removed i18n (site now single-language English)
   ],
 
   css: [
@@ -61,30 +61,14 @@ export default defineNuxtConfig({
     },
     quality: 70,
   },
-
-  i18n: {
-  locales: [
-    { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' },
-    { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' }
-  ],
-  langDir: 'locales/',
-  defaultLocale: 'en'
-},
+  // i18n block removed
 
   cookieControl: {
-    locales: ["de", "en"],
+    // Single language setup (English only)
+    locales: ["en"],
 
     /* Texte überschreiben  */
-    localeTexts: {
-      de: {
-        acceptAll: "Alle akzeptieren",
-        declineAll: "Nichts da",
-        manageCookies: "Einstellungen",
-        accept: "Akzeptieren",
-        decline: "Ablehnen",
-        save: "Speichern",
-      },
-    },
+    localeTexts: {},
 
     barPosition: "bottom-full",
     isAcceptNecessaryButtonEnabled: true,
@@ -108,22 +92,22 @@ export default defineNuxtConfig({
       necessary: [
         {
           id: "session",
-          name: { de: "Sitzung" },
-          description: { de: "Speichert Sprache & Log-in" },
+          name: "Session",
+          description: "Stores session preferences",
           targetCookieIds: ["_session"],
         },
       ],
       optional: [
         {
           id: "analytics",
-          name: { de: "Plausible Analytics" },
-          description: { de: "Anonyme Seitenstatistik" },
-          isPreselected: false, // nie vorauswählen!
+          name: "Plausible Analytics",
+          description: "Anonymous site usage analytics",
+          isPreselected: false,
         },
         {
           id: "youtube",
-          name: { de: "YouTube-Embeds" },
-          description: { de: "Lädt eingebettete Videos" },
+          name: "YouTube Embeds",
+          description: "Loads embedded YouTube videos",
           targetCookieIds: ["YSC", "VISITOR_INFO1_LIVE"],
           isPreselected: false,
         },

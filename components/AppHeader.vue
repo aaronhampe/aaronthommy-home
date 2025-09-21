@@ -6,17 +6,18 @@
       scrolled ? 'shadow-sm dark:shadow-gray-800 py-3' : 'py-5',
     ]"
   >
-    <div class="container mx-auto px-6 flex items-center justify-between">
+    <!-- Grid layout: left and right act as flexible spacers (1fr each), center auto so nav is mathematically centered -->
+    <div class="container mx-auto px-6 grid items-center grid-cols-[1fr_auto_1fr]">
       <!-- Logo mit designter Typografie -->
-      <div class="logo relative z-10">
+      <div class="logo relative z-10 justify-self-start">
         <NuxtLink to="/" class="flex items-center font-bold tracking-tight">
           <span class="text-2xl text-gray-900 dark:text-white">aaron</span>
           <span class="text-2xl text-blue-500 dark:text-blue-400">thommy</span>
         </NuxtLink>
       </div>
 
-      <!-- Desktop Navigation mit i18n -->
-      <nav class="hidden lg:block">
+  <!-- Desktop Navigation (static English) -->
+      <nav class="hidden lg:block justify-self-center">
         <ul class="flex space-x-8">
           <li v-for="(item, index) in navItems" :key="index">
             <NuxtLink
@@ -28,17 +29,14 @@
                   : 'text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
               "
             >
-              {{ $t(`header.${item.key}`) }}
+              {{ item.label }}
             </NuxtLink>
           </li>
         </ul>
       </nav>
 
-      <!-- Aktionen mit Sprachumschalter und Dark Mode -->
-      <div class="flex items-center space-x-5">
-        <!-- Sprachumschalter als separate Komponente -->
-        <LanguageSwitcher />
-
+  <!-- Actions: Dark Mode -->
+      <div class="flex items-center space-x-5 justify-self-end">
         <!-- Darkmode Toggle als separate Komponente -->
         <DarkModeToggle />
 
@@ -66,7 +64,7 @@
       </div>
     </div>
 
-    <!-- Mobile Navigation mit i18n -->
+  <!-- Mobile Navigation (static English) -->
     <transition
       enter-active-class="transition duration-300 ease-out"
       enter-from-class="transform -translate-y-8 opacity-0"
@@ -92,7 +90,7 @@
                     : 'text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400'
                 "
               >
-                {{ $t(`header.${item.key}`) }}
+                {{ item.label }}
               </NuxtLink>
             </li>
           </ul>
@@ -158,24 +156,21 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
-import { useI18n } from "vue-i18n";
 import { useThemeStore } from "~/stores/themeStore";
-import LanguageSwitcher from "~/components/LanguageSwitcher.vue";
 import DarkModeToggle from "~/components/DarkModeToggle.vue";
 
 const route = useRoute();
-const { t } = useI18n();
 const themeStore = useThemeStore();
 const isMobileMenuOpen = ref(false);
 const scrolled = ref(false);
 
 // Navigation Items mit i18n-Keys
 const navItems = [
-  { key: "home", path: "/" },
-  { key: "community", path: "/community" },
-  { key: "tabs", path: "/tabs" },
-  { key: "social", path: "/social" },
-  { key: "kontakt", path: "/kontakt" },
+  { key: "home", path: "/", label: "Home" },
+  { key: "community", path: "/community", label: "Community" },
+  { key: "tabs", path: "/tabs", label: "Tabs" },
+  { key: "social", path: "/social", label: "Social Media" },
+  { key: "kontakt", path: "/kontakt", label: "Contact" },
 ];
 
 // Überprüft, ob der aktuelle Pfad aktiv ist

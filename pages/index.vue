@@ -1397,18 +1397,11 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { useI18n } from "vue-i18n";
-import { useLanguageStore } from "~/stores/languageStore";
 import { useThemeStore } from "~/stores/themeStore";
 
-const { t } = useI18n();
-const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
 
 onMounted(() => {
-  // Spracheinstellungen initialisieren
-  languageStore.initLocale();
-
   // Theme-Einstellungen initialisieren
   themeStore.initTheme();
 

@@ -328,11 +328,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { useThemeStore } from '~/stores/themeStore'
 
 const themeStore = useThemeStore()
-const { t } = useI18n()
 
 // Form Data
 const contactForm = ref({

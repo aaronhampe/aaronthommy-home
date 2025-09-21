@@ -5,10 +5,83 @@
 // preview the resulting ASCII tab and export it as a PDF.  
 
 import { ref, computed, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 
-// Internationalization
-const { t } = useI18n()
+// Local static translations (formerly i18n) – English only now
+const translationMap: Record<string, string> = {
+  'tabs.generator.instruments.acoustic': 'Acoustic Guitar',
+  'tabs.generator.instruments.electric': 'Electric Guitar',
+  'tabs.generator.instruments.ukulele': 'Ukulele',
+  'tabs.generator.title': 'Tab Generator',
+  'header.tabs': 'Tabs',
+  'tabs.generator.subtitle': 'Create, edit and export your own guitar (or ukulele) tablatures directly in the browser.',
+  'tabs.generator.tutorial.title': 'Quick Start',
+  'tabs.generator.tutorial.step1': 'Pick your instrument below.',
+  'tabs.generator.tutorial.step2': 'Click frets to add notes (again to remove).',
+  'tabs.generator.tutorial.step3': 'Add more columns for progression.',
+  'tabs.generator.tutorial.step4': 'Play back or download a PDF.',
+  'tabs.generator.tutorial.step5': 'Save / load your work anytime.',
+  'tabs.generator.tutorial.understood': 'Got it',
+  'tabs.generator.tutorial.demo': 'Demo',
+  'tabs.generator.tutorial.help': 'Show help',
+  'tabs.generator.metadata.title': 'Song Metadata',
+  'tabs.generator.metadata.songTitle': 'Song Title',
+  'tabs.generator.metadata.artist': 'Artist',
+  'tabs.generator.metadata.album': 'Album',
+  'tabs.generator.metadata.bpm': 'BPM',
+  'tabs.generator.metadata.timeSignature': 'Time Signature',
+  'tabs.generator.metadata.key': 'Key',
+  'tabs.generator.metadata.capo': 'Capo',
+  'tabs.generator.metadata.noCapo': 'No Capo',
+  'tabs.generator.metadata.fret': 'fret',
+  'tabs.generator.metadata.difficulty': 'Difficulty',
+  'tabs.generator.metadata.difficulties.beginner': 'Beginner',
+  'tabs.generator.metadata.difficulties.intermediate': 'Intermediate',
+  'tabs.generator.metadata.difficulties.advanced': 'Advanced',
+  'tabs.generator.metadata.difficulties.expert': 'Expert',
+  'tabs.generator.metadata.genre': 'Genre',
+  'tabs.generator.ui.saveLoad': 'Save / Load',
+  'tabs.generator.ui.saveCurrentTab': 'Save Current Tab',
+  'tabs.generator.ui.savedTabs': 'Saved Tabs',
+  'tabs.generator.ui.unknownArtist': 'Unknown Artist',
+  'tabs.generator.ui.columns': 'columns',
+  'tabs.generator.ui.saved': 'Saved',
+  'tabs.generator.ui.load': 'Load',
+  'tabs.generator.ui.delete': 'Delete',
+  'tabs.generator.ui.noSavedTabs': 'No saved tabs',
+  'tabs.generator.ui.column': 'Column',
+  'tabs.generator.ui.of': 'of',
+  'tabs.generator.ui.withNotes': 'with notes',
+  'tabs.generator.ui.empty': 'empty',
+  'tabs.generator.ui.on': 'On',
+  'tabs.generator.ui.off': 'Off',
+  'tabs.generator.ui.info': 'Info',
+  'tabs.generator.ui.save': 'Save',
+  'tabs.generator.ui.back': 'Back',
+  'tabs.generator.ui.forward': 'Forward',
+  'tabs.generator.ui.chord': 'Chord',
+  'tabs.generator.ui.new': 'New',
+  'tabs.generator.ui.clear': 'Clear',
+  'tabs.generator.ui.copy': 'Copy',
+  'tabs.generator.ui.tabPreview': 'Tab Preview',
+  'tabs.generator.ui.tabs': 'Tabs',
+  'tabs.generator.ui.actions': 'Actions',
+  'tabs.generator.messages.exportManageDelete': 'Export a PDF, manage columns or clear them.',
+  'tabs.generator.messages.generatingPdf': 'Generating PDF...',
+  'tabs.generator.ui.downloadPdf': 'Download PDF',
+  'tabs.generator.messages.playing': 'Playing...',
+  'tabs.generator.ui.playTab': 'Play Tab',
+  'tabs.generator.ui.newColumn': 'New Column',
+  'tabs.generator.ui.removeColumn': 'Remove Column',
+  'tabs.generator.ui.remove': 'Remove',
+  'tabs.generator.ui.duplicate': 'Duplicate',
+  'tabs.generator.ui.clearAll': 'Clear All',
+  'tabs.generator.ui.asciiPreview': 'ASCII Preview',
+  'tabs.generator.ui.ascii': 'ASCII'
+}
+
+function t(key: string): string {
+  return translationMap[key] ?? key
+}
 
 // jsPDF is used to generate the PDF download.  
 // We'll import it dynamically on the client to avoid SSR errors.
@@ -27,7 +100,7 @@ interface InstrumentConfig {
 
 const instruments: Record<string, InstrumentConfig> = {
   acoustic: {
-    name: 'Akustikgitarre',
+    name: 'Acoustic Guitar',
     emoji: '🎸',
     stringNames: ['e', 'B', 'G', 'D', 'A', 'E'],
     stringColors: [
@@ -42,7 +115,7 @@ const instruments: Record<string, InstrumentConfig> = {
     numFrets: 12
   },
   electric: {
-    name: 'E-Gitarre',
+    name: 'Electric Guitar',
     emoji: '🎸',
     stringNames: ['e', 'B', 'G', 'D', 'A', 'E'],
     stringColors: [
@@ -74,10 +147,7 @@ const instruments: Record<string, InstrumentConfig> = {
 /*
  * Computed instrument name with i18n
  */
-const instrumentName = computed(() => {
-  const instrumentKey = currentInstrument.value
-  return t(`tabs.generator.instruments.${instrumentKey}`)
-})
+const instrumentName = computed(() => instrumentConfig.value?.name || currentInstrument.value)
 
 /*
  * Current instrument selection
@@ -1285,7 +1355,7 @@ onMounted(() => {
                 v-if="currentColumnHasNotes"
                 @click="playCurrentChord"
                 class="px-3 py-1 text-sm bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-all duration-200 flex items-center gap-1 font-semibold shadow-sm active:scale-95"
-                title="Alle Noten dieser Spalte als Akkord abspielen"
+                title="Play current chord (Space)"
               >
                 🎸 <span class="hidden sm:inline">{{ t('tabs.generator.ui.chord') }}</span>
               </button>
@@ -1330,7 +1400,7 @@ onMounted(() => {
             <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
               📺 <span class="hidden sm:inline">{{ t('tabs.generator.ui.tabPreview') }}</span><span class="sm:hidden">{{ t('tabs.generator.ui.tabs') }}</span>
               <span class="hidden md:inline text-sm font-normal text-gray-500 dark:text-gray-400">
-                (Klicke zum Bearbeiten & Abspielen)
+                Click to edit or play
               </span>
             </h2>
             
@@ -1454,7 +1524,7 @@ onMounted(() => {
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600',
                       col.notes[sIndex] !== null ? 'shadow-lg' : 'shadow-md'
                     ]"
-                    :title="col.notes[sIndex] !== null ? `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte, Bund ${col.notes[sIndex]} - Klick zum Abspielen` : `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte - leer`"
+                    :title="col.notes[sIndex] !== null ? `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte, Bund ${col.notes[sIndex]} - Click to play` : `${stringNames[sIndex]} string, ${col.originalIndex + 1}. Spalte - empty`"
                   >
                     {{ col.notes[sIndex] === null ? '—' : col.notes[sIndex] }}
                   </button>
@@ -1621,7 +1691,7 @@ onMounted(() => {
           <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
             ⌨️ {{ instrumentConfig?.name }}-Hals (Eingabe)
             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-              (Klicke auf einen Bund zum Hinzufügen/Entfernen - funktioniert wie eine Tastatur)
+              Works like a keyboard - Click to play
             </span>
           </h2>
         </div>
@@ -1835,7 +1905,7 @@ onMounted(() => {
             <h2 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
               👁️ <span class="hidden sm:inline">{{ t('tabs.generator.ui.asciiPreview') }}</span><span class="sm:hidden">{{ t('tabs.generator.ui.ascii') }}</span>
               <span class="hidden lg:inline text-sm font-normal text-gray-500 dark:text-gray-400">
-                (Kopiere, PDF oder spiele ab)
+                Copy, PDF or play your tab
               </span>
             </h2>
             
@@ -1851,9 +1921,9 @@ onMounted(() => {
                     ? 'bg-green-500 hover:bg-green-600 text-white transform hover:scale-105'
                     : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                 ]"
-                title="Gesamte Tabulatur abspielen"
+                title="Play Tab"
               >
-                ▶️ <span class="hidden sm:inline">Tab abspielen</span><span class="sm:hidden">Play</span>
+                ▶️ <span class="hidden sm:inline">Play Tab</span><span class="sm:hidden">Play</span>
               </button>
               <button
                 v-if="isPlaying"

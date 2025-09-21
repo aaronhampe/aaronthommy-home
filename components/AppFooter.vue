@@ -56,7 +56,7 @@
             <p
               class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed max-w-md"
             >
-              {{ $t("home.hero.subtitle") }}
+              Guitar and piano that evoke emotions
             </p>
           </div>
 
@@ -80,7 +80,7 @@
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
-                  {{ $t("header.home") }}
+                  Home
                 </NuxtLink>
                 <NuxtLink
                   to="/tabs"
@@ -89,7 +89,7 @@
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
-                  {{ $t("Tabs") }}
+                  Tabs
                 </NuxtLink>
                 <NuxtLink
                   to="/social"
@@ -98,7 +98,7 @@
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
-                  {{ $t("header.social") }}
+                  Social Media
                 </NuxtLink>
                 <NuxtLink
                   to="/offers"
@@ -107,7 +107,7 @@
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
-                  {{ $t("header.offers") }}
+                  Offers
                 </NuxtLink>
                 <NuxtLink
                   to="/kontakt"
@@ -116,7 +116,7 @@
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
-                  {{ $t("footer.contact") }}
+                  Contact
                 </NuxtLink>
               </nav>
             </div>
@@ -126,13 +126,13 @@
               <h3
                 class="text-gray-900 dark:text-white font-bold text-lg mb-6 relative"
               >
-                {{ $t("footer.community.title") }}
+                Join the Community
                 <div
                   class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
                 ></div>
               </h3>
               <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {{ $t("footer.community.text") }}
+                Join my community to get exclusive content, updates and more!
               </p>
               <NuxtLink
                 to="/community"
@@ -148,7 +148,7 @@
                     d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"
                   />
                 </svg>
-                {{ $t("footer.community.button") }}
+                Go to Community
               </NuxtLink>
             </div>
           </div>
@@ -158,12 +158,9 @@
         <div class="border-t border-gray-300 dark:border-white/10 pt-12 mb-12">
           <div class="text-center space-y-6">
             <h3 class="text-gray-900 dark:text-white font-bold text-xl">
-              Folge mir auf Social Media
+              Follow me on Social Media
             </h3>
-            <p class="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-              Für tägliche musikalische Inspirationen, neue Tutorials und
-              Behind-the-Scenes Content
-            </p>
+          
 
             <!-- Social Icons -->
             <div class="flex justify-center space-x-6">
@@ -246,7 +243,7 @@
           >
             <!-- Copyright -->
             <p class="text-gray-600 dark:text-gray-400 text-sm">
-              {{ $t("footer.copyright", { year: new Date().getFullYear() }) }}
+              © {{ new Date().getFullYear() }} Aaron Thommy. All rights reserved.
             </p>
 
             <!-- Legal Links -->
@@ -255,7 +252,7 @@
                 to="/impressum"
                 class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm transition-colors relative group"
               >
-                {{ $t("footer.imprint") }}
+                Imprint
                 <div
                   class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"
                 ></div>
@@ -264,7 +261,7 @@
                 to="/datenschutz"
                 class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm transition-colors relative group"
               >
-                {{ $t("footer.privacy") }}
+                Privacy Policy
                 <div
                   class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"
                 ></div>
@@ -273,7 +270,7 @@
                 to="/kontakt"
                 class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white text-sm transition-colors relative group"
               >
-                {{ $t("footer.contact") }}
+                Contact
                 <div
                   class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"
                 ></div>
@@ -288,19 +285,13 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useI18n } from "vue-i18n";
 import { useThemeStore } from "~/stores/themeStore";
-
-const { t } = useI18n();
 const themeStore = useThemeStore();
 const email = ref("");
 
 const subscribeToNewsletter = () => {
   if (email.value) {
-    const message =
-      t("language.de") === "Deutsch"
-        ? `Danke für deine Anmeldung mit ${email.value}!`
-        : `Thank you for subscribing with ${email.value}!`;
+    const message = `Thank you for subscribing with ${email.value}!`;
     alert(message);
     email.value = "";
   }

@@ -6,7 +6,7 @@
         aaron<span class="text-blue-500 dark:text-blue-400">thommy</span>
       </h1>
       <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl">
-        {{ $t('home.hero.subtitle') }}
+        Guitar and piano that evoke emotions
       </p>
     </div>
     
@@ -26,10 +26,10 @@
         <!-- Große Feature-Box -->
         <BaseBox 
           size="L" 
-          :title="$t('home.welcome.title')" 
-          :text="$t('home.welcome.text')"
+          title="Community" 
+          text="Join my community to get exclusive content, updates and more!"
           link="/community"
-          :linkText="$t('home.welcome.button')"
+          linkText="Learn more"
           bgColor="bg-gray-100 dark:bg-gray-800"
           class="md:col-span-2"
         />
@@ -37,10 +37,10 @@
         <!-- Quadratische Box für Social Media Highlights mit Icon -->
         <BaseBox 
           size="Q" 
-          :title="$t('home.social.title')" 
-          :text="$t('home.social.text')"
+          title="Social" 
+          text="Follow me on TikTok, Instagram and YouTube for daily musical inspirations."
           link="/social"
-          :linkText="$t('home.social.button')"
+          linkText="Check my channels"
           bgColor="bg-blue-50 dark:bg-blue-900/30"
         >
           <div class="absolute top-6 right-6 opacity-20 dark:opacity-10">
@@ -51,10 +51,10 @@
         <!-- Rest of your boxes remain unchanged -->
         <BaseBox 
           size="M" 
-          :title="$t('home.courses.title')" 
-          :text="$t('home.courses.text')"
+          title="Courses" 
+          text="From beginner to professional - discover my tutorials and digital learning content."
           link="/offers"
-          :linkText="$t('home.courses.button')"
+          linkText="Explore courses"
           bgColor="bg-indigo-50 dark:bg-indigo-900/30"
         >
           <div class="absolute bottom-0 right-0 opacity-30 dark:opacity-20">
@@ -64,20 +64,20 @@
         
         <BaseBox 
           size="M" 
-          :title="$t('home.equipment.title')" 
-          :text="$t('home.equipment.text')"
+          title="Equipment" 
+          text="My recommendations for instruments, accessories and software for your musical journey."
           link="/comingsoon"
-          :linkText="$t('home.equipment.button')"
+          linkText="See recommendations"
           bgColor="bg-gray-100 dark:bg-gray-800"
         >
         </BaseBox>
         
         <BaseBox 
           size="M" 
-          :title="$t('home.video.title')" 
-          :text="$t('home.video.text')"
+          title="Latest Video" 
+          text="Watch my latest performance."
           link="https://youtube.com"
-          :linkText="$t('home.video.button')"
+          linkText="Watch now"
           bgColor="bg-red-50 dark:bg-red-900/20"
           class="md:col-span-1 lg:col-span-1"
         >
@@ -103,20 +103,13 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useLanguageStore } from '~/stores/languageStore';
 import { useThemeStore } from '~/stores/themeStore';
 import BaseBox from '~/components/BaseBox.vue';
 import SpinningRecord from '~/components/SpinningRecord.vue';
 
-const { t } = useI18n();
-const languageStore = useLanguageStore();
 const themeStore = useThemeStore();
 
 onMounted(() => {
-  // Spracheinstellungen initialisieren
-  languageStore.initLocale();
-  
   // Themeeinstellungen initialisieren
   themeStore.initTheme();
 });
