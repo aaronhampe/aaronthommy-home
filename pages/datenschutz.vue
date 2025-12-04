@@ -62,7 +62,7 @@
           <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Controller</h3>
           <p class="text-gray-600 dark:text-gray-300 mb-4">The controller (entity responsible) for data processing on this site is:</p>
           <p class="text-gray-600 dark:text-gray-300 mb-6">
-            AARON THOMAS HAMPE<br>
+            Aaron Thommy<br>
             c/o MDC<br>
             Management#2005<br>
             Welserstraße 3<br>
@@ -72,7 +72,6 @@
 
           <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Contact:</h4>
           <p class="text-gray-600 dark:text-gray-300 mb-6">
-            Phone: +49 1514 295774884<br>
             Email: info@aaronthommy.com <br>
             Website: www.aaronthommy.com
           </p>

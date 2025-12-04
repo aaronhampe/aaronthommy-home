@@ -83,36 +83,20 @@
                   Home
                 </NuxtLink>
                 <NuxtLink
-                  to="/tabs"
-                  class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
-                >
-                  <div
-                    class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
-                  ></div>
-                  Tabs
-                </NuxtLink>
-                <NuxtLink
                   to="/social"
                   class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
                 >
+                  
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
                   Social Media
                 </NuxtLink>
                 <NuxtLink
-                  to="/offers"
-                  class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
-                >
-                  <div
-                    class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
-                  ></div>
-                  Offers
-                </NuxtLink>
-                <NuxtLink
                   to="/kontakt"
                   class="group flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300"
                 >
+                 
                   <div
                     class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"
                   ></div>
@@ -120,37 +104,7 @@
                 </NuxtLink>
               </nav>
             </div>
-
-            <!-- Community Section -->
-            <div class="space-y-6">
-              <h3
-                class="text-gray-900 dark:text-white font-bold text-lg mb-6 relative"
-              >
-                Join the Community
-                <div
-                  class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
-                ></div>
-              </h3>
-              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                Join my community to get exclusive content, updates and more!
-              </p>
-              <NuxtLink
-                to="/community"
-                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"
-                  />
-                </svg>
-                Go to Community
-              </NuxtLink>
-            </div>
+            
           </div>
         </div>
 

@@ -160,30 +160,7 @@
           </a>
         </div>
 
-        <!-- Call to Action -->
-        <div class="text-center mt-16">
-          <div class="relative inline-block">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl blur-lg opacity-30"></div>
-            <div class="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-white/60 dark:border-gray-700/60 shadow-xl">
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                Never Miss a Performance
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto">
-                Follow on your favorite platform to get notified when I release new covers and content
-              </p>
-              <div class="flex justify-center space-x-4">
-                <a href="https://www.tiktok.com/@aaronthommy" target="_blank" 
-                   class="px-6 py-3 bg-gradient-to-r from-gray-800 to-black text-white font-semibold rounded-xl hover:scale-105 transition-transform duration-300">
-                  Follow on TikTok
-                </a>
-                <a href="/community" 
-                   class="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-xl hover:scale-105 transition-transform duration-300">
-                  Join Patreon
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+    
       </div>
     </section>
   </div>

@@ -7,6 +7,23 @@ export default defineNuxtConfig({
 
   devtools: { enabled: false },
 
+  ssr: process.env.NODE_ENV === 'production',
+
+  vite: {
+    define: {
+      '__VUE_PROD_DEVTOOLS__': false
+    },
+    optimizeDeps: {
+      exclude: ['@vue/devtools-kit']
+    }
+  },
+
+  nitro: {
+    externals: {
+      inline: ['@vue/devtools-kit']
+    }
+  },
+
   site: {
     url: "https://aaronthommy.com",
     trailingSlash: false,
@@ -42,6 +59,7 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
+    enabled: process.env.NODE_ENV === 'production',
     defaults: {
       component: "AaronThommyBanner",
       props: { title: "Aaron Thommy" },

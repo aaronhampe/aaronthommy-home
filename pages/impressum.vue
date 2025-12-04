@@ -15,7 +15,7 @@
             <!-- Provider Information -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Information pursuant to § 5 TMG (German Telemedia Act)</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              AARON THOMAS HAMPE<br>
+              Aaron Thommy<br>
               c/o MDC<br>
               Management#2005<br>
               Welserstraße 3<br>
@@ -26,34 +26,17 @@
             <!-- Contact -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Contact</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              Phone: +49 1514 295774884<br>
               Email: info@aaronthommy.com <br>
               Website: www.aaronthommy.com
             </p>
 
-            <!-- VAT ID -->
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">VAT Identification Number</h2>
-            <p class="text-gray-600 dark:text-gray-300 mb-6">
-              VAT ID pursuant to § 27 a German Value Added Tax Act (UStG):<br>
-              DE454283895
-            </p>
 
             <!-- Responsible for Content -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Responsible for the Content</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              AARON THOMAS HAMPE
+              Aaron Thommy
             </p>
 
-            <!-- EU Online Dispute Resolution -->
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">EU Online Dispute Resolution (ODR)</h2>
-            <p class="text-gray-600 dark:text-gray-300 mb-6">
-              The European Commission provides a platform for Online Dispute Resolution (ODR):
-              <a href="https://ec.europa.eu/consumers/odr/" target="_blank" class="text-blue-500 dark:text-blue-400 hover:underline">
-                https://ec.europa.eu/consumers/odr/
-              </a>
-              <br>
-              Our email address can be found above under Contact.
-            </p>
 
             <!-- Consumer Dispute Resolution -->
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Consumer Dispute Resolution / Universal Arbitration Board</h2>

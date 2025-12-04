@@ -6,17 +6,19 @@
       scrolled ? 'shadow-sm dark:shadow-gray-800 py-3' : 'py-5',
     ]"
   >
-    <!-- Grid layout: left and right act as flexible spacers (1fr each), center auto so nav is mathematically centered -->
-    <div class="container mx-auto px-6 grid items-center grid-cols-[1fr_auto_1fr]">
+    <!-- Layout: Mobile mit Flex (Logo links, Actions rechts), ab lg mit Grid für zentrierte Navigation -->
+    <div
+      class="container mx-auto px-6 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr]"
+    >
       <!-- Logo mit designter Typografie -->
-      <div class="logo relative z-10 justify-self-start">
+      <div class="logo relative z-10 lg:justify-self-start">
         <NuxtLink to="/" class="flex items-center font-bold tracking-tight">
           <span class="text-2xl text-gray-900 dark:text-white">aaron</span>
           <span class="text-2xl text-blue-500 dark:text-blue-400">thommy</span>
         </NuxtLink>
       </div>
 
-  <!-- Desktop Navigation (static English) -->
+      <!-- Desktop Navigation (static English) -->
       <nav class="hidden lg:block justify-self-center">
         <ul class="flex space-x-8">
           <li v-for="(item, index) in navItems" :key="index">
@@ -35,8 +37,8 @@
         </ul>
       </nav>
 
-  <!-- Actions: Dark Mode -->
-      <div class="flex items-center space-x-5 justify-self-end">
+      <!-- Actions: Dark Mode -->
+      <div class="ml-auto flex items-center space-x-5 lg:justify-self-end">
         <!-- Darkmode Toggle als separate Komponente -->
         <DarkModeToggle />
 
@@ -167,8 +169,6 @@ const scrolled = ref(false);
 // Navigation Items mit i18n-Keys
 const navItems = [
   { key: "home", path: "/", label: "Home" },
-  { key: "community", path: "/community", label: "Community" },
-  { key: "tabs", path: "/tabs", label: "Tabs" },
   { key: "social", path: "/social", label: "Social Media" },
   { key: "kontakt", path: "/kontakt", label: "Contact" },
 ];

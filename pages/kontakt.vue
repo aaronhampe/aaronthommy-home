@@ -294,33 +294,8 @@
           </div>
         </div>
 
-        <!-- Call-to-Action for Patreon -->
-        <div class="mt-20 text-center animate-fade-in-up-delayed">
-          <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 rounded-3xl blur-2xl group-hover:scale-110 transition-transform duration-700"></div>
-            <div class="relative bg-white/10 dark:bg-gray-800/10 backdrop-blur-lg rounded-3xl border border-white/20 dark:border-gray-700/20 p-8 md:p-12 shadow-2xl">
-              <h3 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                Want <span class="text-orange-600 dark:text-orange-400">Exclusive Access?</span>
-              </h3>
-              <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join my Music Circle on Patreon for exclusive tabs, behind-the-scenes content, personal feedback, and monthly live sessions.
-              </p>
-              <a 
-                href="https://patreon.com/AaronThommyMusicCircle" 
-                target="_blank"
-                class="inline-flex items-center px-10 py-5 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white text-lg font-bold rounded-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 shadow-xl"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14.82 2.41c3.96 0 7.18 3.22 7.18 7.18 0 3.96-3.22 7.18-7.18 7.18-3.96 0-7.18-3.22-7.18-7.18 0-3.96 3.22-7.18 7.18-7.18M2 21.77V2.41h2.91v19.36z"/>
-                </svg>
-                Join the Music Circle
-                <svg class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
+
+  
       </div>
     </div>
   </div>
