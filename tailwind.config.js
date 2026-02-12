@@ -12,45 +12,40 @@ module.exports = {
     'dark',              // DARK **danach** → überschreibt sicher
     /* hover, focus, motion-safe …*/
   ],
-  
+
   content: [
-    "./components/**/*.{js,vue,ts}", 
-    "./layouts/**/*.vue", 
-    "./pages/**/*.vue", 
-    "./plugins/**/*.{js,ts}", 
-    "./nuxt.config.{js,ts}", 
-    "./app.vue", 
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./nuxt.config.{js,ts}",
+    "./app.vue",
     "*.{js,ts,jsx,tsx,mdx}"
   ],
-  
+
   theme: {
     extend: {
-      colors: {
-        primary: {
-          DEFAULT: '#3490dc',
-          dark: '#2779bd',
-        },
-        // Erweiterte Farbpalette für Dark Mode
-        dark: {
-          bg: {
-            primary: '#121212',
-            secondary: '#1e1e1e',
-            tertiary: '#2d2d2d'
-          },
-          text: {
-            primary: '#f1f1f1',
-            secondary: '#a0a0a0'
-          }
-        }
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
       },
-      // Verbesserte Schatten für Dark Mode
-      boxShadow: {
-        'dark-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.4)',
-        'dark-md': '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.4)',
-        'dark-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.4)',
+      colors: {
+        black: '#000000',
+        white: '#ffffff',
+        gray: {
+          50: '#f9f9f9',
+          100: '#f2f2f2',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+        },
       },
     },
   },
-  
+
   plugins: [],
 }

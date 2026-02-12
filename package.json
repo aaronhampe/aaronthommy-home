@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@dargmuesli/nuxt-cookie-control": "^9.0.8",
+    "@types/bcrypt": "^6.0.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.6.2",
     "jspdf": "^3.0.1",
     "lucide-vue-next": "^0.475.0",
     "module": "^1.2.5",
@@ -20,7 +24,8 @@
     "pnpm": "^10.14.0",
     "swiper": "^11.2.6",
     "vexflow": "^5.0.0",
-    "vue-recaptcha-v3": "^2.0.1"
+    "vue-recaptcha-v3": "^2.0.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@nuxt/image": "^1.11.0",

@@ -9,20 +9,7 @@ export default defineNuxtConfig({
 
   ssr: process.env.NODE_ENV === 'production',
 
-  vite: {
-    define: {
-      '__VUE_PROD_DEVTOOLS__': false
-    },
-    optimizeDeps: {
-      exclude: ['@vue/devtools-kit']
-    }
-  },
-
-  nitro: {
-    externals: {
-      inline: ['@vue/devtools-kit']
-    }
-  },
+  ssr: process.env.NODE_ENV === 'production',
 
   site: {
     url: "https://aaronthommy.com",
@@ -43,7 +30,7 @@ export default defineNuxtConfig({
   css: [
     "~/assets/css/main.css",
     "~/assets/css/hero-section.css",
-    "~/assets/css/patreon-section.css",
+    "~/assets/css/hero-section.css",
   ],
 
   sitemap: {
@@ -134,7 +121,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    define: {
+      '__VUE_PROD_DEVTOOLS__': false
+    },
     optimizeDeps: {
+      exclude: ['@vue/devtools-kit'],
       include: ["pinia", "swiper"],
     },
     build: {
@@ -149,6 +140,9 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    externals: {
+      inline: ['@vue/devtools-kit']
+    },
     esbuild: {
       options: {
         target: "esnext",
