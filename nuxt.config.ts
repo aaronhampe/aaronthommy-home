@@ -9,8 +9,6 @@ export default defineNuxtConfig({
 
   ssr: process.env.NODE_ENV === 'production',
 
-  ssr: process.env.NODE_ENV === 'production',
-
   site: {
     url: "https://aaronthommy.com",
     trailingSlash: false,
@@ -24,6 +22,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "nuxt-og-image",
     "@nuxt/image",
+    "@nuxtjs/turnstile",
     // Removed i18n (site now single-language English)
   ],
 
@@ -149,5 +148,9 @@ export default defineNuxtConfig({
         minify: false,
       },
     },
+  },
+
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY || '1x00000000000000000000AA', // Test key
   },
 });

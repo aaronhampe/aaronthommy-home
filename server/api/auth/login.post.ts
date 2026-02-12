@@ -3,46 +3,70 @@ import { db } from '../../utils/db';
 import { verifyPassword } from '../../utils/password';
 import { createSession } from '../../utils/session';
 
-const loginSchema = z.object({
-    email: z.string().email(),
-    password: z.string(),
-});
-
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
-    const result = loginSchema.safeParse(body);
+
+    // Verify Turnstile Token (only in production or if token is present)
+    // In dev we might skip if we want, but user asked for protection.
+    if (body.turnstileToken) {
+        const verifyResult = await verifyTurnstileToken(body.turnstileToken);
+        if (!verifyResult.success) {
+            throw createError({
+                statusCode: 400,
+                statusMessage: 'Invalid CAPTCHA',
+            });
+        }
+    } else if (process.env.NODE_ENV === 'production') {
+        // Enforce in production
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'CAPTCHA required',
+        });
+    }
+
+    const result = z.object({
+        email: z.string().email(),
+        password: z.string().min(8),
+    }).safeParse(body);
 
     if (!result.success) {
         throw createError({
             statusCode: 400,
             statusMessage: 'Invalid input',
+            data: result.error.errors,
         });
     }
 
     const { email, password } = result.data;
 
-    // Find user
     const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email) as any;
+
     if (!user) {
         throw createError({
             statusCode: 401,
-            statusMessage: 'Invalid credentials',
+            statusMessage: 'Invalid email or password',
         });
     }
 
-    // Verify password
-    const isValid = await verifyPassword(password, user.password);
-    if (!isValid) {
+    // If user has no password (e.g. Google auth only), they can't login with password
+    if (!user.password) {
         throw createError({
             statusCode: 401,
-            statusMessage: 'Invalid credentials',
+            statusMessage: 'Please login with Google',
         });
     }
 
-    // Create session
+    const valid = await verifyPassword(password, user.password);
+
+    if (!valid) {
+        throw createError({
+            statusCode: 401,
+            statusMessage: 'Invalid email or password',
+        });
+    }
+
     const { sessionId, expiresAt } = createSession(user.id);
 
-    // Set cookie
     setCookie(event, 'session_id', sessionId, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -51,6 +75,7 @@ export default defineEventHandler(async (event) => {
     });
 
     return {
+        success: true,
         user: { id: user.id, email: user.email, name: user.name },
     };
 });

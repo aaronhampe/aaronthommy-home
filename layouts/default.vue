@@ -13,6 +13,12 @@
           <NuxtLink to="/music" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
             Music
           </NuxtLink>
+          <NuxtLink to="/tone-tutorials" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+            Tutorials
+          </NuxtLink>
+           <NuxtLink to="/chat" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+            Chat
+          </NuxtLink>
           <NuxtLink to="/dashboard" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
             Profile
           </NuxtLink>
